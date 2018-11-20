@@ -3,6 +3,7 @@ from . import install
 
 from fabric.decorators import task
 from fabric.state import env
+from dotenv import load_dotenv
 
 import os
 
@@ -11,9 +12,7 @@ load_dotenv()
 env.repository = "https://github.com/aibaq/nakey"
 env.repository_ssh = "git@github.com:aibaq/nakey"
 env.repo_name = "nakey"
-env.user = "ubuntu"
-env.key_filename = "~/work/key/nakey.pem"
-env.hosts = [""]
+env.hosts = ["api.nakey.kz"]
 
 
 @task

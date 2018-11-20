@@ -45,9 +45,6 @@ def install():
     sudo("chown -R {0} /{0} ".format(env.user, env.repo_name))
     sudo("mkdir -p /var/log/gunicorn /var/log/celery;")
     sudo("touch /var/log/gunicorn/{0}.log".format(env.repo_name))
-    sudo("touch /var/log/celery/{0}.log".format(env.repo_name))
-    sudo("touch /var/log/celery/{0}-beat.log".format(env.repo_name))
-    sudo("touch /var/log/celery/{0}-flower.log".format(env.repo_name))
 
 
 @task
