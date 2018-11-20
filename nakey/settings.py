@@ -31,7 +31,8 @@ class BaseConfiguration(Configuration):
         'django.contrib.postgres',
         'django_celery_beat',
         'django_celery_results',
-        'nakey.core'
+        'rest_framework',
+        'nakey.core',
     ]
 
     MIDDLEWARE = [

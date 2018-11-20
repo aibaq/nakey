@@ -45,14 +45,14 @@ class ItemSerializer(serializers.ModelSerializer):
 
 class RequestItemCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Request
+        model = RequestItem
         fields = ('item', 'count')
 
 
 class RequestCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
-        fields = ('full_name', 'phone', 'address', 'email',)
+        fields = ('full_name', 'phone', 'address', 'email', 'items')
     items = RequestItemCreateSerializer(many=True, help_text='''{"item": 1, "count": 10}''')
 
     def create(self, validated_data):
