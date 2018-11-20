@@ -101,7 +101,7 @@ def letsencrypt(config_name, *domains):
     sudo("service nginx stop")
     run("mkdir -p ~/letsencrypt;mkdir -p ~/letsencrypt/work;mkdir -p ~/letsencrypt/logs;mkdir -p ~/letsencrypt/cron;")
     sudo(("certbot certonly -n --expand --work-dir ~/letsencrypt/work/ --logs-dir ~/letsencrypt/logs/ " + domains_command).format(env.repo_name, config_name))
-    run("openssl dhparam -out ~/{0}/configs/letsencrypt/{1}/ssl-dhparams.pem 2048".format(env.repo_name, config_name)).format(env.repo_name, env.repository_ssh))
+    run("openssl dhparam -out ~/{0}/configs/letsencrypt/{1}/ssl-dhparams.pem 2048".format(env.repo_name, config_name)).format(env.repo_name, env.repository_ssh)
     run("echo \" 0 9 1,15 * * ~/letsencrypt/cron/cronscript.sh\" > ~/letsencrypt/cron/crontab")
     run("""
         echo \"
