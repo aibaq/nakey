@@ -1,0 +1,120 @@
+MAN = 'MAN'
+WOMAN = 'WOMAN'
+
+GENDERS = (
+    (MAN, MAN),
+    (WOMAN, WOMAN),
+)
+
+ACCOUNT_KIT = 'account_kit'
+FACEBOOK = 'facebook'
+INSTA = 'insta'
+VK = 'vk'
+GOOGLE = 'google'
+
+SOCIAL_TYPES = (
+    # (ACCOUNT_KIT, ACCOUNT_KIT),
+    (FACEBOOK, FACEBOOK),
+    (INSTA, INSTA),
+    # (VK, VK),
+    # (GOOGLE, GOOGLE),
+)
+
+SOCIAL_FIELDS = {
+    ACCOUNT_KIT: 'ak_id',
+    FACEBOOK: 'fb_id',
+    INSTA: 'insta_id',
+    VK: 'vk_id',
+    GOOGLE: 'email',
+}
+
+LOGIN = 'LOGIN'
+REGISTRATION = 'REGISTRATION'
+RESET_PASSWORD = 'RESET_PASSWORD'
+
+ACTIVATION_TYPES = (
+    (LOGIN, LOGIN),
+    (REGISTRATION, REGISTRATION),
+    (RESET_PASSWORD, RESET_PASSWORD),
+)
+
+MAX_ITERATION = 3
+
+
+NEW = 'NEW'
+USED = 'USED'
+
+CAR_TYPES = (
+    (NEW, NEW),
+    (USED, USED),
+)
+
+TRANSMISSION_AUTO = 1
+TRANSMISSION_MECHANICAL = 2
+TRANSMISSION_TIPTRONIC = 3
+TRANSMISSION_VARIATOR = 4
+TRANSMISSION_ROBOT = 5
+
+TRANSMISSION_TYPES = (
+    (TRANSMISSION_AUTO, 'автомат'),
+    (TRANSMISSION_MECHANICAL, 'механика'),
+    (TRANSMISSION_TIPTRONIC, 'типтроник'),
+    (TRANSMISSION_VARIATOR, 'вариатор'),
+    (TRANSMISSION_ROBOT, 'робот'),
+)
+
+
+WHEEL_LEFT = 1
+WHEEL_RIGHT = 2
+
+WHEEL_TYPES = (
+    (WHEEL_LEFT, 'слева'),
+    (WHEEL_RIGHT, 'справа'),
+)
+
+
+DRIVE_UNIT_FULL = 1
+DRIVE_UNIT_FRONT = 2
+DRIVE_UNIT_BACK = 3
+
+DRIVE_UNIT_TYPES = (
+    (DRIVE_UNIT_FULL, 'передний привод'),
+    (DRIVE_UNIT_FRONT, 'полный привод'),
+    (DRIVE_UNIT_BACK, 'задний привод'),
+)
+
+FUEL_PETROL = 1
+FUEL_DIESEL = 2
+FUEL_GAS_PETROL = 3
+FUEL_GAS = 4
+FUEL_HYBRID = 5
+FUEL_ELECTRICITY = 6
+
+FUEL_TYPES = (
+    (FUEL_PETROL, 'бензин'),
+    (FUEL_DIESEL, 'дизель'),
+    (FUEL_GAS_PETROL, 'газ-бензин'),
+    (FUEL_GAS, 'газ'),
+    (FUEL_HYBRID, 'гибрид'),
+    (FUEL_ELECTRICITY, 'электричество'),
+)
+
+SIMPLE = 'SIMPLE'
+PROMO = 'PROMO'
+OFFER = 'OFFER'
+
+NEWS_TYPES = (
+    (SIMPLE, SIMPLE),
+    (PROMO, PROMO),
+    (OFFER, OFFER),
+)
+
+TRADE_IN = 'TRADE_IN'
+IMMEDIATE = 'IMMEDIATE'
+
+SELL_TYPES = (
+    (TRADE_IN, 'Продажа по trade-in'),
+    (IMMEDIATE, 'Моментальная продажа'),
+)
+
+
