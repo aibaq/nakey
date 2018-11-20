@@ -27,7 +27,7 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        path('api/docs/', include_docs_urls(title='Level8 documentation', authentication_classes=[],
+        path('api/docs/', include_docs_urls(title='Nakey documentation', authentication_classes=[],
                                             permission_classes=[]))]
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

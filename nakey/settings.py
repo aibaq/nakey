@@ -184,7 +184,7 @@ class BaseConfiguration(Configuration):
     }
 
     SUIT_CONFIG = {
-        'ADMIN_NAME': 'nakey'
+        'ADMIN_NAME': 'Nakey'
     }
 
 
