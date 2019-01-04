@@ -1,5 +1,9 @@
+from django.conf import settings
+from django.template.loader import render_to_string
 from django.db import models
+from nakey.core import tasks
 from nakey.mixins.models import TimestampMixin
+from nakey.utils import messages
 from nakey.utils.upload import banner_upload, item_upload
 
 
@@ -70,6 +74,11 @@ class Request(TimestampMixin, models.Model):
     phone = models.CharField(max_length=100, blank=True, verbose_name='Телефон')
     address = models.CharField(max_length=1000, blank=True, verbose_name='Адрес')
     email = models.EmailField(max_length=1000, blank=True, verbose_name='Email')
+
+    def send_email(self):
+        message = render_to_string('emails/request.html', {'req': self,
+                                                           'request_items': self.items.all()})
+        tasks.email(to=settings.EMAIL_HOST_USER, subject=messages.REQUEST_SUBJECT, message=message)
 
 
 class RequestItem(TimestampMixin, models.Model):

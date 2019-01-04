@@ -63,4 +63,5 @@ class RequestCreateSerializer(serializers.ModelSerializer):
             RequestItem.objects.create(request=instance,
                                        item_id=i['item'],
                                        count=i['count'])
+        instance.send_email()
         return instance
