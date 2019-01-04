@@ -50,6 +50,7 @@ class Item(TimestampMixin, models.Model):
     sizes = models.ManyToManyField(Size)
     manufacture = models.ForeignKey(Manufacture, on_delete=models.DO_NOTHING)
     description = models.TextField(verbose_name='Описание')
+    view_count = models.PositiveIntegerField(default=10, verbose_name='Просмотры')
     # TODO: состав
 
 

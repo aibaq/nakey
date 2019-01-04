@@ -16,7 +16,7 @@ class BaseConfiguration(Configuration):
 
     SECRET_KEY = os.getenv('SECRET_KEY')
 
-    DEBUG = True
+    DEBUG = False
 
     ALLOWED_HOSTS = ['*']
 
@@ -185,6 +185,21 @@ class BaseConfiguration(Configuration):
 
     SUIT_CONFIG = {
         'ADMIN_NAME': 'Nakey'
+    }
+
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.AllowAny',
+        ),
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.BasicAuthentication',
+        ),
+        'DEFAULT_FILTER_BACKENDS': (
+            'django_filters.rest_framework.DjangoFilterBackend',),
+        'EXCEPTION_HANDLER': 'trafficwave_back.utils.exceptions.custom_exception_handler',
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+        'PAGE_SIZE': 20
     }
 
 

@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 from .views import *
 
@@ -10,4 +11,10 @@ router.register(r'size', SizeViewSet, base_name='size')
 router.register(r'manufacture', ManufactureViewSet, base_name='manufacture')
 router.register(r'item', ItemViewSet, base_name='item')
 router.register(r'request', RequestViewSet, base_name='request')
-urlpatterns = router.urls
+urlpatterns = [
+    path('', IndexView.as_view(), name='index'),
+    path('shop/', ShopView.as_view(), name='shop'),
+    path('shop/item/<int:pk>/', ItemView.as_view(), name='item'),
+    path('contacts/', ContactsView.as_view(), name='contacts'),
+]
+urlpatterns += router.urls
