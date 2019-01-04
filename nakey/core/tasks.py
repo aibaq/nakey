@@ -1,8 +1,7 @@
+from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.core.mail import EmailMessage
 from django.conf import settings
-from nakey.utils.string_utils import valid_email
-from celery import shared_task
 
 logger = get_task_logger(__name__)
 
@@ -12,6 +11,7 @@ def email(to, subject, message, pdf=None):
     """
     Sends email to user/users. 'to' parameter must be a string or list.
     """
+    from nakey.utils.string_utils import valid_email
     try:
         if not isinstance(to, list):
             to = [to]
