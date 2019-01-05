@@ -15,6 +15,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('shop/', ShopView.as_view(), name='shop'),
     path('shop/item/<int:pk>/', ItemView.as_view(), name='item'),
+    path('cart/', CartView.as_view(), name='cart'),
     path('contacts/', ContactsView.as_view(), name='contacts'),
 ]
 urlpatterns += router.urls
