@@ -29,6 +29,11 @@ class ItemView(View):
         item = get_object_or_404(Item, pk=pk)
         return render(request, self.template_name, {'item': item})
 
+class CartView(View):
+    template_name = 'core/cart.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
 
 class ContactsView(View):
     template_name = 'core/contacts.html'
