@@ -1,5 +1,35 @@
-Index
-{% for banner in banners %}
-    {{ banner.id }}<br>
-    <img src="{{ banner.image.url }}" />
-{% endfor %}
+{% extends './base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'slick/slick.css'%}">
+<link rel="stylesheet" href="{% static 'slick/slick-theme.css'%}">
+<link rel="stylesheet" href="{% static 'css/index.css'%}">
+<title>Главная страница</title>
+{% endblock head %}
+{% block content %}
+    <div id="banner">
+        {% for banner in banners %}
+        <div>
+            <img data-lazy="{{ banner.image.url }}" />
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'slick/slick.min.js' %}"></script>
+<script>
+    $('#banner').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: true,
+        infinite: true,
+        centerMode: true,
+        centerPadding: '60px',
+        autoplay: true,
+        autoplaySpeed: 5000,
+        lazyLoad: 'ondemand',
+        arrows: true,
+
+    });
+</script>
+{% endblock scripts%}
