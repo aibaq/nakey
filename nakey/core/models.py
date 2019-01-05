@@ -14,12 +14,18 @@ class Banner(TimestampMixin, models.Model):
     name = models.CharField(max_length=500, verbose_name='Наименование')
     image = models.ImageField(upload_to=banner_upload)
 
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
     name = models.CharField(max_length=500, verbose_name='Наименование')
+
+    def __str__(self):
+        return self.name
 
 
 class Color(models.Model):
@@ -28,6 +34,9 @@ class Color(models.Model):
         verbose_name_plural = 'Цвета'
     name = models.CharField(max_length=500, verbose_name='Наименование')
 
+    def __str__(self):
+        return self.name
+
 
 class Size(models.Model):
     class Meta:
@@ -35,12 +44,18 @@ class Size(models.Model):
         verbose_name_plural = 'Размеры'
     name = models.CharField(max_length=500, verbose_name='Наименование')
 
+    def __str__(self):
+        return self.name
+
 
 class Manufacture(models.Model):
     class Meta:
         verbose_name = 'Про'
         verbose_name_plural = 'Размеры'
     name = models.CharField(max_length=500, verbose_name='Наименование')
+
+    def __str__(self):
+        return self.name
 
 
 class Item(TimestampMixin, models.Model):
