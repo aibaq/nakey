@@ -33,5 +33,5 @@ class ItemView(View):
 class ContactsView(View):
     template_name = 'core/contacts.html'
 
-    def get(self, request, pk, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
