@@ -42,7 +42,7 @@ class ItemSerializer(serializers.ModelSerializer):
     manufacture = ManufactureSerializer()
 
     def to_representation(self, instance):
-        representation = super(ItemSerializer, self).to_representation()
+        representation = super(ItemSerializer, self).to_representation(instance)
         representation['images'] = [x.image.url for x in instance.images.all()]
         return representation
 
