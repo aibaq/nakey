@@ -1,5 +1,4 @@
 from rest_framework import serializers
-# from level8.utils.image_utils import get_full_url
 from .models import *
 
 
@@ -41,6 +40,11 @@ class ItemSerializer(serializers.ModelSerializer):
     colors = ColorSerializer(many=True)
     sizes = SizeSerializer(many=True)
     manufacture = ManufactureSerializer()
+
+    def to_representation(self, instance):
+        representation = super(ItemSerializer, self).to_representation()
+        representation['images'] = [x.image.url for x in instance.images.all()]
+        return representation
 
 
 class RequestItemCreateSerializer(serializers.ModelSerializer):
