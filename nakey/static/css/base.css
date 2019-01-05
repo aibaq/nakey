@@ -1,0 +1,23 @@
+/* COMMON STYLES */
+/* item preview */
+.item{
+    border: 1px solid #EBEFF5;
+}
+.item .img{
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;        
+}
+.item .img:hover{
+
+}
+.item .description h6{
+    text-transform: lowercase;
+}
+.item:hover{
+    box-shadow: 0 1px 5px #007bff;
+}
+small{
+    font-size: 0.875rem;
+}
