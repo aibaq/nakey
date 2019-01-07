@@ -5,6 +5,7 @@
 <title>Корзина</title>
 {% endblock head %}
 {% block content %}
+<p>{{ request.build_absolute_uri }}{{ object.get_absolute_url }}</p>
 
 {% endblock content %}
 {% block scripts %}
