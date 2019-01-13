@@ -2,8 +2,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <base href="/">
+  <meta charset="UTF-8"/>
+  <base href="/"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="{% static 'img/icon.png' %}">
@@ -14,15 +14,12 @@
   {% endblock head %}
 </head>
 <body>
-  <header>
-    {% include './header.html' %}
-  </header>
-
+  {% include './header.html' %}
   <main>
     {% block content %}
     {% endblock content %}
   </main>
-  <footer></footer>
+  {% include './footer.html' %}
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'bootstrap-4.0.0/js/bootstrap.js' %}"></script>
   {% block scripts %}
