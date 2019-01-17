@@ -7,9 +7,16 @@
 {% block content %}
 <div class="container">
     <h3>Корзина</h3>
-    
+    <div class="item-list d-flex flex-wrap"></div>
 </div>
 {% endblock content %}
 {% block scripts %}
 
+<script>
+    console.log(getCartItems())
+    let items = getCartItems();
+    items.map(item=>{
+        $('#productPreviewTmpl').tmpl({item: item}).appendTo('.item-list');
+    })
+</script>
 {% endblock scripts%}
