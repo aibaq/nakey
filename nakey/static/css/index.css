@@ -1,3 +1,55 @@
-#banner{
-    overflow: hidden;
+section{
+    padding: 60px 0;
 }
+section h3{
+    text-align: center;
+}
+#banner{
+    /* overflow: hidden; */
+}
+#banner .slick-prev{
+    left: 25px;
+}
+#banner .slick-prev{
+    left: 25px;
+    z-index: 1200;
+}
+#banner .slick-next{
+    right: 25px;
+}
+#banner .slick-dots{
+    bottom: 10px;
+}
+#banner .slick-dots li button:before
+{
+    font-size: 16px;
+    line-height: 16px;
+    color: rgba(0,0,0,0);
+    border: 1px solid rgba(0,0,0,0.9);
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    border-radius: 50%;
+}
+.banner-item{
+    height: 600px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner-text{
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+    color: #fff;
+}
+/* popular: */
+#popular{
+
+}
+.popular-list .item-outer{
+    padding: 0 16px;
+}
+#popular .slick-prev:before, #popular .slick-next:before{
+    /* color: rgba(23,230,0,1); */
+    color: rgba(0,0,0,0.8);
+}
+/*  */
