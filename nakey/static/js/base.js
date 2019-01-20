@@ -1,6 +1,11 @@
 // cart:
-console.log("base.js")
-function addToCart(item){
+function onGetCartItems(){
+    if(localStorage.getItem("cartItems")){
+        return JSON.parse(localStorage.getItem("cartItems"))
+    }
+    return [];
+}
+function onAddToCart(item){
     let items = [];
     if(localStorage.getItem("cartItems")){
         items = JSON.parse(localStorage.getItem("cartItems"));
@@ -13,12 +18,15 @@ function addToCart(item){
     }else{
         items.push(item);
     }
-    console.log(items)
     localStorage.setItem("cartItems", JSON.stringify(items));
 }
-function getCartItems(){
-    if(localStorage.getItem("cartItems")){
-        return JSON.parse(localStorage.getItem("cartItems"))
+function onRemoveFromCart(item_id){
+    console.log(item_id)
+    var items = onGetCartItems();
+    var index = items.findIndex(item=>item.id == item_id);
+    if(index > -1){
+        items.splice(index, 1);
+        localStorage.setItem("cartItems", JSON.stringify(items));
     }
-    return [];
+    console.log(items);
 }

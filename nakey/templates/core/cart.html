@@ -7,16 +7,65 @@
 {% block content %}
 <div class="container">
     <h3>Корзина</h3>
-    <div class="item-list d-flex flex-wrap"></div>
+    <div class="row">
+        <div class="col-12 col-md-9">
+            <div class="item-list d-flex flex-wrap"></div>
+        </div>
+        <div class="col-12 col-md-3">
+            <h3>Информация</h3>
+            <table id="cart-detail">                
+                <tbody>
+                    <tr>
+                        <td>Количество товаров</td>
+                        <td>Общая цена</td>
+                    </tr>
+                    <tr>
+                        <td class="cart-count">
+
+                        </td>
+                        <td class="cart-price">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary">Оформит заказ</button>
+        </div>
+    </div>
 </div>
 {% endblock content %}
 {% block scripts %}
-
 <script>
-    console.log(getCartItems())
-    let items = getCartItems();
+    function changeCount(e, item_id){
+        let current = items.find(item=>item.id == item_id);
+        let count = e.value;
+        current.count = count;
+        $("#cart_item_"+item_id+" .price").text( count*current.price+"");
+        var allcount = 0;
+        var  allprice = 0;
+        items.map(item=>{
+            allcount += Number(item.count);
+            allprice += item.count*item.price;
+        });
+        $("#cart-detail .cart-count").text(allcount);
+        $("#cart-detail .cart-price").text(allprice);
+    }
+    function removeFromCart(item_id){
+        onRemoveFromCart(item_id);
+    }
+</script>
+<script>
+    let items = onGetCartItems();
     items.map(item=>{
-        $('#productPreviewTmpl').tmpl({item: item}).appendTo('.item-list');
+        item.count = 1; //todo: from localstorage
+        let data = {
+            item: item,
+            cart: {
+                count: 1,
+            }
+        };
+        $('#productCartPreviewTmpl').tmpl(data).appendTo('.item-list');
+        changeCount({value: item.count}, item.id);
     })
 </script>
 {% endblock scripts%}
