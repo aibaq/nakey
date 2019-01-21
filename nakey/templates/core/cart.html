@@ -12,7 +12,7 @@
             <div class="item-list d-flex flex-wrap"></div>
         </div>
         <div class="col-12 col-md-3">
-            <h3>Информация</h3>
+            <h3>Оформить заказ</h3>
             <table id="cart-detail">                
                 <tbody>
                     <tr>
@@ -29,43 +29,57 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary">Оформит заказ</button>
+            <button class="btn btn-primary" onclick="clickRequest()">Отправить заявку</button>
         </div>
     </div>
 </div>
 {% endblock content %}
 {% block scripts %}
 <script>
-    function changeCount(e, item_id){
-        let current = items.find(item=>item.id == item_id);
-        let count = e.value;
-        current.count = count;
-        $("#cart_item_"+item_id+" .price").text( count*current.price+"");
+    function renderCart(){
+        var items = onGetCartItems();
+        $(".item-list").empty();
+        if(items.length == 0){
+            $(".item-list").append("<p>Ваша корзина пуста</p>")
+        }
         var allcount = 0;
         var  allprice = 0;
         items.map(item=>{
             allcount += Number(item.count);
             allprice += item.count*item.price;
+            let data = { item: item };
+            
+            $("#cart_item_"+item.id+" .price").text(item.count*item.price+""); //
+            $('#productCartPreviewTmpl').tmpl(data).appendTo('.item-list');
         });
         $("#cart-detail .cart-count").text(allcount);
         $("#cart-detail .cart-price").text(allprice);
     }
+    function changeCount(e, item_id){
+        // console.log("change count", item_id, e.value)
+        onUpdateCartItem(item_id, e.value);
+        renderCart();
+    }
     function removeFromCart(item_id){
         onRemoveFromCart(item_id);
+        renderCart();
+    }
+    function clickRequest(){
+        $('#requestmodal').empty();
+        $('#requestModalTmpl').tmpl({item_id: "name"}).appendTo('#requestmodal');
+        $("#requestmodal .modal").modal('show');
+    }
+    function sendRequest({}){
+        var data = {
+            name: $('#requestmodal #name').val(),
+            phone: $('#requestmodal #phone').val(),
+            city: $('#requestmodal #city').val(),
+            items: onGetCartItems()
+        }
+        console.log(data)
     }
 </script>
 <script>
-    let items = onGetCartItems();
-    items.map(item=>{
-        item.count = 1; //todo: from localstorage
-        let data = {
-            item: item,
-            cart: {
-                count: 1,
-            }
-        };
-        $('#productCartPreviewTmpl').tmpl(data).appendTo('.item-list');
-        changeCount({value: item.count}, item.id);
-    })
+    renderCart();
 </script>
 {% endblock scripts%}

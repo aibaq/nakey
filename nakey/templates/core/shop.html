@@ -85,7 +85,17 @@
         return vars;
     }
     function onClickCart(id){
-        addToCart(items.find(item=>item.id == id));
+        onAddToCart(items.find(item=>item.id == id));
+    }
+    function sendRequest(item_id){
+        console.log(item_id)
+        var data = {
+            name: $('#requestmodal #name').val(),
+            phone: $('#requestmodal #phone').val(),
+            city: $('#requestmodal #city').val(),
+            items: item_id
+        }
+        console.log(data)
     }
 </script>
 <script>

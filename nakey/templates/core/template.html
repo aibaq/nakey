@@ -18,11 +18,11 @@
                 </a>
                 <div class="container item-btns p-2">
                     <div class="row">
-                        <div class="col-6 px-3 cursor-pointer">
+                        <div class="col-6 px-3 cursor-pointer" onclick="onClickBuy(${item.id})">
                             <span class="cart-btn">Купить</span>
                         </div>
-                        <div class="col-6 px-3 cursor-pointer">
-                            <a class="cart-btn" href="/cart"><i class="fas fa-shopping-cart"></i></a>
+                        <div class="col-6 px-3" onclick="onClickCart(${item.id})">
+                            <span class="cart-btn cursor-pointer"><i class="fas fa-shopping-cart"></i></span>
                         </div>
                     </div>
                 </div>
@@ -49,12 +49,52 @@
             </a>
         </div>
         <div class="col-12 col-md-4 cart-item-details d-flex flex-column justify-content-between mb-3">
-            <div onclick="removeFromCart(${item.id})" class="text-right">
-                X
+            <div onclick="removeFromCart(${item.id})" class="text-right cursor-pointer">
+                <i class="fas fa-times"></i>
             </div>
             <div class="d-flex align-items-center justify-content-center">
-                <input class="form-control" type="number" value="${cart.count}" onchange="changeCount(this, ${item.id})"/><span class="px-2">шт = </span><span class="price">${item.price}</span>&nbsp;&#8376;
+                <input class="form-control" type="number" value="${item.count}" onchange="changeCount(this, ${item.id})"/><span class="px-2">шт = </span><span class="price">${item.price*item.count}</span>&nbsp;&#8376;
             </div>
         </div>
     </div>
+</script>
+<script id="requestModalTmpl" type="text/x-jquery-tmpl">
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Отправить заявку</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input name="name" id="name" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Ваш телефон</label>
+                        <input name="phone" id="phone" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ваш город</label>
+                        <input name="city" id="city" type="text" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary" onclick="sendRequest(${item_id})">Отправить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<div id="requestmodal"></div>
+<script>
+    function onClickBuy(item_id){
+        $('#requestmodal').empty();
+        $('#requestModalTmpl').tmpl({item_id: item_id}).appendTo('#requestmodal');
+        $("#requestmodal .modal").modal('show');
+    }
 </script>

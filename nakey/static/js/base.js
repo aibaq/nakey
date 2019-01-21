@@ -5,8 +5,12 @@ function onGetCartItems(){
     }
     return [];
 }
+function onUpdateCartItems(items){
+    localStorage.setItem("cartItems", JSON.stringify(items));
+}
 function onAddToCart(item){
     let items = [];
+    item.count = 1;//default count is 1;
     if(localStorage.getItem("cartItems")){
         items = JSON.parse(localStorage.getItem("cartItems"));
         console.log(items.find(i=>i.id == item.id))
@@ -18,7 +22,7 @@ function onAddToCart(item){
     }else{
         items.push(item);
     }
-    localStorage.setItem("cartItems", JSON.stringify(items));
+    onUpdateCartItems(items)
 }
 function onRemoveFromCart(item_id){
     console.log(item_id)
@@ -26,7 +30,17 @@ function onRemoveFromCart(item_id){
     var index = items.findIndex(item=>item.id == item_id);
     if(index > -1){
         items.splice(index, 1);
-        localStorage.setItem("cartItems", JSON.stringify(items));
+        onUpdateCartItems(items)
     }
     console.log(items);
+}
+function onUpdateCartItem(item_id, newcount){
+    items = onGetCartItems();
+    console.log("Update", items, item_id, newcount)
+    var searchitem = items.find(item=>{ return item.id == item_id; });
+    console.log("search", searchitem)
+    if(searchitem != undefined){
+        searchitem.count = newcount;
+        onUpdateCartItems(items)
+    }
 }
