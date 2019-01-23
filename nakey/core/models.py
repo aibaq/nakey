@@ -93,7 +93,8 @@ class Request(TimestampMixin, models.Model):
     def send_email(self):
         message = render_to_string('emails/request.html', {'req': self,
                                                            'request_items': self.items.all()})
-        tasks.email(to=settings.EMAIL_HOST_USER, subject=messages.REQUEST_SUBJECT, message=message)
+        if settings.CELERY_ON:
+            tasks.email(to=settings.EMAIL_HOST_USER, subject=messages.REQUEST_SUBJECT, message=message)
 
 
 class RequestItem(TimestampMixin, models.Model):

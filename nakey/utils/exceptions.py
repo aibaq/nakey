@@ -1,7 +1,7 @@
 from rest_framework.views import exception_handler
 from rest_framework.exceptions import APIException
 from rest_framework.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
-from toyota.utils.codes import BAD_REQUEST
+from nakey.utils.codes import BAD_REQUEST
 
 
 def custom_exception_handler(exc, context):
