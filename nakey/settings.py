@@ -39,7 +39,7 @@ class BaseConfiguration(Configuration):
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
+        # 'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -122,6 +122,7 @@ class BaseConfiguration(Configuration):
     ADMINS = (
     )
 
+    CELERY_ON = False
     CELERY_BROKER_URL = 'pyamqp://{user}:{pwd}@{host}:{port}/{vhost}'.format(
         user=os.getenv('RABBIT_USER', 'guest'),
         pwd=os.getenv('RABBIT_PASSWORD', 'guest'),
@@ -197,7 +198,7 @@ class BaseConfiguration(Configuration):
         ),
         'DEFAULT_FILTER_BACKENDS': (
             'django_filters.rest_framework.DjangoFilterBackend',),
-        'EXCEPTION_HANDLER': 'trafficwave_back.utils.exceptions.custom_exception_handler',
+        'EXCEPTION_HANDLER': 'nakey.utils.exceptions.custom_exception_handler',
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
         'PAGE_SIZE': 20
     }
