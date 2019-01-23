@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/template.css'%}">
 
 <script id="productPreviewTmpl" type="text/x-jquery-tmpl">
-    <div class="item-outer col-12 col-sm-6 col-md-3">
+    <div class="item-outer ${style.className}">
             <div class="item cursor-pointer">
                 <a class="item-details cursor-pointer" href="/shop/item/${item.id}">
                     <div class="img" style="background-image: url(http://localhost:8000${item.images[0]})">
@@ -22,7 +22,10 @@
                             <span class="cart-btn">Купить</span>
                         </div>
                         <div class="col-6 px-3" onclick="onClickCart(${item.id})">
-                            <span class="cart-btn cursor-pointer"><i class="fas fa-shopping-cart"></i></span>
+                            <span class="cart-btn cursor-pointer">
+                                <!-- <i class="fas fa-shopping-cart"></i> -->
+                                <i class="fas fa-cart-plus"></i>
+                            </span>
                         </div>
                     </div>
                 </div>

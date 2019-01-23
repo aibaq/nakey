@@ -15,12 +15,14 @@ function onAddToCart(item){
         items = JSON.parse(localStorage.getItem("cartItems"));
         console.log(items.find(i=>i.id == item.id))
         if(items.find(i=>i.id == item.id) == undefined){
-            items.push(item)
+            items.push(item);
+            toastr.success('Товар добавлен в корзину')
         }else{
-            alert("you")
+            toastr.warning('Товар уже есть в корзине')
         }
     }else{
         items.push(item);
+        toastr.success('Товар добавлен в корзину')
     }
     onUpdateCartItems(items)
 }

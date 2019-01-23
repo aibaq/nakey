@@ -58,7 +58,7 @@
                         items = res.data.results;
                         items.map(item=>{
                             console.log(item)
-                            $('#productPreviewTmpl').tmpl({item: item}).appendTo('.item-list');
+                            $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-3'}}).appendTo('.item-list');
                         })
                     }else{
 
@@ -85,7 +85,12 @@
         return vars;
     }
     function onClickCart(id){
-        onAddToCart(items.find(item=>item.id == id));
+        var cartItems = onGetCartItems();
+        if(cartItems.find(item=>item.id == id)){
+            window.location.href = "/cart";        
+        }else{
+            onAddToCart(items.find(item=>item.id == id));
+        }
     }
     function sendRequest(item_id){
         console.log(item_id)
