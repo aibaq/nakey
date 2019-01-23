@@ -9,8 +9,10 @@
     <div class="container">
         <h3>Магазин</h3>
         <div class="filter d-flex">
-            <div class="form-group mb-2 d-flex flex-column mr-3">
-                <label for="category">Категория</label>
+            <div class="form-group mb-3 mr-3">
+                <input id="search-text" class="form-control" placeholder="Поиск" />
+            </div>
+            <div class="form-group mb-3 d-flex flex-column mr-3">
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="category-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Все
@@ -22,8 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-2 d-flex flex-column">
-                <label for="ordering">Сортировать по</label>
+            <div class="form-group mb-3 d-flex flex-column mr-3">
                 <!-- <select name="" id="" class="form-control">
                     <option value="price">Цене <i class="fas fa-sort-numeric-up"></i></option>
                     <option value="-price">Цене <i class="fas fa-sort-numeric-up"></i></option>
@@ -32,7 +33,7 @@
                 </select> -->
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Выберите
+                        Сортировка
                     </button>
                     <div class="dropdown-menu" aria-labelledby="sort-btn">
                         <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
@@ -42,6 +43,7 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-2"><button class="btn btn-primary" onclick="acceptFilter()">Найти</button></div>
         </div>
         <div class="item-list row">
 
@@ -63,7 +65,7 @@
         {name: 'Популярности', value: '-views_count'},
     ]
     const url = "/item/?limit=100";
-    const shopUrl = "/shop/";
+    var shopUrl = "/shop/";
 </script>
 <script>
     // get category:
@@ -97,17 +99,20 @@
         var query = getUrlVars();
         filter.category = query['category'];
         filter.ordering = query['ordering'];
+        filter.search = query['search'];
         console.log(filter);
         items = [];
         $('.item-list').empty();
         let newUrl = url;
         if(filter.category){
             newUrl+="&category="+filter.category;
-            // $('#category-btn').text(text);       
         }
         if(filter.ordering){
             newUrl+="&ordering="+filter.ordering;
-            // $('#order-btn').text(text);       
+        }
+        if(filter.search){
+            newUrl+="&search="+filter.search;
+            $('#search-text').val(filter.search);
         }
         $.ajax({
             url: newUrl,
@@ -128,43 +133,6 @@
                 }
             },
         });
-    }
-    // Read a page's GET URL variables and return them as an associative array.
-    function getUrlVars(){
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++){
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
-    }
-    function setUrlVar(query){
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        var exist = false;
-        for(var i = 0; i < hashes.length; i++){
-            hash = hashes[i].split('=');
-            if(query.name == hash[0]){
-                hash[1] = query.value;//change value of query
-                exist = true;
-            }
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        if(!exist){
-            hash = [query.name, query.value];
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        let str = shopUrl;
-        for(var i = 0; i < vars.length; i++){
-            let before = i==0?'?':'&';
-            str+=before+vars[i]+'='+vars[vars[i]];
-        }
-        // console.log(hashes);
-        return str;
     }
     function onClickCart(id){
         var cartItems = onGetCartItems();
@@ -192,6 +160,13 @@
     function changeCategory(id, text){
         // console.log(setUrlVar({name: 'category', value: id}));
         window.location.replace(setUrlVar({name: 'category', value: id}));
+    }
+    function acceptFilter(){
+        let text = $('#search-text').val();
+        console.log(text)
+        if(text == '' || text == undefined)
+            return;
+        window.location.replace(setUrlVar({name: 'search', value: text}));
     }
 </script>
 <script>
