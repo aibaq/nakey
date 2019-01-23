@@ -18,9 +18,8 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Каталог 
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/shop">Сумки</a>
-                    <a class="dropdown-item" href="/shop">Кожанные изделия</a>
+                    <div class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contacts">Контакты</a>
@@ -36,3 +35,29 @@
         </div>
     </nav>
 </header>
+<script>
+var categories = [];
+const categoryUrl = '/category';
+// get category:
+function getCategories(){
+    $.ajax({
+        url: categoryUrl,
+        success: function(res){
+            console.log(res)
+            if(res){
+                if(res.code == 0){
+                    categories = res.data.results;
+                    categories.map(c=>{
+                        $('#dropdown-category').append(`<a class="dropdown-item" href="/shop/?category=${c.id}">${c.name}</a>`)
+                    });
+                }else{
+
+                }
+            }else{
+
+            }
+        },
+    });
+}   
+getCategories();
+</script>

@@ -7,13 +7,14 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="{% static 'img/icon.png' %}">
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'bootstrap-4.0.0/css/bootstrap.css' %}" />
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}" />
   <link rel="stylesheet" href="{% static 'css/base.css' %}" />
   <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}" />
   {% block head %}
   {% endblock head %}
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </head>
 <body>
   {% include './header.html' %}
@@ -22,8 +23,9 @@
     {% endblock content %}
   </main>
   {% include './footer.html' %}
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/base.js' %}"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
+  <script src="{% static 'bootstrap-4.0.0/js/popper.js' %}"></script>
   <script src="{% static 'bootstrap-4.0.0/js/bootstrap.js' %}"></script>
   <script src="{% static 'js/jq-templates.js' %}"></script>
   <script src="{% static 'toastr/toastr.min.js' %}"></script>

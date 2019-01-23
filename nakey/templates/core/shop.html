@@ -2,30 +2,46 @@
 {% load staticfiles %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/cart.css'%}">
+<link rel="stylesheet" href="{% static 'css/shop.css'%}">
 <title>Каталог</title>
 {% endblock head %}
 {% block content %}
     <div class="container">
         <h3>Магазин</h3>
-        <div class="filter">
-            <form class="form-inline">
-                <div class="form-group mb-2 d-flex flex-column">
-                    <label for="staticEmail2">Категория</label>
-                    <select name="" id="category" class="form-control">
+        <div class="filter d-flex">
+            <div class="form-group mb-2 d-flex flex-column mr-3">
+                <label for="category">Категория</label>
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="category-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Все
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="category-btn">
                         {% for cat in categories %}
-                        <option value="{{cat.id}}">{{cat}}</option>
+                        <div class="dropdown-item" onclick="changeCategory('{{cat.id}}', '{{cat}}')">{{cat}}</div>
                         {% endfor%}
-                    </select>
+                    </div>
                 </div>
-                <div class="form-group mb-2 d-flex flex-column">
-                    <label for="staticEmail2">Сортировать по</label>
-                    <select name="" id="" class="form-control">
-                        <option value="price">Цене</option>
-                        <option value="price">Цене</option>
-                        <option value="price">Цене</option>
-                    </select>
+            </div>
+            <div class="form-group mb-2 d-flex flex-column">
+                <label for="ordering">Сортировать по</label>
+                <!-- <select name="" id="" class="form-control">
+                    <option value="price">Цене <i class="fas fa-sort-numeric-up"></i></option>
+                    <option value="-price">Цене <i class="fas fa-sort-numeric-up"></i></option>
+                    <option value="views_count">Популярности &#xf163;</option>
+                    <option value="-views_count">Популярности <i class="fas">&#xf163;</i></option>
+                </select> -->
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выберите
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="sort-btn">
+                        <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
+                        <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
+                        <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                        <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="item-list row">
 
@@ -35,22 +51,66 @@
 {% block scripts %}
 <script>
     var filter = {
-        category_id: null,
-        sort: null,
+        category: null,
+        ordering: null,
     }
     var items = [];
-    var url = "http://localhost:8000/item/?limit=10";
+    var categories = [];
+    var orders = [
+        {name: 'Цене', value: 'price'},
+        {name: 'Цене', value: '-price'},
+        {name: 'Популярности', value: 'views_count'},
+        {name: 'Популярности', value: '-views_count'},
+    ]
+    const url = "/item/?limit=100";
+    const shopUrl = "/shop/";
 </script>
 <script>
+    // get category:
+    function getCategories(){
+        $.ajax({
+            url: categoryUrl,
+            success: function(res){
+                console.log(res)
+                if(res){
+                    if(res.code == 0){
+                        categories = res.data.results;
+                        if(filter.category){
+                            let name = categories.find(c=>c.id == filter.category).name;
+                            $('#category-btn').text(name);     
+                        }
+                        if(filter.ordering){
+                            let name = orders.find(c=>c.value == filter.ordering).name;
+                            $('#order-btn').text(name);
+                        }
+                    }else{
+
+                    }
+                }else{
+
+                }
+            },
+        });
+    }
     //get items:
     function getItems(){
+        var query = getUrlVars();
+        filter.category = query['category'];
+        filter.ordering = query['ordering'];
         console.log(filter);
         items = [];
         $('.item-list').empty();
-        if(filter.category_id)
-            url+="&category_id="+filter.category_id;
+        let newUrl = url;
+        if(filter.category){
+            newUrl+="&category="+filter.category;
+            // $('#category-btn').text(text);       
+        }
+        if(filter.ordering){
+            newUrl+="&ordering="+filter.ordering;
+            // $('#order-btn').text(text);       
+        }
         $.ajax({
-            url: url,
+            url: newUrl,
             success: function(res){
                 console.log(res)
                 if(res){
@@ -69,20 +129,42 @@
             },
         });
     }
-    function createQuery(){
-        
-    }
     // Read a page's GET URL variables and return them as an associative array.
     function getUrlVars(){
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
+        for(var i = 0; i < hashes.length; i++){
             hash = hashes[i].split('=');
             vars.push(hash[0]);
             vars[hash[0]] = hash[1];
         }
         return vars;
+    }
+    function setUrlVar(query){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        var exist = false;
+        for(var i = 0; i < hashes.length; i++){
+            hash = hashes[i].split('=');
+            if(query.name == hash[0]){
+                hash[1] = query.value;//change value of query
+                exist = true;
+            }
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        if(!exist){
+            hash = [query.name, query.value];
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        let str = shopUrl;
+        for(var i = 0; i < vars.length; i++){
+            let before = i==0?'?':'&';
+            str+=before+vars[i]+'='+vars[vars[i]];
+        }
+        // console.log(hashes);
+        return str;
     }
     function onClickCart(id){
         var cartItems = onGetCartItems();
@@ -102,15 +184,18 @@
         }
         console.log(data)
     }
+    function sortOrder(order, text){
+        $('#order-btn').text(text);
+        // console.log(setUrlVar({name: 'ordering', value: order}));
+        window.location.replace(setUrlVar({name: 'ordering', value: order}));
+    }
+    function changeCategory(id, text){
+        // console.log(setUrlVar({name: 'category', value: id}));
+        window.location.replace(setUrlVar({name: 'category', value: id}));
+    }
 </script>
 <script>
-    $('#category').on('change', function(){
-        console.log(this.value);
-        filter.category_id = this.value;
-        getItems();
-    })
-    var query = getUrlVars();
-    filter.category_id = query['category_id'];
+    getCategories();
     getItems();
 </script>
 {% endblock scripts%}
