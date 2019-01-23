@@ -18,7 +18,7 @@
                 </a>
                 <div class="container item-btns p-2">
                     <div class="row">
-                        <div class="col-6 px-3 cursor-pointer" onclick="onClickBuy(${item.id})">
+                        <div class="col-6 px-3 cursor-pointer" onclick="onClickBuy(`${JSON.stringify(item)}`)">
                             <span class="cart-btn">Купить</span>
                         </div>
                         <div class="col-6 px-3" onclick="onClickCart(${item.id})">
@@ -87,7 +87,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary" onclick="sendRequest(${item_id})">Отправить</button>
+                    <button type="submit" class="btn btn-primary" onclick="prepareRequest(`${items}`)">Отправить</button>
                 </div>
             </div>
         </div>
@@ -95,9 +95,72 @@
 </script>
 <div id="requestmodal"></div>
 <script>
-    function onClickBuy(item_id){
+    var requestUrl = "http://localhost:8000/request/";
+</script>
+<script>
+    function onClickBuy(item){
         $('#requestmodal').empty();
-        $('#requestModalTmpl').tmpl({item_id: item_id}).appendTo('#requestmodal');
+        $('#requestModalTmpl').tmpl( {items: [item]} ).appendTo('#requestmodal');
         $("#requestmodal .modal").modal('show');
+    }
+    function onSendRequest(data){
+        var FD  = new FormData();
+        //TODO: make array object as FD
+        for(name in data) {
+            FD.append(name, data[name]);
+        }
+        // for (var [key, value] of FD.entries()) { 
+        //     console.log(key, value);
+        // }
+        $.ajax({
+            type: 'POST',
+            url: requestUrl,
+            data: FD,
+            processData: false,
+            contentType: false,
+            success: function(res){
+                console.log(res)
+                if(res){
+                    if(res.code == 0){
+                        console.log("success");
+                        toastr.success('Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с вами!')
+                    }else{
+                        toastr.warning('Ошибка #'+res.code, 'Попробуйте еще раз');
+                    }
+                }else{
+
+                }
+            },
+            error: function(error){
+                console.log(error);
+                toastr.error(error.statusText, 'Ошибка сервера');
+            }
+        });
+    }
+    function prepareRequest(items){
+        if(onGetCartItems().length == 0)
+            return;
+        var name = $('#requestmodal #name').val();
+        if(name == ''|| name == undefined){
+            toastr.warning('Заполните имя')
+            return;
+        }
+        var phone = $('#requestmodal #phone').val(); 
+        if(phone == ''|| phone == undefined){
+            toastr.warning('Заполните телефон')
+            return;
+        }
+        var city = $('#requestmodal #city').val();
+        if(city == ''|| city == undefined){
+            toastr.warning('Заполните ваш город')
+            return;
+        }
+        let data = {
+            full_name: name, 
+            phone: phone, 
+            address: city, 
+            items: JSON.parse(items)
+        }
+        onSendRequest(data);
     }
 </script>

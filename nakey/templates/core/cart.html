@@ -12,31 +12,12 @@
             <div class="item-list d-flex flex-wrap"></div>
         </div>
         <div class="col-12 col-md-3 order">
-            <h3>Оформить заказ</h3>
-            <table id="cart-detail">                
-                <tbody>
-                    <tr>
-                        <td>Количество товаров</td>
-                        <td>Общая цена</td>
-                    </tr>
-                    <tr>
-                        <td class="cart-count">
-
-                        </td>
-                        <td class="cart-price">
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="btn btn-primary" onclick="clickRequest()">Отправить заявку</button>
         </div>
     </div>
 </div>
 {% endblock content %}
 {% block scripts %}
 <script>
-    var url = "http://localhost:8000/request/";
 </script>
 <script>
     function renderCart(){
@@ -94,56 +75,8 @@
             return;
         }
         $('#requestmodal').empty();
-        $('#requestModalTmpl').tmpl({item_id: "name"}).appendTo('#requestmodal');
+        $('#requestModalTmpl').tmpl({items: JSON.stringify(onGetCartItems())}).appendTo('#requestmodal');
         $("#requestmodal .modal").modal('show');
-    }
-    function sendRequest({}){
-        if(onGetCartItems().length == 0)
-            return;
-        var name = $('#requestmodal #name').val();
-        if(name == ''|| name == undefined){
-            toastr.warning('Заполните имя')
-            return;
-        }
-        var phone = $('#requestmodal #phone').val(); 
-        if(phone == ''|| phone == undefined){
-            toastr.warning('Заполните телефон')
-            return;
-        }
-        var city = $('#requestmodal #city').val();
-        if(city == ''|| city == undefined){
-            toastr.warning('Заполните ваш город')
-            return;
-        }
-        var data = JSON.stringify({
-            name: name,
-            phone: phone,
-            city: city,
-            items: onGetCartItems()
-        });
-        console.log(data)
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            success: function(res){
-                console.log(res)
-                if(res){
-                    if(res.code == 0){
-                        console.log("success");
-                        toastr.success('Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с вами!')
-                    }else{
-                        toastr.warning('Ошибка #'+res.code, 'Попробуйте еще раз');
-                    }
-                }else{
-
-                }
-            },
-            error: function(error){
-                console.log(error);
-                toastr.error(error.statusText, 'Ошибка сервера');
-            }
-        });
     }
 </script>
 <script>
