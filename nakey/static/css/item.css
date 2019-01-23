@@ -8,7 +8,7 @@
     background-position: center;
 }
 .images{
-    padding: 0 32px;
+    padding: 0 22px;
 }
 .item-image{
     width: 120px;
@@ -22,4 +22,9 @@
     /* color: rgba(23,230,0,1); */
     color: rgba(0,0,0,1); 
     /* not works, why? */
+}
+#image-preview .modal-dialog{
+    width: calc(100vh - 28px);
+    margin-top: 14px;
+    max-width: none;
 }
