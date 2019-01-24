@@ -33,3 +33,4 @@ def prod():
     env.hosts = [os.getenv('PROD_HOST')]
     env.environ = 'prod'
     env.dotenv_path = '{}/.env'.format(env.repo_name)
+    env.port = 21111
