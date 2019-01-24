@@ -99,25 +99,24 @@
 </script>
 <script>
     function onClickBuy(item){
+        console.log("onlcik item", item)
+        let data = {
+            items: JSON.stringify([JSON.parse(item)])
+        }
         $('#requestmodal').empty();
-        $('#requestModalTmpl').tmpl( {items: [item]} ).appendTo('#requestmodal');
+        $('#requestModalTmpl').tmpl(data).appendTo('#requestmodal');
         $("#requestmodal .modal").modal('show');
     }
     function onSendRequest(data){
-        var FD  = new FormData();
-        //TODO: make array object as FD
-        for(name in data) {
-            FD.append(name, data[name]);
-        }
-        // for (var [key, value] of FD.entries()) { 
-        //     console.log(key, value);
-        // }
+        console.log(data);
         $.ajax({
             type: 'POST',
             url: requestUrl,
-            data: FD,
-            processData: false,
-            contentType: false,
+            data: JSON.stringify(data),
+            dataType: 'json',
+            // processData: false,
+            contentType: "application/json; charset=utf-8",
+            // contentType: false,
             success: function(res){
                 console.log(res)
                 if(res){
@@ -138,6 +137,7 @@
         });
     }
     function prepareRequest(items){
+        console.log("items", items)
         if(onGetCartItems().length == 0)
             return;
         var name = $('#requestmodal #name').val();
@@ -155,11 +155,15 @@
             toastr.warning('Заполните ваш город')
             return;
         }
+        let parsedItems = [];
+        JSON.parse(items).map(item=>{
+            parsedItems.push({item: item.id, count: item.count | 1});
+        })
         let data = {
             full_name: name, 
             phone: phone, 
             address: city, 
-            items: JSON.parse(items)
+            items: parsedItems
         }
         onSendRequest(data);
     }

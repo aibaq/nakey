@@ -1,13 +1,19 @@
 {% extends './base.html' %}
 {% load staticfiles %}
 {% block head %}
-<style>
-    .filter .dropdown button,
-    .filter button{
-        width: 100%;
-    }
-</style>
-<title>Каталог</title>
+    <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Корзина Nakey.kz" />
+    <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta property="og:url" content="https://nakey.kz/shop" />
+    <title>Каталог товаров</title>
+    <style>
+        .filter .dropdown button,
+        .filter button{
+            width: 100%;
+        }
+    </style>
 {% endblock head %}
 {% block content %}
     <div class="container">
