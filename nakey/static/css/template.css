@@ -57,3 +57,14 @@ small{
 .cart-item-details input{
     width: 50px;
 }
+@media screen and (max-width: 576px){
+    .item{
+        margin-bottom: 16px;
+    }
+    .item .item-details{
+        border-color: #EBEFF5;
+    }
+    .item .item-btns{
+        visibility: visible;
+    }
+}

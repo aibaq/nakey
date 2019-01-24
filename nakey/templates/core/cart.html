@@ -1,12 +1,16 @@
 {% extends './base.html' %}
 {% load staticfiles %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/cart.css'%}">
 <title>Корзина</title>
+<style>
+    .item-list .item{
+        margin-bottom: 16px;
+    }
+</style>
 {% endblock head %}
 {% block content %}
 <div class="container">
-    <h3 class="mt-3 mb-5">Ваша Корзина</h3>
+    <h3 class="mb-5">Ваша Корзина</h3>
     <div class="row">
         <div class="col-12 col-md-9">
             <div class="item-list d-flex flex-wrap"></div>
@@ -58,7 +62,7 @@
             $('#productCartPreviewTmpl').tmpl(data).appendTo('.item-list');
         });
         $("#cart-detail .cart-count").text(allcount);
-        $("#cart-detail .cart-price").text(allprice);
+        $("#cart-detail .cart-price").html(allprice+'&nbsp;&#8376;');
     }
     function changeCount(e, item_id){
         // console.log("change count", item_id, e.value)

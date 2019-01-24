@@ -1,22 +1,66 @@
 {% load staticfiles %}
-<footer class="container">
-    <div class="row">
-        <div class="col-4">
-            <h6>Наш адрес</h6>
+<style>
+    .circle{
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+    }
+    .footer-top{
+        background-color: #222222;
+    }
+    .footer-top h6{
+        color: #dddddd;
+    }
+    .footer-top a,
+    .footer-top p{
+        color: #919191;
+    }
+    .footer-copyright{
+        background-color: #444444;
+        color: #fff;
+    }
+    .footer-copyright a{
+        color: #fff;
+    }
 
-        </div>
-        <div class="col-4">
-            <h6>Наш адрес</h6>
-            
-        </div>
-        <div class="col-4">
-            <h6>Социальные сети</h6>
-            <div>
-
+</style>
+<footer>
+    <div class="footer-top">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+                    <h6>Наш адрес</h6>
+                    <p>Барахолка,ТЦ Дастур, <br/>
+                        Северное кольцо 8, <br/>
+                        Almaty, Kazakhstan
+                    </p>
+                </div>
+                <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+                    <h6>Наши контакты</h6>
+                    <a href="tel:+77752530066">+7(775) 253 00 66</a><br/>
+                    <a href="mailto:nakeykz@gmail.com">nakeykz@gmail.com</a>
+                </div>
+                <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+                    <h6>Социальные сети</h6>
+                    <div class="d-flex">
+                        <a href="https://www.instagram.com/nakeykz/" target="_blank" class="circle">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/shop.nakeykz/" target="_blank" class="circle">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://vk.com/nakey_kz" target="_blank" class="circle">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="https://nakey.kz">Nakey.kz</a>
+    <div class="footer-copyright">
+        <div class="container text-center py-3">
+            © 2019 Copyright:
+            <a href="https://nakey.kz">Nakey.kz</a>
+        </div>
     </div>
 </footer>

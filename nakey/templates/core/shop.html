@@ -1,18 +1,22 @@
 {% extends './base.html' %}
 {% load staticfiles %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/cart.css'%}">
-<link rel="stylesheet" href="{% static 'css/shop.css'%}">
+<style>
+    .filter .dropdown button,
+    .filter button{
+        width: 100%;
+    }
+</style>
 <title>Каталог</title>
 {% endblock head %}
 {% block content %}
     <div class="container">
         <h3>Магазин</h3>
-        <div class="filter d-flex">
-            <div class="form-group mb-3 mr-3">
+        <div class="filter row" >
+            <div class="col-12 col-md-6 col-lg-3 form-group mb-3">
                 <input id="search-text" class="form-control" placeholder="Поиск" />
             </div>
-            <div class="form-group mb-3 d-flex flex-column mr-3">
+            <div class="col-12 col-md-6 col-lg-2 form-group mb-3 d-flex flex-column">
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="category-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Все
@@ -24,13 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-3 d-flex flex-column mr-3">
-                <!-- <select name="" id="" class="form-control">
-                    <option value="price">Цене <i class="fas fa-sort-numeric-up"></i></option>
-                    <option value="-price">Цене <i class="fas fa-sort-numeric-up"></i></option>
-                    <option value="views_count">Популярности &#xf163;</option>
-                    <option value="-views_count">Популярности <i class="fas">&#xf163;</i></option>
-                </select> -->
+            <div class="col-12 col-md-6 col-lg-2 form-group mb-3 d-flex flex-column">
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Сортировка
@@ -43,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-2"><button class="btn btn-primary" onclick="acceptFilter()">Найти</button></div>
+            <div class="col-12 col-md-6 col-lg-2 mb-2"><button class="btn btn-primary" onclick="acceptFilter()">Найти</button></div>
         </div>
         <div class="item-list row">
 

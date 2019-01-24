@@ -1,4 +1,9 @@
 /* COMMON STYLES */
+main.main{
+    /* 75 - header height, 250 - footer height */
+    min-height: calc(100vh - 75px - 200px);
+    padding: 48px 0;
+}
 .cursor-pointer{
     cursor: pointer;
 }
