@@ -1,14 +1,35 @@
 {% extends './base.html' %}
 {% load staticfiles %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/cart.css'%}">
-<title>Контакты</title>
+    <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Корзина Nakey.kz" />
+    <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta property="og:url" content="https://nakey.kz/contacts" />
+    <title>Контакты</title>
 {% endblock head %}
 {% block content %}
 <div class="container">
     <h3>Наши контакты</h3>
-    <h3>Наш адресс</h3>
-
+    <div>
+        <a href="tel:+77752530066">+7(775) 253 00 66</a><br/>
+        <a href="mailto:nakeykz@gmail.com">nakeykz@gmail.com</a>
+    </div>
+    <h3>Наш адрес</h3>
+    <div class="row">
+        <div class="col-12">
+            <p>
+            Барахолка,ТЦ Дастур, <br/>
+            Цокольный этаж  3 ряд 5-6 бутик <br/>
+            Северное кольцо 8, <br/>
+            Almaty, Kazakhstan
+            </p>
+        </div>
+        <div class="col-12">
+            <a class="dg-widget-link" href="http://2gis.kz/almaty/firm/70000001030103091/center/76.89277410507204,43.29416862558849/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Алматы</a><div class="dg-widget-link"><a href="http://2gis.kz/almaty/firm/70000001030103091/photos/70000001030103091/center/76.89277410507204,43.29416862558849/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии компании</a></div><div class="dg-widget-link"><a href="http://2gis.kz/almaty/center/76.892771,43.293875/zoom/16/routeTab/rsType/bus/to/76.892771,43.293875╎Дастур, торговый центр?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Дастур, торговый центр</a></div><script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script><script charset="utf-8">new DGWidgetLoader({"width":'100%',"height":400,"borderColor":"#a3a3a3","pos":{"lat":43.29416862558849,"lon":76.89277410507204,"zoom":16},"opt":{"city":"almaty"},"org":[{"id":"70000001030103091"}]});</script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+        </div>
+    </div>
 </div>
 {% endblock content %}
 {% block scripts %}

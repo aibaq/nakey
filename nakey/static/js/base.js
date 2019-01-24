@@ -1,4 +1,9 @@
 // cart:
+var shopUrl = "/shop/";
+var filter = {
+    category: null,
+    ordering: null,
+}
 function onGetCartItems(){
     if(localStorage.getItem("cartItems")){
         return JSON.parse(localStorage.getItem("cartItems"))
@@ -15,12 +20,14 @@ function onAddToCart(item){
         items = JSON.parse(localStorage.getItem("cartItems"));
         console.log(items.find(i=>i.id == item.id))
         if(items.find(i=>i.id == item.id) == undefined){
-            items.push(item)
+            items.push(item);
+            toastr.success('Товар добавлен в корзину')
         }else{
-            alert("you")
+            toastr.warning('Товар уже есть в корзине')
         }
     }else{
         items.push(item);
+        toastr.success('Товар добавлен в корзину')
     }
     onUpdateCartItems(items)
 }
@@ -43,4 +50,43 @@ function onUpdateCartItem(item_id, newcount){
         searchitem.count = newcount;
         onUpdateCartItems(items)
     }
+}
+// Read a page's GET URL variables and return them as an associative array.
+function getUrlVars(){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++){
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+function setUrlVar(query){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    if(!window.location.href.includes('?'))
+        hashes = [];
+    var exist = false;
+    for(var i = 0; i < hashes.length; i++){
+        hash = hashes[i].split('=');
+        if(query.name == hash[0]){
+            hash[1] = query.value;//change value of query
+            exist = true;
+        }
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    if(!exist){
+        hash = [query.name, query.value];
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    let str = shopUrl;
+    for(var i = 0; i < vars.length; i++){
+        let before = i==0?'?':'&';
+        str+=before+vars[i]+'='+vars[vars[i]];
+    }
+    console.log('str:', vars);
+    return str;
 }

@@ -1,5 +1,116 @@
-item
+{% extends './base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Корзина Nakey.kz" />
+    <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta property="og:url" content="https://nakey.kz/" />
+    
+    <link rel="stylesheet" href="{% static 'css/item.css'%}">
+    <title>Каталог</title>
+{% endblock head %}
+{% block content %}
+<div class="container item-page">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="main-image mb-3" style="background-image: url(http://localhost:8000/media/{{item.images.all.0.image }})">
+            </div>
+            <div class="images">
+                <div id="images-carousel">
+                    {% for item in item.images.all %}
+                        <div class="item-image cursor-pointer" onclick="openImage('http://localhost:8000/media/{{item.image}}')">
+                            <img src="http://localhost:8000/media/{{item.image}}" alt=""/>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-8">
+            <h1>{{ item.name }}</h1>
+            <b>{{ item.price }}&nbsp;&#8376;</b>
+            <p>{{ item.description }}</p>
+            <div class="btns d-flex">
+                <button class="btn btn-light mb-3 mr-3" onclick="clickBuy()">Купить</button>
+                <button class="btn btn-light mb-3 cart-btn" onclick="onClickCart()">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="image-preview" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div id="hover-zoom">
+                    <img src="" alt="" class="w-100"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'zoom/jquery.zoom.min.js' %}"></script>
+<script src="{% static 'zoom/jquery.zoom.js' %}"></script>
+<script>
+    let url = '/item/{{item.id}}';
+    var item;
+    $.ajax({
+        url: url,
+        success: function(res){
+            console.log(res)
+            if(res){
+                if(res.code == 0){
+                    item = res.data;
+                }else{
 
-{{ item.id }}<br>
-{{ item.name }}<br>
-{{ item.price }}<br>
+                }
+            }else{
+
+            }
+        },
+    });
+    var length = '{{item.images.all | length}}';
+    var show = length > 3?3:length;
+    $('#images-carousel').slick({
+        slidesToShow: show,
+        slidesToScroll: 1,
+        dots: false,
+        infinite: false,
+        autoplay: false,
+        lazyLoad: 'ondemand',
+        arrows: true,
+        // variableWidth: true,
+        // adaptiveHeight: true,
+
+    });
+    let items = onGetCartItems()
+    if(items.find(item=>item.id == '{{item.id}}')){
+        $('.cart-btn').text('Перейти в корзину');
+    }
+
+    function onClickCart(){
+        var cartItems = onGetCartItems();
+        var id = item.id;
+        if(cartItems.find(item=>item.id == id)){
+            window.location.href = "/cart";        
+        }else{
+            onAddToCart(item);
+            $('.cart-btn').text('Перейти в корзину');
+        }
+    }
+    function clickBuy(){
+        onClickBuy(JSON.stringify(item));
+    }
+    function openImage(image_url){
+        $('.main-image').css({'background-image': 'url('+image_url+')'});
+        $('#image-preview img').attr('src', image_url);
+        $('#image-preview').modal('show');
+        $(document).ready(function(){
+            // $('#image-preview img').zoom({url: image_url});
+			$('#hover-zoom').zoom();
+        });
+    }
+</script>
+{% endblock scripts %}

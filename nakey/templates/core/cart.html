@@ -1,18 +1,43 @@
 {% extends './base.html' %}
 {% load staticfiles %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/cart.css'%}">
-<title>Корзина</title>
+    <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Корзина Nakey.kz" />
+    <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta property="og:url" content="https://nakey.kz/cart" />
+    <title>Корзина</title>
+    <style>
+        .item-list .item{
+            margin-bottom: 16px;
+        }
+    </style>
 {% endblock head %}
 {% block content %}
 <div class="container">
-    <h3>Корзина</h3>
+    <h3 class="mb-5">Ваша Корзина</h3>
     <div class="row">
         <div class="col-12 col-md-9">
             <div class="item-list d-flex flex-wrap"></div>
         </div>
-        <div class="col-12 col-md-3">
-            <h3>Оформить заказ</h3>
+        <div class="col-12 col-md-3 order">
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script>
+</script>
+<script>
+    function renderCart(){
+        var items = onGetCartItems();
+        $(".item-list").empty();
+        if(items.length == 0){
+            $(".item-list").append("<p>Ваша корзина пуста, ищите товары <a href='/shop'>тут</a></p>")
+            $(".order").empty();
+        }else{
+            $(".order").html(` <h3>Оформить заказ</h3>
             <table id="cart-detail">                
                 <tbody>
                     <tr>
@@ -29,19 +54,9 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary" onclick="clickRequest()">Отправить заявку</button>
-        </div>
-    </div>
-</div>
-{% endblock content %}
-{% block scripts %}
-<script>
-    function renderCart(){
-        var items = onGetCartItems();
-        $(".item-list").empty();
-        if(items.length == 0){
-            $(".item-list").append("<p>Ваша корзина пуста</p>")
+            <button class="btn btn-primary" onclick="clickRequest()">Отправить заявку</button>`);
         }
+
         var allcount = 0;
         var  allprice = 0;
         items.map(item=>{
@@ -53,7 +68,7 @@
             $('#productCartPreviewTmpl').tmpl(data).appendTo('.item-list');
         });
         $("#cart-detail .cart-count").text(allcount);
-        $("#cart-detail .cart-price").text(allprice);
+        $("#cart-detail .cart-price").html(allprice+'&nbsp;&#8376;');
     }
     function changeCount(e, item_id){
         // console.log("change count", item_id, e.value)
@@ -65,18 +80,13 @@
         renderCart();
     }
     function clickRequest(){
-        $('#requestmodal').empty();
-        $('#requestModalTmpl').tmpl({item_id: "name"}).appendTo('#requestmodal');
-        $("#requestmodal .modal").modal('show');
-    }
-    function sendRequest({}){
-        var data = {
-            name: $('#requestmodal #name').val(),
-            phone: $('#requestmodal #phone').val(),
-            city: $('#requestmodal #city').val(),
-            items: onGetCartItems()
+        if(onGetCartItems().length == 0){
+            toastr.warning('Ваша корзина пуста')            
+            return;
         }
-        console.log(data)
+        $('#requestmodal').empty();
+        $('#requestModalTmpl').tmpl({items: JSON.stringify(onGetCartItems())}).appendTo('#requestmodal');
+        $("#requestmodal .modal").modal('show');
     }
 </script>
 <script>

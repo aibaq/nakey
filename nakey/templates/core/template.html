@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/template.css'%}">
 
 <script id="productPreviewTmpl" type="text/x-jquery-tmpl">
-    <div class="item-outer col-12 col-sm-6 col-md-3">
+    <div class="item-outer ${style.className}">
             <div class="item cursor-pointer">
                 <a class="item-details cursor-pointer" href="/shop/item/${item.id}">
                     <div class="img" style="background-image: url(http://localhost:8000${item.images[0]})">
@@ -18,11 +18,14 @@
                 </a>
                 <div class="container item-btns p-2">
                     <div class="row">
-                        <div class="col-6 px-3 cursor-pointer" onclick="onClickBuy(${item.id})">
+                        <div class="col-6 px-3 cursor-pointer" onclick="onClickBuy(`${JSON.stringify(item)}`)">
                             <span class="cart-btn">Купить</span>
                         </div>
                         <div class="col-6 px-3" onclick="onClickCart(${item.id})">
-                            <span class="cart-btn cursor-pointer"><i class="fas fa-shopping-cart"></i></span>
+                            <span class="cart-btn cursor-pointer">
+                                <!-- <i class="fas fa-shopping-cart"></i> -->
+                                <i class="fas fa-cart-plus"></i>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -84,7 +87,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary" onclick="sendRequest(${item_id})">Отправить</button>
+                    <button type="submit" class="btn btn-primary" onclick="prepareRequest(`${items}`)">Отправить</button>
                 </div>
             </div>
         </div>
@@ -92,9 +95,76 @@
 </script>
 <div id="requestmodal"></div>
 <script>
-    function onClickBuy(item_id){
+    var requestUrl = "http://localhost:8000/request/";
+</script>
+<script>
+    function onClickBuy(item){
+        console.log("onlcik item", item)
+        let data = {
+            items: JSON.stringify([JSON.parse(item)])
+        }
         $('#requestmodal').empty();
-        $('#requestModalTmpl').tmpl({item_id: item_id}).appendTo('#requestmodal');
+        $('#requestModalTmpl').tmpl(data).appendTo('#requestmodal');
         $("#requestmodal .modal").modal('show');
+    }
+    function onSendRequest(data){
+        console.log(data);
+        $.ajax({
+            type: 'POST',
+            url: requestUrl,
+            data: JSON.stringify(data),
+            dataType: 'json',
+            // processData: false,
+            contentType: "application/json; charset=utf-8",
+            // contentType: false,
+            success: function(res){
+                console.log(res)
+                if(res){
+                    if(res.code == 0){
+                        console.log("success");
+                        toastr.success('Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с вами!')
+                    }else{
+                        toastr.warning('Ошибка #'+res.code, 'Попробуйте еще раз');
+                    }
+                }else{
+
+                }
+            },
+            error: function(error){
+                console.log(error);
+                toastr.error(error.statusText, 'Ошибка сервера');
+            }
+        });
+    }
+    function prepareRequest(items){
+        console.log("items", items)
+        if(onGetCartItems().length == 0)
+            return;
+        var name = $('#requestmodal #name').val();
+        if(name == ''|| name == undefined){
+            toastr.warning('Заполните имя')
+            return;
+        }
+        var phone = $('#requestmodal #phone').val(); 
+        if(phone == ''|| phone == undefined){
+            toastr.warning('Заполните телефон')
+            return;
+        }
+        var city = $('#requestmodal #city').val();
+        if(city == ''|| city == undefined){
+            toastr.warning('Заполните ваш город')
+            return;
+        }
+        let parsedItems = [];
+        JSON.parse(items).map(item=>{
+            parsedItems.push({item: item.id, count: item.count | 1});
+        })
+        let data = {
+            full_name: name, 
+            phone: phone, 
+            address: city, 
+            items: parsedItems
+        }
+        onSendRequest(data);
     }
 </script>
