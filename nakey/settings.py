@@ -212,10 +212,10 @@ class Dev(BaseConfiguration):
     MEDIA_ROOT = '/nakey/media'
 
 
-class Production(BaseConfiguration):
+class Prod(BaseConfiguration):
     DEBUG = False
-    ALLOWED_HOSTS = ['']
-    SITE_URL = ''
+    ALLOWED_HOSTS = ['nakey.kz']
+    SITE_URL = 'http://nakey.kz'
     CELERY_SEND_TASK_ERROR_EMAILS = False
     STATIC_ROOT = '/nakey/static'
     MEDIA_ROOT = '/nakey/media'
