@@ -78,8 +78,7 @@ def update_supervisor():
 def update_nginx(first_run=0):
     sudo("cp ~/{0}/configs/nginx/{1}/*.conf /etc/nginx/sites-available".format(env.repo_name, env.environ))
     if first_run:
-        # sudo("ln -s /etc/nginx/sites-available/{0}.conf /etc/nginx/sites-enabled/{0}.conf".format(env.repo_name))
-        sudo("ln -s /etc/nginx/sites-available/nakey_front.conf /etc/nginx/sites-enabled/nakey_front.conf")
+        sudo("ln -s /etc/nginx/sites-available/{0}.conf /etc/nginx/sites-enabled/{0}.conf".format(env.repo_name))
     sudo("service nginx restart")
 
 
