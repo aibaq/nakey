@@ -15,13 +15,13 @@
 <div class="container item-page">
     <div class="row">
         <div class="col-12 col-md-4">
-            <div class="main-image mb-3" style="background-image: url(http://localhost:8000/media/{{item.images.all.0.image }})">
+            <div class="main-image mb-3" style="background-image: url(http://nakey.kz/media/{{item.images.all.0.image }})">
             </div>
             <div class="images">
                 <div id="images-carousel">
                     {% for item in item.images.all %}
-                        <div class="item-image cursor-pointer" onclick="openImage('http://localhost:8000/media/{{item.image}}')">
-                            <img src="http://localhost:8000/media/{{item.image}}" alt=""/>
+                        <div class="item-image cursor-pointer" onclick="openImage('http://nakey.kz/media/{{item.image}}')">
+                            <img src="http://nakey.kz/media/{{item.image}}" alt=""/>
                         </div>
                     {% endfor %}
                 </div>
