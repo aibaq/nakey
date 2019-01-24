@@ -214,7 +214,7 @@ class Dev(BaseConfiguration):
 
 class Prod(BaseConfiguration):
     DEBUG = False
-    ALLOWED_HOSTS = ['nakey.kz']
+    ALLOWED_HOSTS = ['nakey.kz', '185.125.46.98']
     SITE_URL = 'http://nakey.kz'
     CELERY_SEND_TASK_ERROR_EMAILS = False
     STATIC_ROOT = '/nakey/static'
