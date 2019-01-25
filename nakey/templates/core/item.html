@@ -7,7 +7,7 @@
     <meta property="og:title" content="Корзина Nakey.kz" />
     <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
     <meta property="og:url" content="https://nakey.kz/" />
-    
+    <meta property="og:image" content="http://nakey.kz/media/{{item.images.all.0.image}}">    
     <link rel="stylesheet" href="{% static 'css/item.css'%}">
     <title>Каталог</title>
 
@@ -47,6 +47,10 @@ fjs.parentNode.insertBefore(js, fjs);
                 <button class="btn btn-light mb-3 mr-3 cart-btn" onclick="onClickCart()">Добавить в корзину</button>
                 <!-- <i class="fas fa-share-square"></i> -->
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             <div class="share d-flex align-items-center">
                 <input type="text" value="" id="thislink">
                 <div class="cursor-pointer mr-3" href="" target="_blank" onclick="copyLink()">
@@ -167,6 +171,7 @@ fjs.parentNode.insertBefore(js, fjs);
         var copyText = document.getElementById("thislink");
         copyText.select();
         document.execCommand("copy");
+        toastr.success('Вы скопировали ссылку')
         // alert("Copied the text: " + copyText.value);
     }
 </script>
