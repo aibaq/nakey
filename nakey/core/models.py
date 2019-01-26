@@ -11,11 +11,13 @@ class Banner(TimestampMixin, models.Model):
     class Meta:
         verbose_name = 'Баннер'
         verbose_name_plural = 'Баннера'
-    name = models.CharField(max_length=500, verbose_name='Наименование')
+    title = models.CharField(max_length=500, verbose_name='Наименование')
+    subtitle = models.CharField(max_length=500, verbose_name='Наименование 2')
     image = models.ImageField(upload_to=banner_upload)
+    image_title = models.CharField(max_length=500, verbose_name='Наименование ссылки')
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Category(models.Model):
