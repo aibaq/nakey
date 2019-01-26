@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.db import models
 from nakey.core import tasks
 from nakey.mixins.models import TimestampMixin
-from nakey.utils import messages
+from nakey.utils import constants, messages
 from nakey.utils.upload import banner_upload, item_upload
 
 
@@ -96,7 +96,7 @@ class Request(TimestampMixin, models.Model):
         message = render_to_string('emails/request.html', {'req': self,
                                                            'request_items': self.items.all()})
         if settings.CELERY_ON:
-            tasks.email(to=settings.EMAIL_HOST_USER, subject=messages.REQUEST_SUBJECT, message=message)
+            tasks.email(to=constants.RECEIVER_EMAIL, subject=messages.REQUEST_SUBJECT, message=message)
 
 
 class RequestItem(TimestampMixin, models.Model):
