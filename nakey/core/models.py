@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.db import models
 from nakey.core import tasks
 from nakey.mixins.models import TimestampMixin
-from nakey.utils import messages
+from nakey.utils import constants, messages
 from nakey.utils.upload import banner_upload, item_upload
 
 
@@ -11,11 +11,13 @@ class Banner(TimestampMixin, models.Model):
     class Meta:
         verbose_name = 'Баннер'
         verbose_name_plural = 'Баннера'
-    name = models.CharField(max_length=500, verbose_name='Наименование')
+    title = models.CharField(max_length=500, verbose_name='Наименование')
+    subtitle = models.CharField(max_length=500, verbose_name='Наименование 2')
     image = models.ImageField(upload_to=banner_upload)
+    image_title = models.CharField(max_length=500, verbose_name='Наименование ссылки')
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Category(models.Model):
@@ -77,8 +79,10 @@ class ItemImage(models.Model):
     class Meta:
         verbose_name = 'Фото товара'
         verbose_name_plural = 'Фотки товара'
+        ordering = ('priority',)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=item_upload)
+    priority = models.PositiveIntegerField(default=1, db_index=True)
 
 
 class Request(TimestampMixin, models.Model):
@@ -94,7 +98,7 @@ class Request(TimestampMixin, models.Model):
         message = render_to_string('emails/request.html', {'req': self,
                                                            'request_items': self.items.all()})
         if settings.CELERY_ON:
-            tasks.email(to=settings.EMAIL_HOST_USER, subject=messages.REQUEST_SUBJECT, message=message)
+            tasks.email(to=constants.RECEIVER_EMAIL, subject=messages.REQUEST_SUBJECT, message=message)
 
 
 class RequestItem(TimestampMixin, models.Model):

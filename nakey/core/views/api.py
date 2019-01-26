@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from nakey.core.serializers import *
 from nakey.utils.decorators import response_wrapper
 from rest_framework import viewsets
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import AllowAny
 import logging
 
@@ -44,7 +44,7 @@ class ManufactureViewSet(viewsets.ReadOnlyModelViewSet):
 class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    filter_backends = (DjangoFilterBackend, OrderingFilter,)
+    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filter_fields = ('category', 'manufacture')
     search_fields = ('name',)
     ordering_fields = ('views_count', 'price')

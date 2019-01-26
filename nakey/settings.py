@@ -219,3 +219,4 @@ class Prod(BaseConfiguration):
     CELERY_SEND_TASK_ERROR_EMAILS = False
     STATIC_ROOT = '/nakey/static'
     MEDIA_ROOT = '/nakey/media'
+    CELERY_ON = True
