@@ -77,8 +77,10 @@ class ItemImage(models.Model):
     class Meta:
         verbose_name = 'Фото товара'
         verbose_name_plural = 'Фотки товара'
+        ordering = ('priority',)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=item_upload)
+    priority = models.PositiveIntegerField(default=1, db_index=True)
 
 
 class Request(TimestampMixin, models.Model):
