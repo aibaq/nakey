@@ -16,7 +16,7 @@ def email(to, subject, message, pdf=None):
         if not isinstance(to, list):
             to = [to]
         email_list = list(filter(lambda email: valid_email(email), to))
-        msg = EmailMessage(subject, message, from_email=settings.EMAIL_HOST_USER, to=email_list)
+        msg = EmailMessage(subject, message, from_email=settings.FROM_EMAIL, to=email_list)
         msg.content_subtype = "html"
         msg.send()
     except Exception as exc:

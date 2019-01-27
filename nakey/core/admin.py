@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'image')
+    list_display = ('id', 'title', 'image')
 
 
 @admin.register(Category)

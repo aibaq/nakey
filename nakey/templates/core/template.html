@@ -5,7 +5,7 @@
     <div class="item-outer ${style.className}">
             <div class="item cursor-pointer">
                 <a class="item-details cursor-pointer" href="/shop/item/${item.id}">
-                    <div class="img" style="background-image: url(http://localhost:8000${item.images[0]})">
+                    <div class="img" style="background-image: url(http://nakey.kz/${item.images[0]})">
                         <!-- change this to last image -->
                     </div>
                     <div class="description p-2">
@@ -38,7 +38,7 @@
         <div class="item col-12 col-md-8">
             <a class="d-flex item-details cursor-pointer flex-row pl-0 cursor-pointer" href="/shop/item/${item.id}">
                 <div class="img-outer">
-                    <div class="img" style="background-image: url(http://localhost:8000${item.images[0]})">
+                    <div class="img" style="background-image: url(http://nakey.kz/${item.images[0]})">
                         <!-- change this to last image -->
                     </div>
                 </div>
@@ -95,7 +95,7 @@
 </script>
 <div id="requestmodal"></div>
 <script>
-    var requestUrl = "http://localhost:8000/request/";
+    var requestUrl = "http://nakey.kz/request/";
 </script>
 <script>
     function onClickBuy(item){
