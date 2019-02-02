@@ -25,43 +25,55 @@ fjs.parentNode.insertBefore(js, fjs);
 {% block content %}
 <div class="container item-page">
     <div class="row">
-        <div class="col-12 col-md-4">
-            <div class="main-image mb-3" style="background-image: url(http://nakey.kz/media/{{item.images.all.0.image }})">
+        <div class="col-12 col-md-6">
+            <div class="main-image mb-3" style="background-image: url(http://localhost:8000/media/{{item.images.all.0.image }})">
             </div>
             <div class="images">
                 <div id="images-carousel">
                     {% for item in item.images.all %}
-                        <div class="item-image cursor-pointer" onclick="openImage('http://nakey.kz/media/{{item.image}}')">
-                            <img src="http://nakey.kz/media/{{item.image}}" alt=""/>
+                        <div class="item-image cursor-pointer" onclick="openImage('http://localhost:8000/media/{{item.image}}')">
+                            <img src="http://localhost:8000/media/{{item.image}}" alt=""/>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-8">
-            <h1>{{ item.name }}</h1>
-            <b>{{ item.price }}&nbsp;&#8376;</b>
-            <p>{{ item.description }}</p>
-            <div class="btns d-flex mb-4">
-                <button class="btn btn-light mb-3 mr-3" onclick="clickBuy()">Купить</button>
-                <button class="btn btn-light mb-3 mr-3 cart-btn" onclick="onClickCart()">Добавить в корзину</button>
-                <!-- <i class="fas fa-share-square"></i> -->
+        <div class="col-12 col-md-6 description">
+            <h1 class="color-black">{{ item.name }}</h1>
+            <p class="color-black">{{ item.description }}</p>
+            <table class="detail w-100 mb-5">
+                <tr>
+                    <td>Категория:</td>
+                    <td>{{item.category.name}}</td>
+                </tr>
+                <tr>
+                    <td>Цвет:</td>
+                    <td>{{item.colors.all.0.name}}</td>
+                </tr>
+                <tr>
+                    <td>Пройзводство:</td>
+                    <td>{{item.manufacture.name}}</td>
+                </tr>
+            </table>
+            <div class="mb-5 color-red price">{{ item.price }}&nbsp;&#8376;</div>
+            <div class="btns mb-4 row">
+                <div class="col-12 col-md-6">
+                    <button class="btn btn-nk btn-lg mb-3 mr-3 w-100" onclick="clickBuy()">Купить</button>
+                </div>
+                <div class="col-12 col-md-6">
+                    <button class="btn btn-outline-nk btn-lg btn-cart mb-3 mr-3 cart-btn w-100" onclick="onClickCart()">
+                        <img src="{% static 'img/add-cart-red.svg' %}">
+                        Добавить в корзину</button>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="share d-flex align-items-center">
-                <input type="text" value="" id="thislink">
-                <div class="cursor-pointer mr-3" href="" target="_blank" onclick="copyLink()">
-                    <i class="far fa-copy"></i>
-                </div>
-                <div class="fb-share-button mr-3" data-href="{{ request.build_absolute_uri}}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri}}" class="fb-xfbml-parse-ignore">Поделиться</a>
-                </div>
-                <script type="text/javascript">
-                    document.write(VK.Share.button({url: "{{ request.build_absolute_uri }}"},{type: "round", text: "Поделиться"}));
-                </script>
+            <div class="mb-4 share">
+                <span class="mr-4">Поделитесь c друзьями</span>
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri}}" class="fb-xfbml-parse-ignore mr-3">
+                    <img class="cursor-pointer" src="{% static 'img/fb.svg' %}"/>
+                </a>
+                <a target="_blank" href="{{ request.build_absolute_uri }}">
+                    <img class="cursor-pointer" src="{% static 'img/vk.svg' %}"/>
+                </a>
             </div>
         </div>
     </div>
@@ -174,5 +186,8 @@ fjs.parentNode.insertBefore(js, fjs);
         toastr.success('Вы скопировали ссылку')
         // alert("Copied the text: " + copyText.value);
     }
+    $('.btn-cart').on('hover', function(){
+        console.log("hover", $(this));
+    })
 </script>
 {% endblock scripts %}

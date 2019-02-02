@@ -1,8 +1,11 @@
 /* item preview */
+.item{
+    transition: all 0.2s ease-out;
+    background-color: #fff;
+}
 .item .item-details{
     display: block;
-    border: 1px solid rgba(0,0,0,0);
-    border-bottom-color: #EBEFF5;
+    border: 1px solid #EBEFF5;
 }
 .item:hover .item-details{
     border-color: #EBEFF5;
@@ -16,28 +19,30 @@
     padding-top: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;        
+    background-position: center;  
+}
+.item .description h5{
+    font-size: 24px;
 }
 .item .description h6{
-    text-transform: lowercase;
+    font-size: 24px;
 }
 .item .item-btns{
-    font-size: 12px;
     visibility: hidden;
-    border: 1px solid #EBEFF5;
-    border-top: none;
-    background-color: rgba(0,0,0,0.02);
+    border: 1px solid rgba(0,0,0,0);
+    background-color: #fff;
+    /* #EBEFF5 */
 }
-.item .item-btns .row > div:first-child{
-    border-right: 1px solid #EBEFF5;
-    text-align: right;
+.item:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 11px 32px rgba(0, 0, 0, 0.08);
+}
+.item:hover .item-details{
+    border-color: #fff;
+    border: none;
 }
 .item:hover .item-btns{
     visibility: visible;
-}
-.item .item-btns .col-6:hover,
-.item .item-btns .col-6:hover a{
-    color: #007bff;
 }
 small{
     font-size: 0.875rem;

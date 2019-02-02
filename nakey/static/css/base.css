@@ -7,10 +7,50 @@ main.main{
     /* 75 - header height, 250 - footer height */
     min-height: calc(100vh - 75px - 200px);
     padding: 48px 0;
+    background-color:  #FBFBFB;
 }
 .cursor-pointer{
     cursor: pointer;
 }
 .text-center{
     text-align: center;
+}
+.color-black{
+    color: #3A3232;
+}
+.color-red{
+    color: #D62C2C;
+}
+.btn-nk{
+    background: #D62C2C;
+    border-radius: 0;
+    font-family: 'Proxima Nova';
+    line-height: 18px;
+    font-size: 14px;
+    color: #fff;
+}
+.btn-nk:hover{
+    background: #FF6C6C;
+}
+.btn-nk:focus{
+    background: #A41111;
+}
+.btn-outline-nk{
+    color: #D62C2C;
+    border: 2px solid #D62C2C;
+    border-radius: 0;
+    font-family: 'Proxima Nova';
+    line-height: 18px;
+    font-size: 14px;
+    background-color: rgba(0,0,0,0);
+}
+.btn-outline-nk:hover{
+    background: #D62C2C;
+    color: #fff;
+}
+.btn-outline-nk:focus{
+    background: #A41111;
+}
+.btn-lg{
+    min-height: 58px;
 }

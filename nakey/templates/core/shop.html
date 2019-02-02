@@ -18,40 +18,33 @@
 {% endblock head %}
 {% block content %}
     <div class="container">
-        <h3>Магазин</h3>
-        <div class="filter row" >
-            <div class="col-12 col-md-6 col-lg-2 form-group mb-3 d-flex flex-column">
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="category-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Все
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="category-btn">
-                        {% for cat in categories %}
-                        <div class="dropdown-item" onclick="changeCategory('{{cat.id}}', '{{cat}}')">{{cat}}</div>
-                        {% endfor%}
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        КАТАЛОГ
                     </div>
+                    {% for cat in categories %}
+                        <div class="mx-3 my-2" onclick="changeCategory('{{cat.id}}', '{{cat}}')">{{cat}}</div>
+                    {% endfor%}
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-2 form-group mb-3 d-flex flex-column">
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Сортировка
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="sort-btn">
-                        <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
-                        <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
-                        <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                        <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+            <div class="col-12 col-lg-9">
+                <div class="d-flex justify-content-end mb-3">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Сортировка
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="sort-btn">
+                            <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
+                            <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
+                            <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                            <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                        </div>
                     </div>
                 </div>
+                <div class="item-list row"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-3 form-group mb-3">
-                <input id="search-text" class="form-control" placeholder="Поиск" />
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 mb-2"><button class="btn btn-primary" onclick="acceptFilter()">Найти</button></div>
-        </div>
-        <div class="item-list row">
-
         </div>
     </div>
 {% endblock content %}
@@ -128,7 +121,7 @@
                         items = res.data.results;
                         items.map(item=>{
                             console.log(item)
-                            $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-3'}}).appendTo('.item-list');
+                            $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-4 col-lg-4'}}).appendTo('.item-list');
                         })
                     }else{
 
