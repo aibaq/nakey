@@ -34,15 +34,21 @@ section h3{
     border-radius: 50%;
 }
 .banner-item{
-    height: 600px;
+    height: 400px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .banner-text{
-    background-color: rgba(0,0,0,0.5);
+    /* background-color: rgba(0,0,0,0.5); */
     padding: 20px;
     color: #fff;
+}
+.banner-text h3{
+    font-size: 40px;
+}
+.banner-text small{
+    font-size: 30px;
 }
 /* popular: */
 #popular{

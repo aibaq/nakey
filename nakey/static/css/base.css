@@ -61,6 +61,9 @@ main.main{
 .color-red{
     color: #D62C2C;
 }
+a.color-red:hover{
+    color: #A41111;
+}
 .btn-nk{
     background: #D62C2C;
     border-radius: 0;
