@@ -9,25 +9,48 @@
     <meta property="og:url" content="https://nakey.kz/contacts" />
     <meta property="og:image" content="{% static 'img/logo.svg'%}">
     <title>Контакты</title>
+    <style>
+        .nk-card{background-color: #fff}
+        .contacts-item img{
+            max-width: 20px;
+        }
+        .contacts-item:first-child{
+            margin-bottom: 20px;
+        }
+        .contacts-item:second-child{
+            margin-bottom: 44px;
+        }
+        p.color-black{opacity: 1;}
+        .city{opacity: 0.3;}
+    </style>
 {% endblock head %}
 {% block content %}
-<div class="container">
-    <h3>Наши контакты</h3>
-    <div>
-        <a href="tel:+77752530066">+7(775) 253 00 66</a><br/>
-        <a href="mailto:nakeykz@gmail.com">nakeykz@gmail.com</a>
-    </div>
-    <h3>Наш адрес</h3>
+<div class="container nk-card">
     <div class="row">
-        <div class="col-12">
-            <p>
-            Барахолка,ТЦ Дастур, <br/>
-            Цокольный этаж  3 ряд 5-6 бутик <br/>
-            Северное кольцо 8, <br/>
-            Almaty, Kazakhstan
-            </p>
+        <div class="col-12 col-md-6 p-4 p-sm-5">
+            <h3>Контакты</h3>
+            <div class="contacts-item mb-4">
+                <img class="mr-3" src="{% static 'img/phone.svg'%}" alt="Nakey contact"/>
+                <a class="color-black" href="tel:+77752530066">+7(775) 253 00 66</a><br/>
+            </div>
+            <div class="contacts-item mb-4 pb-4">
+                <img class="mr-3" src="{% static 'img/mail.svg'%}" alt="Nakey email"/>
+                <a class="color-black" href="mailto:nakeykz@gmail.com">nakeykz@gmail.com</a>
+            </div>
+            <div class="contacts-item d-flex align-items-start">
+                <img class="mr-3" src="{% static 'img/marker.svg'%}" alt="Nakey email"/>
+                <div class="">
+                    <b class="city color-black mb-3">Almaty, Kazakhstan</b>
+                    <p class="color-black">
+                    Барахолка,ТЦ Дастур, <br/>
+                    Цокольный этаж  3 ряд 5-6 бутик <br/>
+                    Северное кольцо 8, <br/>
+                    </p>
+                </div>
+            </div>
+
         </div>
-        <div class="col-12">
+        <div class="col-12 col-md-6 px-0">
             <a class="dg-widget-link" href="http://2gis.kz/almaty/firm/70000001030103091/center/76.89277410507204,43.29416862558849/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Алматы</a><div class="dg-widget-link"><a href="http://2gis.kz/almaty/firm/70000001030103091/photos/70000001030103091/center/76.89277410507204,43.29416862558849/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии компании</a></div><div class="dg-widget-link"><a href="http://2gis.kz/almaty/center/76.892771,43.293875/zoom/16/routeTab/rsType/bus/to/76.892771,43.293875╎Дастур, торговый центр?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Дастур, торговый центр</a></div><script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script><script charset="utf-8">new DGWidgetLoader({"width":'100%',"height":400,"borderColor":"#a3a3a3","pos":{"lat":43.29416862558849,"lon":76.89277410507204,"zoom":16},"opt":{"city":"almaty"},"org":[{"id":"70000001030103091"}]});</script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
         </div>
     </div>
