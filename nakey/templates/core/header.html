@@ -202,7 +202,6 @@ function getCategories(){
     $.ajax({
         url: categoryUrl,
         success: function(res){
-            console.log(res)
             if(res){
                 if(res.code == 0){
                     categories = res.data.results;
@@ -222,7 +221,6 @@ function getCategories(){
 getCategories();
 function onSearch(){
     var text = $('#header-search-text').val();
-    console.log(setUrlVar({name: 'search', value: text}))
     window.location.replace(setUrlVar({name: 'search', value: text}));    
 }
 $('.cart-link img').hover(
@@ -259,9 +257,8 @@ $(document).ready(function () {
 
 let url = window.location.href;
 $('ul .nav-item a').each(function(){
-    console.log(url, $(this).attr('href'))
+    // console.log(url, $(this).attr('href'))
     if(url.indexOf($(this).attr('href')) !== -1){
-        console.log(true)
         $(this).addClass('active');
     }
     if(url.indexOf('shop')!==-1){
