@@ -6,6 +6,16 @@
 .nav-item {
     margin: 0 24px;
 }
+.nav-item .nav-link{
+    color: #3A3232;
+}
+.nav-item .nav-link:hover {
+    color: #D62C2C;
+}
+.nav-item .nav-link.active {
+    color: #D62C2C;
+}
+
 .dropdown-menu{
     border-color: #E4E5EC;
     border-radius: 0;
@@ -126,9 +136,9 @@
     <a class="navbar-brand" href="/">
             <img src="{% static 'img/logo.svg' %}" alt="">
         </a>
-        <ul class="d-flex justify-content-center align-items-center mb-0 mb-sm-3">
+        <ul class="d-flex justify-content-center align-items-center mb-0">
             <li class="nav-item dropdown dropdown-nk d-none d-sm-flex">
-                <a class="proxima-sb px-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="proxima-sb px-3" href="/shop" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
                     Каталог 
                 </a>
@@ -136,10 +146,10 @@
                 </div>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link color-black proxima-sb pl-0 pl-md-3" href="/about">О нас</a>
+                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">О нас</a>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link color-black proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>
+                <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>
             </li>
         </ul>
         <div class="d-none d-sm-flex">
@@ -246,4 +256,17 @@ $(document).ready(function () {
         }, 400);
     });
 });
+
+let url = window.location.href;
+$('ul .nav-item a').each(function(){
+    console.log(url, $(this).attr('href'))
+    if(url.indexOf($(this).attr('href')) !== -1){
+        console.log(true)
+        $(this).addClass('active');
+    }
+    if(url.indexOf('shop')!==-1){
+        $('.dropdown > a img ').attr('src', "{% static 'img/hamburger-red.svg'%}");
+    }
+})
+
 </script>

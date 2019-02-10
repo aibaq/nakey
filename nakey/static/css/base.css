@@ -72,6 +72,7 @@ main.main{
 .color-red{
     color: #D62C2C!important;
 }
+.main-black{color: #3A3232!important}
 a.color-red:hover{
     color: #A41111;
 }
@@ -84,7 +85,8 @@ a.color-red:hover{
     color: #3A3232;
     text-decoration: none;
 }
-.dropdown-nk > a:hover{
+.dropdown-nk > a:hover,
+.dropdown-nk > a.active{
     border-color: #dd6622;
     color: #D62C2C;
 }
@@ -104,12 +106,14 @@ a.color-red:hover{
 }
 .btn-outline-nk{
     color: #D62C2C;
-    border: 2px solid #D62C2C;
     border-radius: 0;
     font-family: 'Proxima Regular', 'Montserrat', sans-serif;
     line-height: 18px;
     font-size: 14px;
     background-color: rgba(0,0,0,0);
+}
+.btn-outline-nk.bordered{
+    border: 2px solid #D62C2C;
 }
 .btn-outline-nk:hover{
     background: #D62C2C;
@@ -120,4 +124,9 @@ a.color-red:hover{
 }
 .btn-lg{
     min-height: 58px;
+}
+
+input.form-control{
+    border-radius: 0;
+    border-color: #D8D8D8;
 }

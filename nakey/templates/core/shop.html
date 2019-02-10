@@ -6,7 +6,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Магазин сайта Nakey.kz, каталог товаров" />
     <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
-    <meta property="og:url" content="https://nakey.kz/shop" />
+    <meta property="og:url" content="{{SITE_URL}}/shop" />
     <meta property="og:image" content="{% static 'img/logo.svg'%}">
     <title>Каталог товаров</title>
     <style>
@@ -14,10 +14,31 @@
         .filter button{
             width: 100%;
         }
+        main.main{
+            padding-top: 8px;
+            background-color: #fff;
+        }
+        .card{
+            border-radius: 0;
+        }
     </style>
 {% endblock head %}
 {% block content %}
     <div class="container">
+        <div class="d-flex justify-content-end mb-3">
+            <label for="" class="d-flex align-items-center mr-3 mb-0">Сортировка</label>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Выберите
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sort-btn">
+                    <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
+                    <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="input-group my-2 my-lg-0 header-search mr-3 d-flex d-md-none">
                 <input  id="header-search-text" type="search" class="form-control" placeholder="Кожаный рюкзак" aria-label="Search" aria-describedby="basic-addon2">
@@ -36,19 +57,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-9">
-                <div class="d-flex justify-content-end mb-3">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Сортировка
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="sort-btn">
-                            <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
-                            <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
-                            <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                            <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="item-list row"></div>
             </div>
         </div>
@@ -68,7 +77,7 @@
         {name: 'Популярности', value: 'views_count'},
         {name: 'Популярности', value: '-views_count'},
     ]
-    const url = "/item/?limit=100";
+    const itemUrl = "/item/?limit=100";
     var shopUrl = "/shop/";
 </script>
 <script>
@@ -104,10 +113,10 @@
         filter.category = query['category'];
         filter.ordering = query['ordering'];
         filter.search = query['search'];
-        console.log(filter);
+        console.log("Item", itemUrl);
         items = [];
         $('.item-list').empty();
-        let newUrl = url;
+        let newUrl = itemUrl;
         if(filter.category){
             newUrl+="&category="+filter.category;
         }

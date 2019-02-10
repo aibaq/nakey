@@ -70,3 +70,30 @@ table.detail tr td:second-child{
 .share img:hover{
     transform: scale(1.07);
 }
+#images-carousel .slick-prev{
+    background-image: url("../img/angle-left-dark.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#images-carousel .slick-prev:before{
+    content: '';
+}
+#images-carousel .slick-next{
+    background-image: url("../img/angle-right-dark.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#images-carousel .slick-next:before{
+    content: '';
+}
+@media screen and (max-width: 576px){
+    .item-page{
+        padding: 20px;
+    }
+    #images-carousel .item-image{
+        pointer-events: none;
+    }
+
+}
