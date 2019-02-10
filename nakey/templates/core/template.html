@@ -86,7 +86,7 @@
 </script>
 <script>
     function onClickBuy(item){
-        console.log("onlcik item", item)
+        // console.log("onlcik item", item)
         let data = {
             items: JSON.stringify([JSON.parse(item)])
         }
@@ -95,7 +95,6 @@
         $("#requestmodal .modal").modal('show');
     }
     function onSendRequest(data){
-        console.log(data);
         $.ajax({
             type: 'POST',
             url: requestUrl,
@@ -105,10 +104,8 @@
             contentType: "application/json; charset=utf-8",
             // contentType: false,
             success: function(res){
-                console.log(res)
                 if(res){
                     if(res.code == 0){
-                        console.log("success");
                         toastr.success('Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с вами!')
                     }else{
                         toastr.warning('Ошибка #'+res.code, 'Попробуйте еще раз');
@@ -118,13 +115,11 @@
                 }
             },
             error: function(error){
-                console.log(error);
                 toastr.error(error.statusText, 'Ошибка сервера');
             }
         });
     }
     function prepareRequest(items){
-        console.log("items", items)
         if(onGetCartItems().length == 0)
             return;
         var name = $('#requestmodal #name').val();

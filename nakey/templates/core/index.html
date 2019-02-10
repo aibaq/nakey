@@ -63,7 +63,6 @@
 </script>
 <script>
     function getItems(){
-        console.log(filter);
         items = [];
         $('.popular-list').empty();
         if(filter.category_id)
@@ -71,12 +70,10 @@
         $.ajax({
             url: popularUrl,
             success: function(res){
-                console.log(res)
                 if(res){
                     if(res.code == 0){
                         items = res.data.results;
                         items.map(item=>{
-                            console.log(item)
                             $('.popular-list').append('<div class="col-12 col-sm-6 col-md-4 col-lg-3" id="item_'+item.id+'"></div>');
                             $('#productPreviewTmpl').tmpl({item: item, style: {className: ''}}).appendTo('#item_'+item.id);
                         })
