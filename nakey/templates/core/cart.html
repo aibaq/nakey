@@ -6,23 +6,51 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Корзина" />
     <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
-    <meta property="og:url" content="https://nakey.kz/cart" />
+    <meta property="og:url" content="{{SITE_URL}}/cart" />
     <meta property="og:image" content="{% static 'img/logo.svg'%}">
     <title>Корзина</title>
     <style>
+        h3{
+            font-size: 28px;
+        }
+        .nk-card{
+            background-color: #fff;
+            padding: 32px;
+        }
         .item-list .item{
             margin-bottom: 16px;
         }
+        /* @media screen and (max-width: 992px){
+            .list{
+                order: 2; 
+            }
+            .order{
+                order:1;
+            }
+        } */
+        #cart-detail tr td:first-child{
+            color: #3A3232;
+            opacity: 0.5;
+        }
+        @media screen and (max-width: 576px){
+            .nk-card{
+                padding: 16px 21px;
+            }
+        }
+
     </style>
 {% endblock head %}
 {% block content %}
 <div class="container">
-    <h3 class="mb-5">Ваша Корзина</h3>
     <div class="row">
-        <div class="col-12 col-md-9">
-            <div class="item-list d-flex flex-wrap"></div>
+        <div class="col-12 col-lg-8 list">
+            <div class="nk-card">
+                <div class="item-list d-flex flex-wrap"></div>
+            </div>
         </div>
-        <div class="col-12 col-md-3 order">
+        <div class="col-12 col-lg-4 order">
+            <div class="nk-card">
+            </div>
         </div>
     </div>
 </div>
@@ -36,18 +64,18 @@
         $(".item-list").empty();
         if(items.length == 0){
             $(".item-list").append("<p>Ваша корзина пуста, ищите товары <a href='/shop'>тут</a></p>")
-            $(".order").empty();
+            $(".order .nk-card").empty();
         }else{
-            $(".order").html(` <h3>Оформить заказ</h3>
-            <table id="cart-detail">                
+            $(".order .nk-card").html(` <h3 class="proxima-sb">Оформить заказ</h3>
+            <table id="cart-detail" class="mt-4 mb-4">                
                 <tbody>
                     <tr>
-                        <td>Количество товаров</td>
-                        <td>Общая цена</td>
+                        <td class="pr-4">Количество</td>
+                        <td class="cart-count"></td>
                     </tr>
                     <tr>
-                        <td class="cart-count">
-
+                        <td class="pr-4">
+                            Общая цена
                         </td>
                         <td class="cart-price">
 
@@ -55,7 +83,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary" onclick="clickRequest()">Отправить заявку</button>`);
+            <button class="btn btn-nk btn-lg" onclick="clickRequest()">Оформить заявку</button>`);
         }
 
         var allcount = 0;
@@ -71,9 +99,11 @@
         $("#cart-detail .cart-count").text(allcount);
         $("#cart-detail .cart-price").html(allprice+'&nbsp;&#8376;');
     }
-    function changeCount(e, item_id){
-        // console.log("change count", item_id, e.value)
-        onUpdateCartItem(item_id, e.value);
+    function changeCount(value, item_id){
+        // console.log("change count", item_id, value)
+        if(value < 1)
+            return;
+        onUpdateCartItem(item_id, value);
         renderCart();
     }
     function removeFromCart(item_id){
