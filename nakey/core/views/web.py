@@ -12,6 +12,11 @@ class IndexView(View):
                    'popular_items': Item.objects.all().order_by('-view_count')[:constants.POPULAR_COUNT]}
         return render(request, self.template_name, context)
 
+class AboutView(View):
+    template_name = 'core/about.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
 
 class ShopView(View):
     template_name = 'core/shop.html'
