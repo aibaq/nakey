@@ -6,7 +6,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Магазин сайта Nakey.kz, каталог товаров" />
     <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
-    <meta property="og:url" content="https://nakey.kz/shop" />
+    <meta property="og:url" content="{{SITE_URL}}/shop" />
     <meta property="og:image" content="{% static 'img/logo.svg'%}">
     <title>Каталог товаров</title>
     <style>
@@ -14,44 +14,52 @@
         .filter button{
             width: 100%;
         }
+        main.main{
+            padding-top: 8px;
+            background-color: #fff;
+        }
+        .card{
+            border-radius: 0;
+        }
     </style>
 {% endblock head %}
 {% block content %}
     <div class="container">
-        <h3>Магазин</h3>
-        <div class="filter row" >
-            <div class="col-12 col-md-6 col-lg-2 form-group mb-3 d-flex flex-column">
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="category-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Все
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="category-btn">
-                        {% for cat in categories %}
-                        <div class="dropdown-item" onclick="changeCategory('{{cat.id}}', '{{cat}}')">{{cat}}</div>
-                        {% endfor%}
-                    </div>
+        <div class="d-flex justify-content-end mb-3">
+            <label for="" class="d-flex align-items-center mr-3 mb-0">Сортировка</label>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Выберите
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sort-btn">
+                    <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
+                    <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-2 form-group mb-3 d-flex flex-column">
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Сортировка
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="sort-btn">
-                        <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
-                        <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
-                        <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                        <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 form-group mb-3">
-                <input id="search-text" class="form-control" placeholder="Поиск" />
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 mb-2"><button class="btn btn-primary" onclick="acceptFilter()">Найти</button></div>
         </div>
-        <div class="item-list row">
-
+        <div class="row">
+            <div class="input-group my-2 my-lg-0 header-search mr-3 d-flex d-md-none">
+                <input  id="header-search-text" type="search" class="form-control" placeholder="Кожаный рюкзак" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-nk" type="button" onclick="onSearch()">Найти</button>
+                </div>
+            </div>  
+            <div class="d-none d-md-block col-12 col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        КАТАЛОГ
+                    </div>
+                    {% for cat in categories %}
+                        <div class="mx-3 my-2" onclick="changeCategory('{{cat.id}}', '{{cat}}')">{{cat}}</div>
+                    {% endfor%}
+                </div>
+            </div>
+            <div class="col-12 col-lg-9">
+                
+                <div class="item-list row"></div>
+            </div>
         </div>
     </div>
 {% endblock content %}
@@ -69,7 +77,7 @@
         {name: 'Популярности', value: 'views_count'},
         {name: 'Популярности', value: '-views_count'},
     ]
-    const url = "/item/?limit=100";
+    const itemUrl = "/item/?limit=100";
     var shopUrl = "/shop/";
 </script>
 <script>
@@ -78,7 +86,6 @@
         $.ajax({
             url: categoryUrl,
             success: function(res){
-                console.log(res)
                 if(res){
                     if(res.code == 0){
                         categories = res.data.results;
@@ -105,10 +112,9 @@
         filter.category = query['category'];
         filter.ordering = query['ordering'];
         filter.search = query['search'];
-        console.log(filter);
         items = [];
         $('.item-list').empty();
-        let newUrl = url;
+        let newUrl = itemUrl;
         if(filter.category){
             newUrl+="&category="+filter.category;
         }
@@ -122,13 +128,12 @@
         $.ajax({
             url: newUrl,
             success: function(res){
-                console.log(res)
                 if(res){
                     if(res.code == 0){
                         items = res.data.results;
                         items.map(item=>{
-                            console.log(item)
-                            $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-3'}}).appendTo('.item-list');
+                            // console.log(item)
+                            $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-4 col-lg-4'}}).appendTo('.item-list');
                         })
                     }else{
 
@@ -148,14 +153,13 @@
         }
     }
     function sendRequest(item_id){
-        console.log(item_id)
         var data = {
             name: $('#requestmodal #name').val(),
             phone: $('#requestmodal #phone').val(),
             city: $('#requestmodal #city').val(),
             items: item_id
         }
-        console.log(data)
+        // console.log(data)
     }
     function sortOrder(order, text){
         $('#order-btn').text(text);
@@ -168,7 +172,7 @@
     }
     function acceptFilter(){
         let text = $('#search-text').val();
-        console.log(text)
+        // console.log(text)
         if(text == '' || text == undefined)
             return;
         window.location.replace(setUrlVar({name: 'search', value: text}));

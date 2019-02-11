@@ -1,44 +1,199 @@
 {% load staticfiles %}
 <style>
-@media screen and (max-width: 992px){
-   
+.navbar-brand img{
+    max-width: 180px;
 }
+.nav-item {
+    margin: 0 24px;
+}
+.nav-item .nav-link{
+    color: #3A3232;
+}
+.nav-item .nav-link:hover {
+    color: #D62C2C;
+}
+.nav-item .nav-link.active {
+    color: #D62C2C;
+}
+
+.dropdown-menu{
+    border-color: #E4E5EC;
+    border-radius: 0;
+}
+.header-search{
+    margin-left: 32px;
+    position: relative;
+}
+.header-search input#header-search-text{
+    height: 32px;
+    min-width: 240px;
+    border-color: #E4E5EC;
+    border-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    margin-right: -68px;
+    z-index: 9;
+    padding-left: 32px;
+    font-family: 'Proxima Light', 'Montserrat', sans-serif;
+}
+.header-search input::placeholder{
+    font-family: 'Proxima Light', 'Montserrat', sans-serif;
+}
+.header-search::before{
+    z-index: 10;
+    display: inline-block;
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M13 10.586L15.707 13.293C16.098 13.684 16.098 14.316 15.707 14.707L14.707 15.707C14.512 15.902 14.256 16 14 16C13.744 16 13.488 15.902 13.293 15.707L10.586 13C9.536 13.631 8.312 14 7 14C3.141 14 0 10.86 0 7C0 3.14 3.141 0 7 0C10.859 0 14 3.14 14 7C14 8.311 13.63 9.536 13 10.586ZM2 7C2 9.761 4.239 12 7 12C9.761 12 12 9.761 12 7C12 4.239 9.761 2 7 2C4.239 2 2 4.239 2 7Z' fill='#C0C4D1'/></svg>");
+}
+.header-search .input-group-append button.btn{
+    border-radius: 32px;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    width: 68px;
+    z-index: 10;
+}
+/* Mobile: */
+#mobile-search{
+    height: 24px;
+    width: 24px;
+}
+@media screen and (max-width: 1200px){
+    .nav-item {
+        margin: 0 16px;
+    }
+}
+@media screen and (max-width: 992px) and (min-width: 576px){
+    .navbar > ul{
+        order: 3;
+        padding-left: 0;
+        padding-top: 12px;
+    }
+    .navbar > a{
+        order: 1;
+    }
+    .navbar > div{
+        order: 2;
+    }
+}
+@media screen and (max-width: 576px){
+    .navbar ul{
+        padding-left: 0;
+    }
+    .navbar-brand img{
+        max-width: 107px;
+    }
+    .nav-item {
+        margin: 0 0px;
+    }
+    
+}
+/* SIDEBAR */
+.wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-100vw,0);
+    transition: all 0.4s ease-in;
+    z-index: 1200;
+}
+#sidebar{
+    background-color: #fff;
+    height: 100%;
+    width: 80%;
+    z-index: 1100;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.overlay{
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+    top:0;
+    left: 0;
+    background-color: rgba(0,0,0,0);
+    transition: all 0.4s ease-in;
+}
+.wrapper.active{
+    transform: translate(0,0);
+}
+.overlay.active{
+    background-color: rgba(0,0,0,0.5);
+}
+
 </style>
-<header class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light container">
-        <a class="navbar-brand" href="/">
+<header class="">
+    <nav class="navbar navbar-light container px-md-0 d-flex justify-content-between">
+    <a class="navbar-brand" href="/">
             <img src="{% static 'img/logo.svg' %}" alt="">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Каталог 
-                    </a>
-                    <div class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contacts">Контакты</a>
-                </li>
-                <div class="header-search d-flex my-2 my-lg-0">
-                    <input class="form-control mr-2" type="search" placeholder="" aria-label="Search" id="header-search-text"/>
-                    <button class="btn btn-outline-success" onclick="onSearch()">Найти</button>
-                </div>   
-            </ul>
-            <div class="cart-link">
-                <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
+        <ul class="d-flex justify-content-center align-items-center mb-0">
+            <li class="nav-item dropdown dropdown-nk d-none d-sm-flex">
+                <a class="proxima-sb px-3" href="/shop" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
+                    Каталог 
+                </a>
+                <div class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
+                </div>
+            </li>
+            <li class="nav-item d-flex">
+                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">О нас</a>
+            </li>
+            <li class="nav-item d-flex">
+                <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>
+            </li>
+        </ul>
+        <div class="d-none d-sm-flex">
+            <div class="input-group my-2 my-lg-0 header-search mr-3">
+                <input  id="header-search-text" type="search" class="form-control" placeholder="Кожаный рюкзак" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-nk" type="button" onclick="onSearch()">Найти</button>
+                </div>
+            </div>  
+            <div class="d-flex align-items-center cart-link">
+                <a href="/cart">
+                    <img src="{% static 'img/cart-black.svg'%}" alt="">
+                </a>
             </div>
         </div>
     </nav>
+    <div class="d-flex justify-content-between d-sm-none mobile-nav px-3 pb-3">
+        <button class="proxima-sb px-0 dropdown-nk" id="sidebarCollapse">
+            <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
+            Каталог
+        </button>
+        <div class="d-flex">
+            <a href="/cart">
+                <img src="{% static 'img/cart-black.svg'%}" alt="" class="mr-4">
+            </a>
+            <a href="/shop">
+                <img src="{% static 'img/search.svg'%}" alt="" id="mobile-search">
+            </a>
+        </div>
+    </div>
 </header>
+<div class="wrapper d-flex">
+    <div id="sidebar" class="p-3">
+        <a class="navbar-brand p-0" href="/">
+            <img src="{% static 'img/logo.svg' %}" alt=""/>
+        </a>
+        <div class="p-3">
+            <ul id="categories" class="d-flex flex-column p-0">
+            </ul>
+        </div>
+    </div>
+    <div class="overlay">
+    </div>
+</div>
 <script>
 var categories = [];
 const categoryUrl = '/category';
@@ -47,12 +202,12 @@ function getCategories(){
     $.ajax({
         url: categoryUrl,
         success: function(res){
-            console.log(res)
             if(res){
                 if(res.code == 0){
                     categories = res.data.results;
                     categories.map(c=>{
                         $('#dropdown-category').append(`<a class="dropdown-item" href="/shop/?category=${c.id}">${c.name}</a>`)
+                        $('#categories').append(`<li class="item d-flex"><a href="/shop/?category=${c.id}">${c.name}</a></li>`)
                     });
                 }else{
 
@@ -66,7 +221,49 @@ function getCategories(){
 getCategories();
 function onSearch(){
     var text = $('#header-search-text').val();
-    console.log(setUrlVar({name: 'search', value: text}))
     window.location.replace(setUrlVar({name: 'search', value: text}));    
 }
+$('.cart-link img').hover(
+    function(){
+        $(this).attr('src', "{% static 'img/cart-red.svg'%}");
+    }, 
+    function(){
+        $(this).attr('src', "{% static 'img/cart-black.svg'%}");
+    }
+)
+$('.dropdown > a').hover(
+    function(){
+        $('.dropdown > a img ').attr('src', "{% static 'img/hamburger-red.svg'%}");
+    }, 
+    function(){
+        $('.dropdown > a img ').attr('src', "{% static 'img/hamburger.svg'%}");
+    }
+)
+// Sidebar:
+$(document).ready(function () {
+
+    $('.overlay').on('click', function () {
+        $('.wrapper').removeClass('active');
+        $('.wrapper .overlay').removeClass('active');
+    });
+
+    $('#sidebarCollapse').on('click', function () {
+        $('.wrapper').addClass('active');
+        let timeout = setTimeout(function(){
+            $('.wrapper .overlay').addClass('active');
+        }, 400);
+    });
+});
+
+let url = window.location.href;
+$('ul .nav-item a').each(function(){
+    // console.log(url, $(this).attr('href'))
+    if(url.indexOf($(this).attr('href')) !== -1){
+        $(this).addClass('active');
+    }
+    if(url.indexOf('shop')!==-1){
+        $('.dropdown > a img ').attr('src', "{% static 'img/hamburger-red.svg'%}");
+    }
+})
+
 </script>

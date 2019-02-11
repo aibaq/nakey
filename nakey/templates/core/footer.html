@@ -1,66 +1,124 @@
 {% load staticfiles %}
 <style>
-    .circle{
-        border-radius: 50%;
-        width: 42px;
-        height: 42px;
+    footer .container{
+        padding-top: 56px;
+        padding-bottom: 56px;
     }
-    .footer-top{
-        background-color: #222222;
+    h6{
+        line-height: 18px;
+        font-size: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 500;
     }
-    .footer-top h6{
-        color: #dddddd;
+    .address .city{
+        opacity: 0.6;
     }
-    .footer-top a,
-    .footer-top p{
-        color: #919191;
+    .copy div{
+        color: #3A3232;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
     }
-    .footer-copyright{
-        background-color: #444444;
-        color: #fff;
+    .copy img{
+        max-width: 148px;
     }
-    .footer-copyright a{
-        color: #fff;
+    p{
+        opacity: 0.6;
     }
-
+    .contacts a{
+        opacity: 0.6;
+    }
+    a.circle{
+        width: 48px;
+        height: 48px;
+        background: #FFFFFF;
+        border: 1px solid #E4E5EC;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.03);
+        border-radius: 4px;
+        color: #A7ABBD;
+        margin-left: 20px;
+        text-decoration: none;
+    }
+    .circle:first-child{
+        margin-left: 0;
+    }
+    .circle:hover .fa-instagram{
+        color: #8a3ab9;
+    }
+    .circle:hover .fa-facebook-f{
+        color: #3b5998;
+    }
+    .circle:hover .fa-vk{
+        color: #4c75a3;
+    }
+    @media screen and (max-width: 576px){
+        footer .container{
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+        .copy{
+            text-align: center;
+        }
+        .socials h6{
+            display: none;
+        }
+        .socials .d-flex{
+            align-items: center;
+        }
+        .socials .circle{
+            margin-left: 0;
+        }
+        .circle .fa-instagram{
+            color: #8a3ab9;
+        }
+        .circle .fa-facebook-f{
+            color: #3b5998;
+        }
+        .circle .fa-vk{
+            color: #4c75a3;
+        }
+    }
 </style>
 <footer>
-    <div class="footer-top">
-        <div class="container p-3">
-            <div class="row">
-                <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
-                    <h6>Наш адрес</h6>
-                    <p>Барахолка,ТЦ Дастур, <br/>
-                        Северное кольцо 8, <br/>
-                        Almaty, Kazakhstan
-                    </p>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-12 col-sm-6 col-md-3 copy">
+                <img class="mb-3 mb-sm-4" src="{% static 'img/logo.svg'%}" alt="Nakey logotype">
+                <div class="pb-3 pb-sm-0">
+                    © 2018 Nakey. All rights reserved.
                 </div>
-                <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
-                    <h6>Наши контакты</h6>
-                    <a href="tel:+77752530066">+7(775) 253 00 66</a><br/>
-                    <a href="mailto:nakeykz@gmail.com">nakeykz@gmail.com</a>
-                </div>
-                <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
-                    <h6>Социальные сети</h6>
-                    <div class="d-flex">
-                        <a href="https://www.instagram.com/nakeykz/" target="_blank" class="circle">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/shop.nakeykz/" target="_blank" class="circle">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://vk.com/nakey_kz" target="_blank" class="circle">
-                            <i class="fab fa-vk"></i>
-                        </a>
+            </div>
+            <div class="col-7 col-sm-6 col-md-6">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6 d-flex flex-column address">
+                        <h6 class="color-black proxima-sb mb-3">Наш адрес</h6>
+                        <b class="city mb-3">Almaty, Kazakhstan</b>
+                        <p>Барахолка,ТЦ Дастур, <br/>
+                            Северное кольцо 8, <br/>
+                        </p>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 d-flex flex-column contacts">
+                        <h6 class="color-black proxima-sb mb-3">Наши контакты</h6>
+                        <a class="color-black mb-3" href="tel:+77752530066">+7(775) 253 00 66</a>
+                        <a class="color-black" href="mailto:nakeykz@gmail.com">nakeykz@gmail.com</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container text-center py-3">
-            © 2019 Copyright:
-            <a href="https://nakey.kz">Nakey.kz</a>
+            <div class="col-5 col-sm-6 col-md-3 d-flex flex-column socials">
+                <h6 class="color-black proxima-sb">Социальные сети</h6>
+                <div class="d-flex flex-column flex-sm-row">
+                    <a href="https://www.facebook.com/shop.nakeykz/" target="_blank" class="circle mb-3 d-flex justify-content-center align-items-center">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/nakeykz/" target="_blank" class="circle mb-3 d-flex justify-content-center align-items-center">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://vk.com/nakey_kz" target="_blank" class="circle mb-3 d-flex justify-content-center align-items-center">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </footer>

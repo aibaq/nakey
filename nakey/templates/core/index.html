@@ -6,7 +6,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Главная страница сайта Nakey.kz" />
     <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
-    <meta property="og:url" content="https://nakey.kz/" />
+    <meta property="og:url" content="{{SITE_URL}}" />
     <meta property="og:image" content="{% static 'img/logo.svg'%}">
     <!-- <meta property="og:image:width" content="{{poll.facebook_image.width}}">
     <meta property="og:image:height" content="{{poll.facebook_image.height}}"> -->
@@ -21,11 +21,11 @@
     <div class="banner-item" style="background-image: url({{ banner.image.url }})">
         <div class="container h-100 d-flex align-items-center">
             <div class="row w-100">
-                <div class="col-12 col-lg-4 banner-text d-flex flex-column justify-content-center">
-                    <h3 class="mb-3">{{banner.name}}</h3>
+                <div class="col-12 banner-text d-flex flex-column justify-content-center">
+                    <h3 class="mb-0 mb-md-3">{{banner}}</h3>
                     <div class="w-100 d-flex justify-content-between">
-                        <small class="d-flex align-items-center">Новая коллекция</small>
-                        <a href="/shop" class="btn btn-outline-light">Перейти в магазин</a>
+                        <small class="d-flex align-items-center">{{banner.subtitle}}</small>
+                        <!-- <a href="/shop" class="btn btn-outline-light">{{banner.button}}</a> -->
                     </div>
                 </div>
             </div>
@@ -34,17 +34,20 @@
     {% endfor %}
 </div>
 <div class="container">
-    <section id="about">
+    <!-- <section id="about">
         <h3>Nakey.kz - широкии выбор кожанных изделии</h3>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
-    </section>
-    <section id="popular">
-        <h3>Популярные</h3>
-        <div class="popular-list">
-            
-        </div>
+    </section> -->
+    <div class="mb-4 d-flex justify-content-between">
+        <h3 class="section-title">Популярные</h3>
+        <a href="/shop" class="proxima-sb color-red">
+            Весь каталог >
+        </a>   
+    </div>
+    <div class="popular-list row">
+        
     </div>
 </div>
 {% endblock content %}
@@ -55,48 +58,25 @@
         sort: null,
     }
     var items = [];
-    var url = "http://nakey.kz/item/?limit=10";
+    console.log("DOMAIN: ", "{{SITE_URL}}")
+    var popularUrl = "{{ SITE_URL }}/item/?limit=10";
 </script>
 <script>
-    function popularSlider(){
-        $('.popular-list').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            infinite: false,
-            centerMode: false,
-            centerPadding: '60px',
-            autoplay: false,
-            lazyLoad: 'ondemand',
-            arrows: true,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
-                },
-            ]
-        });
-    }
     function getItems(){
-        console.log(filter);
         items = [];
         $('.popular-list').empty();
         if(filter.category_id)
-            url+="&category_id="+filter.category_id;
+            popularUrl+="&category_id="+filter.category_id;
         $.ajax({
-            url: url,
+            url: popularUrl,
             success: function(res){
-                console.log(res)
                 if(res){
                     if(res.code == 0){
                         items = res.data.results;
                         items.map(item=>{
-                            console.log(item)
-                            $('#productPreviewTmpl').tmpl({item: item, style: {className: ''}}).appendTo('.popular-list');
+                            $('.popular-list').append('<div class="col-12 col-sm-6 col-md-4 col-lg-3" id="item_'+item.id+'"></div>');
+                            $('#productPreviewTmpl').tmpl({item: item, style: {className: ''}}).appendTo('#item_'+item.id);
                         })
-                        popularSlider();
                     }else{
 
                     }

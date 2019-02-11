@@ -5,73 +5,63 @@
     <div class="item-outer ${style.className}">
             <div class="item cursor-pointer">
                 <a class="item-details cursor-pointer" href="/shop/item/${item.id}">
-                    <div class="img" style="background-image: url(http://nakey.kz/${item.images[0]})">
+                    <div class="img" style="background-image: url({{ SITE_URL }}${item.images[0]})">
                         <!-- change this to last image -->
                     </div>
-                    <div class="description p-2">
-                        <h5 class="main-black">${item.name}</h5>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="hint-color">${item.category.name}</h6>
-                            <span class="main-black">${item.price}&nbsp;&#8376;</span>
-                        </div>
+                    <div class="description p-2 text-center">
+                        <h5 class="main-black color-black">${item.name}</h5>
+                        <h6 class="main-black color-red">${item.price}&nbsp;&#8376;</h6>                       
                     </div>
                 </a>
-                <div class="container item-btns p-2">
-                    <div class="row">
-                        <div class="col-6 px-3 cursor-pointer" onclick="onClickBuy(`${JSON.stringify(item)}`)">
-                            <span class="cart-btn">Купить</span>
-                        </div>
-                        <div class="col-6 px-3" onclick="onClickCart(${item.id})">
-                            <span class="cart-btn cursor-pointer">
-                                <!-- <i class="fas fa-shopping-cart"></i> -->
-                                <i class="fas fa-cart-plus"></i>
-                            </span>
-                        </div>
-                    </div>
+                <div class="container item-btns d-flex justify-content-between">
+                    <button class="btn btn-nk" onclick="onClickBuy(`${JSON.stringify(item)}`)">Купить</button>
+                    <button class="btn btn-outline-nk" onclick="onClickCart(${item.id})">
+                        <div class="cart-icon"></div>
+                        В корзину
+                    </button>                            
                 </div>
             </div>
         </div>
 </script>
 
 <script id="productCartPreviewTmpl" type="text/x-jquery-tmpl">
-    <div class="item-outer row w-100 d-flex flex-row justify-content-between" id="cart_item_${item.id}">
-        <div class="item col-12 col-md-8">
-            <a class="d-flex item-details cursor-pointer flex-row pl-0 cursor-pointer" href="/shop/item/${item.id}">
-                <div class="img-outer">
-                    <div class="img" style="background-image: url(http://nakey.kz/${item.images[0]})">
-                        <!-- change this to last image -->
+    <div class="item-outer-cart item-outer w-100 d-flex flex-row justify-content-between" id="cart_item_${item.id}">
+        <div class="cart-item">
+            <div class="d-flex item-details cursor-pointer flex-row pl-0 cursor-pointer">
+                <div class="img" style="background-image: url({{ SITE_URL }}${item.images[0]})">
+                </div>
+                <div class="d-flex right-side">
+                    <div class="description d-flex flex-column justify-content-center p-2 mr-3">
+                        <a href="/shop/item/${item.id}"><h5 class="main-black">${item.name}</h5></a>
+                        <div class="d-flex justify-content-between">
+                            <span class="price color-red">${item.price}&nbsp;&#8376;</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn-count d-flex justify-content-center align-items-center mr-4" onclick="changeCount(${item.count-1}, ${item.id})"><span class="minus"></span></button>
+                        <span class="d-flex justify-content-center align-items-center">${item.count}</span> 
+                        <button class="btn-count d-flex justify-content-center align-items-center ml-4 mr-4" onclick="changeCount(${item.count+1}, ${item.id})"><span class="plus"></span></button>
+                        <span class="price d-none d-sm-flex">${item.price*item.count}&nbsp;&#8376;</span>
                     </div>
                 </div>
-                <div class="description p-2">
-                    <h5 class="main-black">${item.name}</h5>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="hint-color">${item.category.name}</h6>
-                        <span class="main-black">${item.price}&nbsp;&#8376;</span>
-                    </div>
-                </div>
-            </a>
+            </div>
         </div>
-        <div class="col-12 col-md-4 cart-item-details d-flex flex-column justify-content-between mb-3">
-            <div onclick="removeFromCart(${item.id})" class="text-right cursor-pointer">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="d-flex align-items-center justify-content-center">
-                <input class="form-control" type="number" value="${item.count}" onchange="changeCount(this, ${item.id})"/><span class="px-2">шт = </span><span class="price">${item.price*item.count}</span>&nbsp;&#8376;
-            </div>
+        <div onclick="removeFromCart(${item.id})" class="btn-remove text-right cursor-pointer d-flex align-items-center">
+            <i class="fas fa-times"></i>
         </div>
     </div>
 </script>
 <script id="requestModalTmpl" type="text/x-jquery-tmpl">
-    <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal request-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Отправить заявку</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close p-4" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <h4 class="text-center proxima-sb mb-5">Отправить заявку</h4>
                     <div class="form-group">
                         <label for="name">Ваше имя</label>
                         <input name="name" id="name" type="text" class="form-control"/>
@@ -84,10 +74,7 @@
                         <label for="city">Ваш город</label>
                         <input name="city" id="city" type="text" class="form-control"/>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary" onclick="prepareRequest(`${items}`)">Отправить</button>
+                    <button type="submit" class="w-100 btn btn-nk btn-lg mt-3" onclick="prepareRequest(`${items}`)">Отправить</button>
                 </div>
             </div>
         </div>
@@ -95,11 +82,11 @@
 </script>
 <div id="requestmodal"></div>
 <script>
-    var requestUrl = "http://nakey.kz/request/";
+    var requestUrl = "{{SITE_URL}}/request/";
 </script>
 <script>
     function onClickBuy(item){
-        console.log("onlcik item", item)
+        // console.log("onlcik item", item)
         let data = {
             items: JSON.stringify([JSON.parse(item)])
         }
@@ -108,7 +95,6 @@
         $("#requestmodal .modal").modal('show');
     }
     function onSendRequest(data){
-        console.log(data);
         $.ajax({
             type: 'POST',
             url: requestUrl,
@@ -118,10 +104,8 @@
             contentType: "application/json; charset=utf-8",
             // contentType: false,
             success: function(res){
-                console.log(res)
                 if(res){
                     if(res.code == 0){
-                        console.log("success");
                         toastr.success('Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с вами!')
                     }else{
                         toastr.warning('Ошибка #'+res.code, 'Попробуйте еще раз');
@@ -131,13 +115,11 @@
                 }
             },
             error: function(error){
-                console.log(error);
                 toastr.error(error.statusText, 'Ошибка сервера');
             }
         });
     }
     function prepareRequest(items){
-        console.log("items", items)
         if(onGetCartItems().length == 0)
             return;
         var name = $('#requestmodal #name').val();

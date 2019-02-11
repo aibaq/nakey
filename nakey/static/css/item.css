@@ -1,5 +1,17 @@
+.item-page{
+    padding: 64px;
+    background-color: #fff;
+}
+.description h1{
+    line-height: 42px;
+    font-size: 28px;
+}
+.description p{
+    line-height: 30px;
+    font-size: 15px;
+}
 .main-image{
-    height: 300px;
+    padding-top: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -28,4 +40,60 @@
 #thislink{
     position: absolute;
     left: -99999px;
+}
+table.detail tr td:first-child{
+    line-height: 24px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+table.detail tr td:second-child{
+    line-height: 24px;
+    font-size: 14px;
+}
+.price{
+    line-height: 42px;
+    font-size: 28px;
+}
+.share span{
+    line-height: 18px;
+    font-size: 15px;
+    color: #000000;
+    opacity: 0.5;
+}
+.share a{
+    text-transform: none;
+    text-decoration: none;
+}
+.share img{
+    /* transition: all 0.5s ease-out; */
+}
+.share img:hover{
+    transform: scale(1.07);
+}
+#images-carousel .slick-prev{
+    background-image: url("../img/angle-left-dark.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#images-carousel .slick-prev:before{
+    content: '';
+}
+#images-carousel .slick-next{
+    background-image: url("../img/angle-right-dark.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+#images-carousel .slick-next:before{
+    content: '';
+}
+@media screen and (max-width: 576px){
+    .item-page{
+        padding: 20px;
+    }
+    #images-carousel .item-image{
+        pointer-events: none;
+    }
+
 }

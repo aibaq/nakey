@@ -17,5 +17,6 @@ urlpatterns = [
     path('shop/item/<int:pk>/', ItemView.as_view(), name='item'),
     path('cart/', CartView.as_view(), name='cart'),
     path('contacts/', ContactsView.as_view(), name='contacts'),
+    path('about/', AboutView.as_view(), name='about'),
 ]
 urlpatterns += router.urls
