@@ -32,6 +32,7 @@ class BaseConfiguration(Configuration):
         'django_celery_beat',
         'django_celery_results',
         'rest_framework',
+        'mptt',
         'nakey.core',
     ]
 

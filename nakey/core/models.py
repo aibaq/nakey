@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 from nakey.core import tasks
 from nakey.mixins.models import TimestampMixin
 from nakey.utils import constants, messages
@@ -20,14 +21,19 @@ class Banner(TimestampMixin, models.Model):
         return self.title
 
 
-class Category(models.Model):
+class Category(MPTTModel):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
     name = models.CharField(max_length=500, verbose_name='Наименование')
+    parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE,
+                            related_name='children', db_index=True)
 
     def __str__(self):
         return self.name
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
 
 class Color(models.Model):
