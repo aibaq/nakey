@@ -129,7 +129,6 @@
 .overlay.active{
     background-color: rgba(0,0,0,0.5);
 }
-
 </style>
 <header class="">
     <nav class="navbar navbar-light container px-md-0 d-flex justify-content-between">
@@ -142,8 +141,9 @@
                     <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
                     Каталог 
                 </a>
-                <div class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
-                </div>
+                <ul class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
+                    {% include './categories.html' with handler='header' %}
+                </ul>
             </li>
             <li class="nav-item d-flex">
                 <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">О нас</a>
@@ -168,7 +168,7 @@
     </nav>
     <div class="d-flex justify-content-between d-sm-none mobile-nav px-3 pb-3">
         <button class="proxima-sb px-0 dropdown-nk" id="sidebarCollapse">
-            <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
+            <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt=""/>
             Каталог
         </button>
         <div class="d-flex">
@@ -188,6 +188,7 @@
         </a>
         <div class="p-3">
             <ul id="categories" class="d-flex flex-column p-0">
+                {% include './categories.html' with handler='mobile-header' %}
             </ul>
         </div>
     </div>
@@ -196,8 +197,11 @@
 </div>
 <script>
 var categories = [];
-const categoryUrl = '/category';
 // get category:
+$('.dropdown-menu').click(function(e){
+    e.stopPropagation();
+    console.log("Prevent")
+})
 function getCategories(){
     $.ajax({
         url: categoryUrl,
@@ -205,10 +209,29 @@ function getCategories(){
             if(res){
                 if(res.code == 0){
                     categories = res.data.results;
+                    var level1 = [], level2 = [];
                     categories.map(c=>{
-                        $('#dropdown-category').append(`<a class="dropdown-item" href="/shop/?category=${c.id}">${c.name}</a>`)
-                        $('#categories').append(`<li class="item d-flex"><a href="/shop/?category=${c.id}">${c.name}</a></li>`)
+                        if(c.level == 0){
+                            level1.push(c);
+                            c.children = [];
+                        }else if(c.level == 1){
+                            level2.push(c);
+                        }
                     });
+                    for(let i in level1){
+                        let cat = level1[i];
+                        // $('#categoryTmpl').tmpl(cat).appendTo('#dropdown-category');
+                        // $('#dropdown-category').append(`<li class="dropdown-item" id="id_${cat.id}"><a href="/shop/?category=${cat.id}">${cat.name}</a><ul></ul></li>`)
+                        // $('#categories').append(`<li class="item d-flex" id="id_${cat.id}"><a href="/shop/?category=${cat.id}">${cat.name}</a><ul></ul></li>`)
+                        for(let child in level2){
+                            if(level2[child].parent == level1[i].id){
+                                level1[i].children.push(level2[child]);
+                                // $(`#id_${cat.id} ul`).append(`<li><a href="/shop/?category=${cat.id}">${level2[child].name}</a></li>`)
+                            }
+                        }
+                    }
+                    // console.log("New :", level1)
+                    
                 }else{
 
                 }
