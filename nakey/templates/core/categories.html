@@ -1,0 +1,129 @@
+{% load staticfiles %}
+<style>
+    .category-list{
+        padding: 24px;
+    }
+    .category-item {
+        padding-bottom: 24px;
+    }
+    .category-item ul{
+        height: 0;
+        transition: all 0.6s ease-in-out;
+        overflow: hidden;
+    }
+    .category-item ul.show{
+        height: auto;
+    }
+    .category-item ul li{
+        list-style-type: none;
+        margin-top: 20px;
+    }
+    .category-item ul li a{
+        color: #000;
+    }
+    .category-item .parent:hover a{
+        color: #D62C2C;
+    }
+    .category-item .parent:hover img{
+        transform: scale(1.2);
+    }
+    .category-item .parent a{
+        color: #000;
+    }
+    .category-item .parent .img{
+        height: 24px;
+        width: 24px;
+    }
+
+    .category-item .parent.active a{
+        color: #D62C2C;
+        text-decoration: underline;
+    }
+    @media screen and (max-width: 576px){
+        .category-item .parent:hover a{
+            color: #000;
+        }
+        .category-item .parent:hover img{
+            transform: scale(1);
+        }
+        .category-item .parent.active a{
+            color: #D62C2C;
+        }
+    }
+    
+</style>
+<div class="category-list" id="category-list-{{handler}}">
+</div>
+<script id="categoryTmpl" type="text/x-jquery-tmpl">
+    <div class="category-item" id="${htmlId}"> 
+        <div class="parent cursor-pointer d-flex justify-content-between align-items-center">
+            <span><a class="proxima-sb" href="/shop/?category=${id}">${name}</a></span>
+            <div class="img d-flex justify-content-center align-items-center" onclick="toggleCategory('${htmlId}')">
+                <img src="{% static 'img/plus.svg'%}"/>
+            </div>
+        </div>
+        <ul class="pl-4 m-0">
+        </ul>
+    </div>
+</script>
+<script>
+getCategories();
+
+function toggleCategory(id){
+    if($(`#${id} ul`).hasClass('show')){
+        $(`#${id} ul`).removeClass('show')
+        $(`#${id} .parent`).removeClass('active')
+        $(`#${id} .parent img`).attr('src', "{% static 'img/plus.svg'%}")
+    }else{
+        // $('#category-list-{{handler}} .category-item').each(function(){
+        //     $(`#category-list-{{handler}} .category-item ul`).removeClass('show');
+        //     $(`#category-list-{{handler}} .category-item .parent`).removeClass('active');
+        //     $(`#category-list-{{handler}} .category-item .parent img`).attr('src', "{% static 'img/plus.svg'%}")
+        // })
+        $(`#${id} ul`).addClass('show')
+        $(`#${id} .parent`).addClass('active')
+        $(`#${id} .parent img`).attr('src', "{% static 'img/minus-red.svg'%}")
+    }
+}
+
+function getCategories(){
+    $.ajax({
+        url: categoryUrl,
+        success: function(res){
+            if(res){
+                if(res.code == 0){
+                    categories = res.data.results;
+                    let level1 = [], level2 = [];
+                    categories.map(c=>{
+                        if(c.level == 0){
+                            level1.push(c);
+                            c.children = [];
+                        }else if(c.level == 1){
+                            level2.push(c);
+                        }
+                    });
+                    for(let i in level1){
+                        let htmlId = `{{handler}}_catid_${level1[i].id}`;
+                        level1[i].htmlId = htmlId;
+                        let cat = level1[i];
+                        $('#categoryTmpl').tmpl(cat).appendTo('#category-list-{{handler}}');
+                        for(let child in level2){
+                            if(level2[child].parent == level1[i].id){
+                                level1[i].children.push(level2[child]);
+                                console.log("UL", htmlId, level2[child])
+                                $(`#${htmlId} ul`).append(`<li><a href="/shop/?category=${level2[child].id}">${level2[child].name}</a></li>`)
+                            }
+                        }
+                    }
+                    toggleCategory(level1[0].id);
+                    
+                }else{
+
+                }
+            }else{
+
+            }
+        },
+    });
+}   
+</script>

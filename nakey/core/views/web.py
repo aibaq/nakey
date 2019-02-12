@@ -25,7 +25,7 @@ class ShopView(View):
     queryset = Item.objects.all()
     def get(self, request, *args, **kwargs):
         context = {
-            'categories': Category.objects.all(), 
+            'categories': Category.objects.all(),
             'SITE_URL': settings.SITE_URL
         }
         return render(request, self.template_name, context)
