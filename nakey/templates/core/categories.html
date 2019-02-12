@@ -110,7 +110,6 @@ function getCategories(){
                         for(let child in level2){
                             if(level2[child].parent == level1[i].id){
                                 level1[i].children.push(level2[child]);
-                                console.log("UL", htmlId, level2[child])
                                 $(`#${htmlId} ul`).append(`<li><a href="/shop/?category=${level2[child].id}">${level2[child].name}</a></li>`)
                             }
                         }
