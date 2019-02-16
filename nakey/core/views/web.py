@@ -14,15 +14,19 @@ class IndexView(View):
                    'SITE_URL': settings.SITE_URL}
         return render(request, self.template_name, context)
 
+
 class AboutView(View):
     template_name = 'core/about.html'
+
     def get(self, request):
         context = {'SITE_URL': settings.SITE_URL}
         return render(request, self.template_name, context)
 
+
 class ShopView(View):
     template_name = 'core/shop.html'
     queryset = Item.objects.all()
+
     def get(self, request, *args, **kwargs):
         context = {
             'categories': Category.objects.all(),
@@ -42,12 +46,14 @@ class ItemView(View):
         }
         return render(request, self.template_name, context)
 
+
 class CartView(View):
     template_name = 'core/cart.html'
 
     def get(self, request, *args, **kwargs):
         context = {'SITE_URL': settings.SITE_URL}
         return render(request, self.template_name, context)
+
 
 class ContactsView(View):
     template_name = 'core/contacts.html'
