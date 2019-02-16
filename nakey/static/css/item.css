@@ -93,7 +93,7 @@ table.detail tr td:second-child{
         padding: 20px;
     }
     #images-carousel .item-image{
-        pointer-events: none;
+        /* pointer-events: none; */
     }
 
 }
