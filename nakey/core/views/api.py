@@ -46,7 +46,7 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filter_fields = ('category', 'manufacture')
     search_fields = ('name',)
-    ordering_fields = ('views_count', 'price')
+    ordering_fields = ('view_count', 'price')
 
 
 @method_decorator(response_wrapper(), name='dispatch')
