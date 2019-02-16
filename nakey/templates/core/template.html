@@ -107,6 +107,7 @@
                 if(res){
                     if(res.code == 0){
                         toastr.success('Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с вами!')
+                        $("#requestmodal .modal").modal('hide');
                     }else{
                         toastr.warning('Ошибка #'+res.code, 'Попробуйте еще раз');
                     }

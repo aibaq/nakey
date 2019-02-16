@@ -98,14 +98,17 @@ function getCategories(){
                             level2.push(c);
                         }
                     });
+                    let query = getUrlVars();
                     for(let i in level1){
                         let htmlId = `{{handler}}_catid_${level1[i].id}`;
+                        if(query['category'] == level1[i].id){
+                            activeId = htmlId;
+                        }
                         level1[i].htmlId = htmlId;
                         let cat = level1[i];
                         $('#categoryTmpl').tmpl(cat).appendTo('#category-list-{{handler}}');
                         for(let child in level2){
                             if(level2[child].parent == level1[i].id){
-                                let query = getUrlVars();
                                 level2[child].class = '';
                                 if(query['category'] == level2[child].id){
                                     level2[child].class = 'active';

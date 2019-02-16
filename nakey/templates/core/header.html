@@ -51,7 +51,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M13 10.586L15.707 13.293C16.098 13.684 16.098 14.316 15.707 14.707L14.707 15.707C14.512 15.902 14.256 16 14 16C13.744 16 13.488 15.902 13.293 15.707L10.586 13C9.536 13.631 8.312 14 7 14C3.141 14 0 10.86 0 7C0 3.14 3.141 0 7 0C10.859 0 14 3.14 14 7C14 8.311 13.63 9.536 13 10.586ZM2 7C2 9.761 4.239 12 7 12C9.761 12 12 9.761 12 7C12 4.239 9.761 2 7 2C4.239 2 2 4.239 2 7Z' fill='#C0C4D1'/></svg>");
+    background-image: url("{% static 'img/search.svg'%}");
 }
 .header-search .input-group-append button.btn{
     border-radius: 32px;
@@ -262,7 +262,6 @@ $(document).ready(function () {
     });
 
     let length = onGetCartItems().length;
-    console.log(length)
     $('.cart-icon .circled').each(function(){
         $(this).text(length);
     })

@@ -171,11 +171,13 @@ fjs.parentNode.insertBefore(js, fjs);
     function openImage(image_url){
         $('.main-image').css({'background-image': 'url('+image_url+')'});
         $('#image-preview img').attr('src', image_url);
-        $('#image-preview').modal('show');
-        $(document).ready(function(){
-            // $('#image-preview img').zoom({url: image_url});
-			$('#hover-zoom').zoom();
-        });
+        if(window.innerWidth > 576){
+            $('#image-preview').modal('show');
+            $(document).ready(function(){
+                // $('#image-preview img').zoom({url: image_url});
+                $('#hover-zoom').zoom();
+            });
+        }
     }
     function openShare(){
         $('#share-modal').modal('show');
