@@ -1,14 +1,14 @@
 {% extends './base.html' %}
 {% load staticfiles %}
 {% block head %}
-    <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <title>Каталог товаров</title>
+    <meta name="description" content="Каталог товаров Nakey.kz - магазин кожаных изделий и конных снаряжений" />
     <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Магазин сайта Nakey.kz, каталог товаров" />
-    <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
+    <meta property="og:title" content="Каталог товаров" />
+    <meta property="og:description" content="Каталог товаров Nakey.kz - магазин кожаных изделий и конных снаряжений" />
     <meta property="og:url" content="{{SITE_URL}}/shop" />
-    <meta property="og:image" content="{% static 'img/logo.svg'%}">
-    <title>Каталог товаров</title>
+    <meta property="og:image" content="{% static 'img/icon.png'%}">
     <style>
         .filter .dropdown button,
         .filter button{
@@ -26,16 +26,16 @@
 {% block content %}
     <div class="container">
         <div class="d-flex justify-content-end mb-3">
-            <label for="" class="d-flex align-items-center mr-3 mb-0">Сортировка</label>
+            <label for="" class="d-flex align-items-center mr-3 mb-0">Сортировка по</label>
             <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Выберите
                 </button>
-                <div class="dropdown-menu" aria-labelledby="sort-btn">
-                    <div class="dropdown-item" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
-                    <div class="dropdown-item" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
-                    <div class="dropdown-item" onclick="sortOrder('-views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                    <div class="dropdown-item" onclick="sortOrder('views_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sort-btn">
+                    <div class="dropdown-item" data-ordering="price" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" data-ordering="-price" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
+                    <div class="dropdown-item" data-ordering="view_count" onclick="sortOrder('view_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" data-ordering="-view_count" onclick="sortOrder('-view_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-down"></i></div>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@
     var orders = [
         {name: 'Цене', value: 'price'},
         {name: 'Цене', value: '-price'},
-        {name: 'Популярности', value: 'views_count'},
-        {name: 'Популярности', value: '-views_count'},
+        {name: 'Популярности', value: 'view_count'},
+        {name: 'Популярности', value: '-view_count'},
     ]
     const itemUrl = "/item/?limit=100";
     var shopUrl = "/shop/";
@@ -134,6 +134,9 @@
                             // console.log(item)
                             $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-4 col-lg-4'}}).appendTo('.item-list');
                         })
+                        if(items.length == 0){
+                            $('.item-list').append(`<h4 class="color-grey p-3">К сожелению, товары не нашлись :(</h4>`)
+                        }
                     }else{
 
                     }
@@ -184,6 +187,15 @@
 </script>
 <script>
     getCategories();
-    getItems();
+    $(document).ready(function(){
+        getItems();
+        $('.dropdown-menu .dropdown-item').each(function(){
+            var query = getUrlVars();
+            if(query['ordering'] == $(this).attr('data-ordering')){
+                $(this).addClass('active')
+            }
+
+        })
+    })
 </script>
 {% endblock scripts%}

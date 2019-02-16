@@ -139,7 +139,7 @@
         }
         let parsedItems = [];
         JSON.parse(items).map(item=>{
-            parsedItems.push({item: item.id, count: item.count | 1});
+            parsedItems.push({item: item.id, count: item.count });
         })
         let data = {
             full_name: name, 
