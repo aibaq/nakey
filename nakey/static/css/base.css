@@ -69,6 +69,10 @@ main.main{
 .color-black{
     color: #3A3232!important;
 }
+.color-grey{
+    color: #3A3232!important;
+    opacity: 0.6;
+}
 .color-red{
     color: #D62C2C!important;
 }
@@ -122,6 +126,10 @@ a.color-red:hover{
 .btn-outline-nk:focus{
     background: #A41111;
 }
+.btn-hamburger{
+    border: none;
+    background: none;
+}
 .btn-lg{
     min-height: 58px;
 }
@@ -129,4 +137,10 @@ a.color-red:hover{
 input.form-control{
     border-radius: 0;
     border-color: #D8D8D8;
+}
+
+.dropdown-menu .dropdown-item:active,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item.active{
+    background-color: #D62C2C;
 }
