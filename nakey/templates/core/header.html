@@ -138,6 +138,20 @@
 .overlay.active{
     background-color: rgba(0,0,0,0.5);
 }
+.cart-icon .circled{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #D62C2C;
+    border-radius: 50%;
+    color: #fff;
+    height: 16px;
+    width: 16px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
 <header class="">
     <nav class="navbar navbar-light container px-md-0 d-flex justify-content-between">
@@ -169,8 +183,9 @@
                 </div>
             </div>  
             <div class="d-flex align-items-center cart-link">
-                <a href="/cart">
+                <a href="/cart" class="position-relative cart-icon">
                     <img src="{% static 'img/cart-black.svg'%}" alt="">
+                    <div class="circled"></div>
                 </a>
             </div>
         </div>
@@ -181,8 +196,9 @@
             Каталог
         </button>
         <div class="d-flex">
-            <a href="/cart">
-                <img src="{% static 'img/cart-black.svg'%}" alt="" class="mr-4">
+            <a href="/cart" class="cart-icon position-relative mr-4">
+                <img src="{% static 'img/cart-black.svg'%}" alt="">
+                <div class="circled"></div>
             </a>
             <a href="/shop">
                 <img src="{% static 'img/search.svg'%}" alt="" id="mobile-search">
@@ -244,6 +260,12 @@ $(document).ready(function () {
             $('.wrapper .overlay').addClass('active');
         }, 400);
     });
+
+    let length = onGetCartItems().length;
+    console.log(length)
+    $('.cart-icon .circled').each(function(){
+        $(this).text(length);
+    })
 });
 
 let url = window.location.href;
