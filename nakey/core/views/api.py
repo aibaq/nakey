@@ -4,7 +4,6 @@ from nakey.core.serializers import *
 from nakey.utils.decorators import response_wrapper
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.permissions import AllowAny
 import logging
 
 logger = logging.getLogger(__name__)
