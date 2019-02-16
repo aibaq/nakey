@@ -7,7 +7,7 @@
     <meta property="og:title" content="Главная страница сайта Nakey.kz" />
     <meta property="og:description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
     <meta property="og:url" content="{{SITE_URL}}" />
-    <meta property="og:image" content="{% static 'img/logo.svg'%}">
+    <meta property="og:image" content="{% static 'img/icon.png'%}">
     <!-- <meta property="og:image:width" content="{{poll.facebook_image.width}}">
     <meta property="og:image:height" content="{{poll.facebook_image.height}}"> -->
 
@@ -59,14 +59,11 @@
     }
     var items = [];
     console.log("DOMAIN: ", "{{SITE_URL}}")
-    var popularUrl = "{{ SITE_URL }}/item/?limit=10";
 </script>
 <script>
     function getItems(){
         items = [];
         $('.popular-list').empty();
-        if(filter.category_id)
-            popularUrl+="&category_id="+filter.category_id;
         $.ajax({
             url: popularUrl,
             success: function(res){

@@ -69,6 +69,10 @@
     .nav-item {
         margin: 0 16px;
     }
+    .nav-item:first-child{
+        margin-left: 0;
+    }
+
 }
 @media screen and (max-width: 992px) and (min-width: 576px){
     .navbar > ul{
@@ -82,6 +86,9 @@
     .navbar > div{
         order: 2;
     }
+    .header-search{
+        margin-left: 16px;
+    }  
 }
 @media screen and (max-width: 576px){
     .navbar ul{
@@ -93,7 +100,9 @@
     .nav-item {
         margin: 0 0px;
     }
-    
+    .header-search{
+        margin-left: 16px;
+    }    
 }
 /* SIDEBAR */
 .wrapper{
@@ -167,7 +176,7 @@
         </div>
     </nav>
     <div class="d-flex justify-content-between d-sm-none mobile-nav px-3 pb-3">
-        <button class="proxima-sb px-0 dropdown-nk" id="sidebarCollapse">
+        <button class="proxima-sb px-0 btn-hamburger" id="sidebarCollapse">
             <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt=""/>
             Каталог
         </button>
@@ -200,48 +209,7 @@ var categories = [];
 // get category:
 $('.dropdown-menu').click(function(e){
     e.stopPropagation();
-    console.log("Prevent")
 })
-function getCategories(){
-    $.ajax({
-        url: categoryUrl,
-        success: function(res){
-            if(res){
-                if(res.code == 0){
-                    categories = res.data.results;
-                    var level1 = [], level2 = [];
-                    categories.map(c=>{
-                        if(c.level == 0){
-                            level1.push(c);
-                            c.children = [];
-                        }else if(c.level == 1){
-                            level2.push(c);
-                        }
-                    });
-                    for(let i in level1){
-                        let cat = level1[i];
-                        // $('#categoryTmpl').tmpl(cat).appendTo('#dropdown-category');
-                        // $('#dropdown-category').append(`<li class="dropdown-item" id="id_${cat.id}"><a href="/shop/?category=${cat.id}">${cat.name}</a><ul></ul></li>`)
-                        // $('#categories').append(`<li class="item d-flex" id="id_${cat.id}"><a href="/shop/?category=${cat.id}">${cat.name}</a><ul></ul></li>`)
-                        for(let child in level2){
-                            if(level2[child].parent == level1[i].id){
-                                level1[i].children.push(level2[child]);
-                                // $(`#id_${cat.id} ul`).append(`<li><a href="/shop/?category=${cat.id}">${level2[child].name}</a></li>`)
-                            }
-                        }
-                    }
-                    // console.log("New :", level1)
-                    
-                }else{
-
-                }
-            }else{
-
-            }
-        },
-    });
-}   
-getCategories();
 function onSearch(){
     var text = $('#header-search-text').val();
     window.location.replace(setUrlVar({name: 'search', value: text}));    
