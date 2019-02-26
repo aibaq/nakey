@@ -88,6 +88,15 @@ table.detail tr td:second-child{
 #images-carousel .slick-next:before{
     content: '';
 }
+.item-image{
+
+}
+.item-image img{
+    max-width: 102px;
+    max-height: 102px;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 576px){
     .item-page{
         padding: 20px;
