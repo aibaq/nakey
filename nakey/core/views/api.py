@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.decorators import method_decorator
+from nakey.core.filters import CategoryFilter
 from nakey.core.serializers import *
 from nakey.utils.decorators import response_wrapper
 from rest_framework import viewsets
@@ -43,8 +44,8 @@ class ManufactureViewSet(viewsets.ReadOnlyModelViewSet):
 class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
-    filter_fields = ('category', 'manufacture')
+    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter, CategoryFilter)
+    filter_fields = ('manufacture',)
     search_fields = ('name',)
     ordering_fields = ('view_count', 'price')
 
