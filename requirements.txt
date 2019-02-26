@@ -16,6 +16,7 @@ django-celery-results==1.0.4
 django-configurations==2.1
 django-filter==2.0.0
 django-js-asset==1.2.1
+django-modeltranslation==0.13
 django-mptt==0.9.1
 django-suit==0.2.26
 django-timezone-field==3.0
