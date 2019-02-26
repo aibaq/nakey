@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <style>
 .navbar-brand img{
     max-width: 180px;
@@ -169,7 +170,7 @@
                 </ul>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">О нас</a>
+                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">{% blocktrans %}О нас{% endblocktrans %}</a>
             </li>
             <li class="nav-item d-flex">
                 <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>

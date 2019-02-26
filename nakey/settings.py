@@ -39,6 +39,7 @@ class BaseConfiguration(Configuration):
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.locale.LocaleMiddleware',
         'django.middleware.common.CommonMiddleware',
         # 'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -92,7 +93,19 @@ class BaseConfiguration(Configuration):
         },
     ]
 
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = 'ru_RU'
+
+    gettext = lambda s: s
+
+    LANGUAGES = [
+        ('ru', gettext('Russian')),
+        ('en', gettext('English')),
+        ('kz', gettext('Kazakh')),
+    ]
+
+    LOCALE_NAME = 'ru'
+
+    LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
     TIME_ZONE = 'UTC'
 
