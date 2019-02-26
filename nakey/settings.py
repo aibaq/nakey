@@ -22,6 +22,7 @@ class BaseConfiguration(Configuration):
 
     INSTALLED_APPS = [
         'suit',
+        'modeltranslation',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
