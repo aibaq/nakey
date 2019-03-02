@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 {% block head %}
     <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
     <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
@@ -41,7 +42,8 @@
         </p>
     </section> -->
     <div class="mb-4 d-flex justify-content-between">
-        <h3 class="section-title">Популярные</h3>
+            
+        <h3 class="section-title">{% blocktrans %}{{ popular }}{% endblocktrans %}</h3>
         <a href="/shop" class="proxima-sb color-red">
             Весь каталог >
         </a>   

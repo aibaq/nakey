@@ -29,6 +29,10 @@ msgstr ""
 msgid "Kazakh"
 msgstr ""
 
-#: nakey/templates/core/header.html:173
-msgid "О нас"
-msgstr ""
+#: nakey/templates/core/header.html:44
+msgid "%(about)s"
+msgstr "Біз туралы"
+
+#: nakey/templates/core/index.html:44
+msgid "%(popular)s"
+msgstr "Танымал"

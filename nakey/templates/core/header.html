@@ -170,7 +170,7 @@
                 </ul>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">{% blocktrans %}О нас{% endblocktrans %}</a>
+                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">{% blocktrans %}{{ about }}{% endblocktrans %}</a>
             </li>
             <li class="nav-item d-flex">
                 <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>
@@ -188,6 +188,25 @@
                     <img src="{% static 'img/cart-black.svg'%}" alt="">
                     <div class="circled"></div>
                 </a>
+            </div>
+            <div class="lang-block mr-4">
+                <div class="dropdown">
+                  <form action="{% url 'set_language' %}" method="post" id="changeLangForm">
+                    {% csrf_token %}
+                    <input name="language" type="hidden" class="lang-input" />
+                    <a class="btn btn-link dropdown-toggle" href="#" role="button" id="langMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {% get_current_language as LANGUAGE_CODE %}
+                      {{ LANGUAGE_CODE }}
+                    </a>
+                    {% get_available_languages as LANGUAGES %}
+                    <div class="dropdown-menu lang-dropdown" aria-labelledby="langMenuLink">
+                      {% for lang in LANGUAGES %}
+                        <a class="dropdown-item lang-link {% if lang.0 == LANGUAGE_CODE %} active{% endif %}"
+                          data-lang="{{ lang.0 }}">{{ lang.0 }}</a>
+                      {% endfor %}
+                    </div>
+                  </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -247,6 +266,12 @@ $('.dropdown > a').hover(
         $('.dropdown > a img ').attr('src', "{% static 'img/hamburger.svg'%}");
     }
 )
+//change lang:
+$('.lang-link').on('click', function() {
+    let selectedLang = $(this).data('lang');
+    $('.lang-input').val(selectedLang);
+    $('#changeLangForm').submit();
+});
 // Sidebar:
 $(document).ready(function () {
 
