@@ -26,7 +26,7 @@
     position: relative;
 }
 .header-search input#header-search-text{
-    height: 32px;
+    height: 100%;
     min-width: 240px;
     border-color: #E4E5EC;
     border-radius: 32px;
@@ -92,6 +92,9 @@
     }  
 }
 @media screen and (max-width: 576px){
+    .navbar{
+       flex-wrap: nowrap;
+    }
     .navbar ul{
         padding-left: 0;
     }
@@ -100,6 +103,12 @@
     }
     .nav-item {
         margin: 0 0px;
+    }
+    .nav-item a{
+        font-size: 13px;
+    }
+    .lang-block .btn{
+        font-size: 13px;
     }
     .header-search{
         margin-left: 16px;
@@ -189,24 +198,24 @@
                     <div class="circled"></div>
                 </a>
             </div>
-            <div class="lang-block mr-4">
-                <div class="dropdown">
-                  <form action="{% url 'set_language' %}" method="post" id="changeLangForm">
-                    {% csrf_token %}
-                    <input name="language" type="hidden" class="lang-input" />
-                    <a class="btn btn-link dropdown-toggle" href="#" role="button" id="langMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {% get_current_language as LANGUAGE_CODE %}
-                      {{ LANGUAGE_CODE }}
-                    </a>
-                    {% get_available_languages as LANGUAGES %}
-                    <div class="dropdown-menu lang-dropdown" aria-labelledby="langMenuLink">
-                      {% for lang in LANGUAGES %}
-                        <a class="dropdown-item lang-link {% if lang.0 == LANGUAGE_CODE %} active{% endif %}"
-                          data-lang="{{ lang.0 }}">{{ lang.0 }}</a>
-                      {% endfor %}
-                    </div>
-                  </form>
+        </div>
+        <div class="lang-block mr-0 mr-sm-4">
+            <div class="dropdown">
+                <form action="{% url 'set_language' %}" method="post" id="changeLangForm">
+                {% csrf_token %}
+                <input name="language" type="hidden" class="lang-input" />
+                <a class="btn btn-link dropdown-toggle" href="#" role="button" id="langMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {{ LANGUAGE_CODE }}
+                </a>
+                {% get_available_languages as LANGUAGES %}
+                <div class="dropdown-menu lang-dropdown" aria-labelledby="langMenuLink">
+                    {% for lang in LANGUAGES %}
+                    <a class="dropdown-item lang-link {% if lang.0 == LANGUAGE_CODE %} active{% endif %}"
+                        data-lang="{{ lang.0 }}">{{ lang.0 }}</a>
+                    {% endfor %}
                 </div>
+                </form>
             </div>
         </div>
     </nav>

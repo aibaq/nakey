@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 13:52+0600\n"
+"POT-Creation-Date: 2019-03-08 15:25+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,23 +32,81 @@ msgstr ""
 msgid "Kazakh"
 msgstr ""
 
-#: nakey/templates/core/footer.html:95
-msgid "Наш адрес"
+#: nakey/templates/core/about.html:21 nakey/templates/core/header.html:173
+msgid "О нас"
 msgstr ""
 
-#: nakey/templates/core/footer.html:96
-msgid "Almaty, Kazakhstan"
+#: nakey/templates/core/about.html:22
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+"tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+"quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
+"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse "
+"cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat "
+"non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 msgstr ""
 
-#: nakey/templates/core/footer.html:97
+#: nakey/templates/core/base.html:83 nakey/templates/core/base.html:89
+msgid "Товар добавлен в корзину"
+msgstr ""
+
+#: nakey/templates/core/base.html:85
+msgid "Товар уже есть в корзине"
+msgstr ""
+
+#: nakey/templates/core/cart.html:67
+msgid "Ваша корзина пуста, ищите товары <a href='/shop'>тут</a>"
+msgstr ""
+
+#: nakey/templates/core/cart.html:70
+msgid "Оформить заказ"
+msgstr ""
+
+#: nakey/templates/core/cart.html:74
+msgid "Количество"
+msgstr ""
+
+#: nakey/templates/core/cart.html:79
+msgid "Общая цена"
+msgstr ""
+
+#: nakey/templates/core/cart.html:87
+msgid "Оформить заявку"
+msgstr ""
+
+#: nakey/templates/core/cart.html:116
+msgid "Ваша корзина пуста"
+msgstr ""
+
+#: nakey/templates/core/contacts.html:32 nakey/templates/core/header.html:176
+msgid "Контакты"
+msgstr ""
+
+#: nakey/templates/core/contacts.html:46 nakey/templates/core/footer.html:98
 msgid "Барахолка,ТЦ Дастур,"
 msgstr ""
 
-#: nakey/templates/core/footer.html:102
+#: nakey/templates/core/contacts.html:47
+msgid "Цокольный этаж  3 ряд 5-6 бутик"
+msgstr ""
+
+#: nakey/templates/core/contacts.html:48
+msgid "Северное кольцо 8,"
+msgstr ""
+
+#: nakey/templates/core/footer.html:96
+msgid "Наш адрес"
+msgstr ""
+
+#: nakey/templates/core/footer.html:97
+msgid "Almaty, Kazakhstan"
+msgstr ""
+
+#: nakey/templates/core/footer.html:103
 msgid "Наши контакты"
 msgstr ""
 
-#: nakey/templates/core/footer.html:109
+#: nakey/templates/core/footer.html:110
 msgid "Социальные сети"
 msgstr ""
 
@@ -56,20 +114,16 @@ msgstr ""
 msgid "Каталог"
 msgstr ""
 
-#: nakey/templates/core/header.html:173
-msgid "О нас"
-msgstr ""
-
-#: nakey/templates/core/header.html:176
-msgid "Контакты"
-msgstr ""
-
 #: nakey/templates/core/header.html:181
 msgid "Кожаный рюкзак"
 msgstr ""
 
-#: nakey/templates/core/header.html:183
+#: nakey/templates/core/header.html:183 nakey/templates/core/shop.html:47
 msgid "Найти"
+msgstr ""
+
+#: nakey/templates/core/index.html:15
+msgid "Главная страница"
 msgstr ""
 
 #: nakey/templates/core/index.html:46
@@ -77,6 +131,126 @@ msgstr ""
 #| msgid "%(popular)s"
 msgid "%(popular)s"
 msgstr "Популярные"
+
+#: nakey/templates/core/index.html:48
+msgid "Весь каталог"
+msgstr ""
+
+#: nakey/templates/core/item.html:49
+msgid "Категория"
+msgstr ""
+
+#: nakey/templates/core/item.html:53
+msgid "Цвет"
+msgstr ""
+
+#: nakey/templates/core/item.html:57
+msgid "Пройзводство"
+msgstr ""
+
+#: nakey/templates/core/item.html:64 nakey/templates/core/template.html:18
+msgid "Купить"
+msgstr ""
+
+#: nakey/templates/core/item.html:69
+msgid "Добавить в корзину"
+msgstr ""
+
+#: nakey/templates/core/item.html:73
+msgid "Поделитесь c друзьями"
+msgstr ""
+
+#: nakey/templates/core/item.html:99
+msgid "Поделиться"
+msgstr ""
+
+#: nakey/templates/core/item.html:158 nakey/templates/core/item.html:168
+msgid "Перейти в корзину"
+msgstr ""
+
+#: nakey/templates/core/item.html:192
+msgid "Вы скопировали ссылку"
+msgstr ""
+
+#: nakey/templates/core/shop.html:30
+msgid "Сортировка по"
+msgstr ""
+
+#: nakey/templates/core/shop.html:33
+msgid "Выберите"
+msgstr ""
+
+#: nakey/templates/core/shop.html:36 nakey/templates/core/shop.html:37
+#: nakey/templates/core/shop.html:75 nakey/templates/core/shop.html:76
+msgid "Цене"
+msgstr ""
+
+#: nakey/templates/core/shop.html:38 nakey/templates/core/shop.html:39
+#: nakey/templates/core/shop.html:77 nakey/templates/core/shop.html:78
+msgid "Популярности"
+msgstr ""
+
+#: nakey/templates/core/shop.html:53
+msgid "КАТАЛОГ"
+msgstr ""
+
+#: nakey/templates/core/shop.html:139
+msgid "К сожелению, товары не нашлись"
+msgstr ""
+
+#: nakey/templates/core/template.html:21
+msgid "В корзину"
+msgstr ""
+
+#: nakey/templates/core/template.html:65
+msgid "Заявка"
+msgstr ""
+
+#: nakey/templates/core/template.html:67
+msgid "Ваше имя"
+msgstr ""
+
+#: nakey/templates/core/template.html:71
+msgid "Ваш телефон"
+msgstr ""
+
+#: nakey/templates/core/template.html:75
+msgid "Ваш город"
+msgstr ""
+
+#: nakey/templates/core/template.html:78
+msgid "Отправить"
+msgstr ""
+
+#: nakey/templates/core/template.html:110
+msgid ""
+"Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с "
+"вами!"
+msgstr ""
+
+#: nakey/templates/core/template.html:113
+msgid "Ошибка"
+msgstr ""
+
+#: nakey/templates/core/template.html:113
+msgid "Попробуйте еще раз"
+msgstr ""
+
+#: nakey/templates/core/template.html:120
+msgid "Ошибка сервера"
+msgstr ""
+
+#: nakey/templates/core/template.html:129
+msgid "Заполните имя"
+msgstr ""
+
+#: nakey/templates/core/template.html:134
+msgid "Заполните телефон"
+msgstr ""
+
+#: nakey/templates/core/template.html:139
+msgid "Заполните ваш город"
+msgstr ""
 
 #~ msgid "%(about)s"
 #~ msgstr "О нас"

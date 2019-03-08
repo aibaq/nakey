@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 13:52+0600\n"
+"POT-Creation-Date: 2019-03-08 15:25+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,23 +29,82 @@ msgstr ""
 msgid "Kazakh"
 msgstr ""
 
-#: nakey/templates/core/footer.html:95
-msgid "Наш адрес"
-msgstr "Біздің мекен-жай"
+#: nakey/templates/core/about.html:21 nakey/templates/core/header.html:173
+msgid "О нас"
+msgstr "Біз туралы"
 
-#: nakey/templates/core/footer.html:96
-msgid "Almaty, Kazakhstan"
+#: nakey/templates/core/about.html:22
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+"tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
+"quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo "
+"consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse "
+"cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat "
+"non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 msgstr ""
 
-#: nakey/templates/core/footer.html:97
+#: nakey/templates/core/base.html:83 nakey/templates/core/base.html:89
+msgid "Товар добавлен в корзину"
+msgstr "Тауар себетке салынды"
+
+#: nakey/templates/core/base.html:85
+msgid "Товар уже есть в корзине"
+msgstr "Тауар себетке салынып қойған"
+
+#: nakey/templates/core/cart.html:67
+msgid "Ваша корзина пуста, ищите товары <a href='/shop'>тут</a>"
+msgstr ""
+"Сіздің себетіңіз бос, тауарларды <a href='/shop'>осы жерден</a> іздеңіз"
+
+#: nakey/templates/core/cart.html:70
+msgid "Оформить заказ"
+msgstr "Тапсырысты рәсімдеу"
+
+#: nakey/templates/core/cart.html:74
+msgid "Количество"
+msgstr "Саны"
+
+#: nakey/templates/core/cart.html:79
+msgid "Общая цена"
+msgstr "Жалпы құны"
+
+#: nakey/templates/core/cart.html:87
+msgid "Оформить заявку"
+msgstr "Тапсырысты рәсімдеу"
+
+#: nakey/templates/core/cart.html:116
+msgid "Ваша корзина пуста"
+msgstr "Сіздің себетіңіз бос"
+
+#: nakey/templates/core/contacts.html:32 nakey/templates/core/header.html:176
+msgid "Контакты"
+msgstr "Байланыс"
+
+#: nakey/templates/core/contacts.html:46 nakey/templates/core/footer.html:98
 msgid "Барахолка,ТЦ Дастур,"
 msgstr "Барахолка, Дәстүр СО"
 
-#: nakey/templates/core/footer.html:102
+#: nakey/templates/core/contacts.html:47
+msgid "Цокольный этаж  3 ряд 5-6 бутик"
+msgstr "Төменгі қабат, 3 қатар 5-6 бутик"
+
+#: nakey/templates/core/contacts.html:48
+msgid "Северное кольцо 8,"
+msgstr "Солтүстік айналым 8,"
+
+#: nakey/templates/core/footer.html:96
+msgid "Наш адрес"
+msgstr "Біздің мекен-жай"
+
+#: nakey/templates/core/footer.html:97
+msgid "Almaty, Kazakhstan"
+msgstr ""
+
+#: nakey/templates/core/footer.html:103
 msgid "Наши контакты"
 msgstr "Бізбен байланыс"
 
-#: nakey/templates/core/footer.html:109
+#: nakey/templates/core/footer.html:110
 msgid "Социальные сети"
 msgstr "Әлеуметтік желілер"
 
@@ -53,27 +112,164 @@ msgstr "Әлеуметтік желілер"
 msgid "Каталог"
 msgstr ""
 
-#: nakey/templates/core/header.html:173
-msgid "О нас"
-msgstr "Біз туралы"
-
-#: nakey/templates/core/header.html:176
-msgid "Контакты"
-msgstr "Байланыс"
-
 #: nakey/templates/core/header.html:181
 msgid "Кожаный рюкзак"
 msgstr "Былғары сөмке"
 
-#: nakey/templates/core/header.html:183
+#: nakey/templates/core/header.html:183 nakey/templates/core/shop.html:47
 msgid "Найти"
 msgstr "Іздеу"
+
+#: nakey/templates/core/index.html:15
+msgid "Главная страница"
+msgstr "Басты бет"
 
 #: nakey/templates/core/index.html:46
 #, fuzzy, python-format
 #| msgid "%(popular)s"
 msgid "%(popular)s"
 msgstr "Танымал"
+
+#: nakey/templates/core/index.html:48
+msgid "Весь каталог"
+msgstr "Барлық каталог"
+
+#: nakey/templates/core/item.html:49
+msgid "Категория"
+msgstr ""
+
+#: nakey/templates/core/item.html:53
+msgid "Цвет"
+msgstr "Түсі"
+
+#: nakey/templates/core/item.html:57
+msgid "Пройзводство"
+msgstr "Өндірген ел"
+
+#: nakey/templates/core/item.html:64 nakey/templates/core/template.html:18
+msgid "Купить"
+msgstr "Сатып алу"
+
+#: nakey/templates/core/item.html:69
+msgid "Добавить в корзину"
+msgstr "Сбетке салу"
+
+#: nakey/templates/core/item.html:73
+msgid "Поделитесь c друзьями"
+msgstr "Достарыңызбен бөлісіңіз"
+
+#: nakey/templates/core/item.html:99
+msgid "Поделиться"
+msgstr "Бөлісу"
+
+#: nakey/templates/core/item.html:158 nakey/templates/core/item.html:168
+msgid "Перейти в корзину"
+msgstr "Себетке өту"
+
+#: nakey/templates/core/item.html:192
+msgid "Вы скопировали ссылку"
+msgstr "Сіз сілтемені көшірдіңіз"
+
+#: nakey/templates/core/shop.html:30
+msgid "Сортировка по"
+msgstr "Сұрыптау"
+
+#: nakey/templates/core/shop.html:33
+msgid "Выберите"
+msgstr "Таңдаңыз"
+
+#: nakey/templates/core/shop.html:36 nakey/templates/core/shop.html:37
+#: nakey/templates/core/shop.html:75 nakey/templates/core/shop.html:76
+msgid "Цене"
+msgstr "Бағасы бойынша"
+
+#: nakey/templates/core/shop.html:38 nakey/templates/core/shop.html:39
+#: nakey/templates/core/shop.html:77 nakey/templates/core/shop.html:78
+msgid "Популярности"
+msgstr "Танымалдылық бойынша"
+
+#: nakey/templates/core/shop.html:53
+msgid "КАТАЛОГ"
+msgstr ""
+
+#: nakey/templates/core/shop.html:139
+msgid "К сожелению, товары не нашлись"
+msgstr "Өкінішке орай, тауарлар табылмады"
+
+#: nakey/templates/core/template.html:21
+msgid "В корзину"
+msgstr "Себетке"
+
+#: nakey/templates/core/template.html:65
+msgid "Заявка"
+msgstr "Тапсырыс"
+
+#: nakey/templates/core/template.html:67
+msgid "Ваше имя"
+msgstr "Есіміңіз"
+
+#: nakey/templates/core/template.html:71
+msgid "Ваш телефон"
+msgstr "Телефоныңыз"
+
+#: nakey/templates/core/template.html:75
+msgid "Ваш город"
+msgstr "Қалаңыз"
+
+#: nakey/templates/core/template.html:78
+msgid "Отправить"
+msgstr "Жіберу"
+
+#: nakey/templates/core/template.html:110
+msgid ""
+"Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с "
+"вами!"
+msgstr ""
+"Сіздің тапсырысыңыз сәтті жіберілді. Біздің менеджерлер сізге жақын арада "
+"хабарласады!"
+
+#: nakey/templates/core/template.html:113
+msgid "Ошибка"
+msgstr "Қате"
+
+#: nakey/templates/core/template.html:113
+msgid "Попробуйте еще раз"
+msgstr "Тағы да бір көріңіз"
+
+#: nakey/templates/core/template.html:120
+msgid "Ошибка сервера"
+msgstr "Сервер қатесі"
+
+#: nakey/templates/core/template.html:129
+msgid "Заполните имя"
+msgstr "Есіміңізді жазыңыз"
+
+#: nakey/templates/core/template.html:134
+msgid "Заполните телефон"
+msgstr "Телефоныңызды жазыңыз"
+
+#: nakey/templates/core/template.html:139
+msgid "Заполните ваш город"
+msgstr "Қалаңызды жазыңыз"
+
+#, fuzzy
+#~| msgid "Оформить заявку"
+#~ msgid "Отправить заявку"
+#~ msgstr "Тапсырысты жіберу"
+
+#, fuzzy
+#~| msgid "Барахолка,ТЦ Дастур,"
+#~ msgid "Барахолка,ТЦ Дастур"
+#~ msgstr "Барахолка, Дәстүр СО"
+
+#~ msgid ""
+#~ "Барахолка,ТЦ Дастур, <br/>\n"
+#~ "Цокольный этаж  3 ряд 5-6 бутик <br/>\n"
+#~ "Северное кольцо 8, <br/>"
+#~ msgstr ""
+#~ "Барахолка, Дәстүр СО, <br/>\n"
+#~ "Төменгі қабат, 3 қатар 5-6 бутик <br/>\n"
+#~ "Солтүстік айналым 8, <br/>"
 
 #~ msgid "%(about)s"
 #~ msgstr "Біз туралы"
