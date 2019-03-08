@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-26 16:29+0000\n"
+"POT-Creation-Date: 2019-03-08 13:52+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,22 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: nakey/settings.py:101
+#: nakey/settings.py:102
 msgid "Russian"
 msgstr ""
 
-#: nakey/settings.py:102
+#: nakey/settings.py:103
 msgid "English"
 msgstr ""
 
-#: nakey/settings.py:103
+#: nakey/settings.py:104
 msgid "Kazakh"
 msgstr ""
 
-#: nakey/templates/core/header.html:173
-msgid "%(about)s"
-msgstr "О нас"
+#: nakey/templates/core/footer.html:95
+msgid "Наш адрес"
+msgstr "Address"
 
-#: nakey/templates/core/index.html:44
+#: nakey/templates/core/footer.html:96
+msgid "Almaty, Kazakhstan"
+msgstr ""
+
+#: nakey/templates/core/footer.html:97
+msgid "Барахолка,ТЦ Дастур,"
+msgstr ""
+
+#: nakey/templates/core/footer.html:102
+msgid "Наши контакты"
+msgstr "Contacts"
+
+#: nakey/templates/core/footer.html:109
+msgid "Социальные сети"
+msgstr "Social networks"
+
+#: nakey/templates/core/header.html:166 nakey/templates/core/header.html:216
+msgid "Каталог"
+msgstr "Catalog"
+
+#: nakey/templates/core/header.html:173
+msgid "О нас"
+msgstr "About us"
+
+#: nakey/templates/core/header.html:176
+msgid "Контакты"
+msgstr "Contacts"
+
+#: nakey/templates/core/header.html:181
+msgid "Кожаный рюкзак"
+msgstr ""
+
+#: nakey/templates/core/header.html:183
+msgid "Найти"
+msgstr "Search"
+
+#: nakey/templates/core/index.html:46
+#, fuzzy, python-format
+#| msgid "%(popular)s"
 msgid "%(popular)s"
 msgstr "Popular"
+
+#~ msgid "%(about)s"
+#~ msgstr "О нас"

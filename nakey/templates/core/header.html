@@ -163,24 +163,24 @@
             <li class="nav-item dropdown dropdown-nk d-none d-sm-flex">
                 <a class="proxima-sb px-3" href="/shop" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
-                    Каталог 
+                    {% blocktrans %}Каталог{% endblocktrans%}
                 </a>
                 <ul class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
                     {% include './categories.html' with handler='header' %}
                 </ul>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">{% blocktrans %}{{ about }}{% endblocktrans %}</a>
+                <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">{% blocktrans %}О нас{% endblocktrans %}</a>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>
+                <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">{% blocktrans %}Контакты{% endblocktrans %}</a>
             </li>
         </ul>
         <div class="d-none d-sm-flex">
             <div class="input-group my-2 my-lg-0 header-search mr-3">
-                <input  id="header-search-text" type="search" class="form-control" placeholder="Кожаный рюкзак" aria-label="Search" aria-describedby="basic-addon2">
+                <input  id="header-search-text" type="search" class="form-control" placeholder="{% blocktrans %}Кожаный рюкзак{% endblocktrans %}" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-nk" type="button" onclick="onSearch()">Найти</button>
+                    <button class="btn btn-nk" type="button" onclick="onSearch()">{% blocktrans %}Найти{% endblocktrans %}</button>
                 </div>
             </div>  
             <div class="d-flex align-items-center cart-link">
@@ -213,7 +213,7 @@
     <div class="d-flex justify-content-between d-sm-none mobile-nav px-3 pb-3">
         <button class="proxima-sb px-0 btn-hamburger" id="sidebarCollapse">
             <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt=""/>
-            Каталог
+            {% blocktrans %}Каталог{% endblocktrans %}
         </button>
         <div class="d-flex">
             <a href="/cart" class="cart-icon position-relative mr-4">
