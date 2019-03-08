@@ -217,7 +217,7 @@
                 {% get_available_languages as LANGUAGES %}
                 <div class="dropdown-menu lang-dropdown" aria-labelledby="langMenuLink">
                     {% for lang in LANGUAGES %}
-                    <a class="dropdown-item lang-link {% if lang.0 == LANGUAGE_CODE %} active{% endif %}"
+                    <a class="cursor-pointer dropdown-item lang-link {% if lang.0 == LANGUAGE_CODE %} active{% endif %}"
                         data-lang="{{ lang.0 }}">{{ lang.0 }}</a>
                     {% endfor %}
                 </div>

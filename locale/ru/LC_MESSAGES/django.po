@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 15:25+0600\n"
+"POT-Creation-Date: 2019-03-08 16:39+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,15 +24,11 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-#: nakey/settings.py:103
-msgid "English"
-msgstr ""
-
 #: nakey/settings.py:104
 msgid "Kazakh"
 msgstr ""
 
-#: nakey/templates/core/about.html:21 nakey/templates/core/header.html:173
+#: nakey/templates/core/about.html:21 nakey/templates/core/header.html:188
 msgid "О нас"
 msgstr ""
 
@@ -78,7 +74,7 @@ msgstr ""
 msgid "Ваша корзина пуста"
 msgstr ""
 
-#: nakey/templates/core/contacts.html:32 nakey/templates/core/header.html:176
+#: nakey/templates/core/contacts.html:32 nakey/templates/core/header.html:191
 msgid "Контакты"
 msgstr ""
 
@@ -110,15 +106,15 @@ msgstr ""
 msgid "Социальные сети"
 msgstr ""
 
-#: nakey/templates/core/header.html:166 nakey/templates/core/header.html:216
+#: nakey/templates/core/header.html:181 nakey/templates/core/header.html:231
 msgid "Каталог"
 msgstr ""
 
-#: nakey/templates/core/header.html:181
+#: nakey/templates/core/header.html:196
 msgid "Кожаный рюкзак"
 msgstr ""
 
-#: nakey/templates/core/header.html:183 nakey/templates/core/shop.html:47
+#: nakey/templates/core/header.html:198 nakey/templates/core/shop.html:47
 msgid "Найти"
 msgstr ""
 
