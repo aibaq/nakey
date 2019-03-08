@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 {% block head %}
     <title>Корзина</title>
     <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
@@ -63,19 +64,19 @@
         var items = onGetCartItems();
         $(".item-list").empty();
         if(items.length == 0){
-            $(".item-list").append("<p>Ваша корзина пуста, ищите товары <a href='/shop'>тут</a></p>")
+            $(".item-list").append("<p>{% blocktrans %}Ваша корзина пуста, ищите товары <a href='/shop'>тут</a>{% endblocktrans %}</p>")
             $(".order .nk-card").empty();
         }else{
-            $(".order .nk-card").html(` <h3 class="proxima-sb">Оформить заказ</h3>
+            $(".order .nk-card").html(` <h3 class="proxima-sb">{% blocktrans %}Оформить заказ{% endblocktrans %}</h3>
             <table id="cart-detail" class="mt-4 mb-4">                
                 <tbody>
                     <tr>
-                        <td class="pr-4">Количество</td>
+                        <td class="pr-4">{% blocktrans %}Количество{% endblocktrans %}</td>
                         <td class="cart-count"></td>
                     </tr>
                     <tr>
                         <td class="pr-4">
-                            Общая цена
+                            {% blocktrans %}Общая цена{% endblocktrans %}
                         </td>
                         <td class="cart-price">
 
@@ -83,7 +84,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-nk btn-lg" onclick="clickRequest()">Оформить заявку</button>`);
+            <button class="btn btn-nk btn-lg" onclick="clickRequest()">{% blocktrans %}Оформить заявку{% endblocktrans %}</button>`);
         }
 
         var allcount = 0;
@@ -112,7 +113,7 @@
     }
     function clickRequest(){
         if(onGetCartItems().length == 0){
-            toastr.warning('Ваша корзина пуста')            
+            toastr.warning('{% blocktrans %}Ваша корзина пуста{% endblocktrans %}')            
             return;
         }
         $('#requestmodal').empty();

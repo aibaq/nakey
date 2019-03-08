@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 {% block head %}
     <title>Контакты</title>
     <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
@@ -28,7 +29,7 @@
 <div class="container nk-card">
     <div class="row">
         <div class="col-12 col-md-6 p-4 p-sm-5">
-            <h3>Контакты</h3>
+            <h3>{% blocktrans %}Контакты{% endblocktrans %}</h3>
             <div class="contacts-item mb-4">
                 <img class="mr-3" src="{% static 'img/phone.svg'%}" alt="Nakey contact"/>
                 <a class="color-black" href="tel:+77752530066">+7(775) 253 00 66</a><br/>
@@ -42,9 +43,9 @@
                 <div class="">
                     <b class="city color-black mb-3">Almaty, Kazakhstan</b>
                     <p class="color-black">
-                    Барахолка,ТЦ Дастур, <br/>
-                    Цокольный этаж  3 ряд 5-6 бутик <br/>
-                    Северное кольцо 8, <br/>
+                    {% blocktrans %}Барахолка,ТЦ Дастур,{% endblocktrans %} <br/>
+                    {% blocktrans %}Цокольный этаж  3 ряд 5-6 бутик{% endblocktrans %} <br/>
+                    {% blocktrans %}Северное кольцо 8,{% endblocktrans %} <br/>
                     </p>
                 </div>
             </div>

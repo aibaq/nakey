@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 {% block head %}
     <title>Каталог товаров</title>
     <meta name="description" content="Каталог товаров Nakey.kz - магазин кожаных изделий и конных снаряжений" />
@@ -26,16 +27,16 @@
 {% block content %}
     <div class="container">
         <div class="d-flex justify-content-end mb-3">
-            <label for="" class="d-flex align-items-center mr-3 mb-0">Сортировка по</label>
+            <label for="" class="d-flex align-items-center mr-3 mb-0">{% blocktrans %}Сортировка по{% endblocktrans %}</label>
             <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle" type="button" id="order-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Выберите
+                    {% blocktrans %}Выберите{% endblocktrans %}
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sort-btn">
-                    <div class="dropdown-item" data-ordering="price" onclick="sortOrder('price', 'Цене')">Цене <i class="fas fa-sort-numeric-up"></i></div>
-                    <div class="dropdown-item" data-ordering="-price" onclick="sortOrder('-price', 'Цене')">Цене <i class="fas fa-sort-numeric-down"></i></div>
-                    <div class="dropdown-item" data-ordering="view_count" onclick="sortOrder('view_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-up"></i></div>
-                    <div class="dropdown-item" data-ordering="-view_count" onclick="sortOrder('-view_count', 'Популярности')">Популярности <i class="fas fa-sort-numeric-down"></i></div>
+                    <div class="dropdown-item" data-ordering="price" onclick="sortOrder('price', 'Цене')">{% blocktrans %}Цене{% endblocktrans %} <i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" data-ordering="-price" onclick="sortOrder('-price', 'Цене')">{% blocktrans %}Цене{% endblocktrans %} <i class="fas fa-sort-numeric-down"></i></div>
+                    <div class="dropdown-item" data-ordering="view_count" onclick="sortOrder('view_count', 'Популярности')">{% blocktrans %}Популярности{% endblocktrans %}<i class="fas fa-sort-numeric-up"></i></div>
+                    <div class="dropdown-item" data-ordering="-view_count" onclick="sortOrder('-view_count', 'Популярности')">{% blocktrans %}Популярности{% endblocktrans %} <i class="fas fa-sort-numeric-down"></i></div>
                 </div>
             </div>
         </div>
@@ -43,13 +44,13 @@
             <div class="input-group my-2 my-lg-0 header-search mr-3 d-flex d-md-none">
                 <input  id="header-search-text" type="search" class="form-control" placeholder="Кожаный рюкзак" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-nk" type="button" onclick="onSearch()">Найти</button>
+                    <button class="btn btn-nk" type="button" onclick="onSearch()">{% blocktrans %}Найти{% endblocktrans %}</button>
                 </div>
             </div>  
             <div class="d-none d-md-block col-12 col-lg-3">                
                 <div class="card">
                     <div class="card-header">
-                        КАТАЛОГ
+                        {% blocktrans %}КАТАЛОГ{% endblocktrans %}
                     </div>
                     {% include './categories.html' with handler='shop'%}
                 </div>
@@ -71,10 +72,10 @@
     var items = [];
     var categories = [];
     var orders = [
-        {name: 'Цене', value: 'price'},
-        {name: 'Цене', value: '-price'},
-        {name: 'Популярности', value: 'view_count'},
-        {name: 'Популярности', value: '-view_count'},
+        {name: '{% blocktrans %}Цене{% endblocktrans %}', value: 'price'},
+        {name: '{% blocktrans %}Цене{% endblocktrans %}', value: '-price'},
+        {name: '{% blocktrans %}Популярности{% endblocktrans %}', value: 'view_count'},
+        {name: '{% blocktrans %}Популярности{% endblocktrans %}', value: '-view_count'},
     ]
     const itemUrl = "/item/?limit=100";
     var shopUrl = "/shop/";
@@ -135,7 +136,7 @@
                             $('#productPreviewTmpl').tmpl({item: item, style: {className: 'col-12 col-sm-6 col-md-4 col-lg-4'}}).appendTo('.item-list');
                         })
                         if(items.length == 0){
-                            $('.item-list').append(`<h4 class="color-grey p-3">К сожелению, товары не нашлись :(</h4>`)
+                            $('.item-list').append(`<h4 class="color-grey p-3">{% blocktrans %}К сожелению, товары не нашлись{% endblocktrans %} :(</h4>`)
                         }
                     }else{
 

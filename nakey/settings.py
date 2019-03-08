@@ -100,7 +100,7 @@ class BaseConfiguration(Configuration):
 
     LANGUAGES = [
         ('ru', gettext('Russian')),
-        ('en', gettext('English')),
+        # ('en', gettext('English')),
         ('kz', gettext('Kazakh')),
     ]
 
