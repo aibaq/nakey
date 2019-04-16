@@ -1,5 +1,6 @@
 {% extends './base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 {% block head %}
     <meta name="description" content="Nakey.kz - магазин кожаных изделий и конных снаряжений" />
     <meta name="keywords" content="кожа, кожаные изделия, конные снаряжения, сумки, кожаные сумки"/>
@@ -11,7 +12,7 @@
     <!-- <meta property="og:image:width" content="{{poll.facebook_image.width}}">
     <meta property="og:image:height" content="{{poll.facebook_image.height}}"> -->
 
-    <title>Главная страница</title>
+    <title>{% blocktrans %}Главная страница{% endblocktrans %}</title>
     
     <link rel="stylesheet" href="{% static 'css/index.css'%}">
 {% endblock head %}
@@ -41,9 +42,10 @@
         </p>
     </section> -->
     <div class="mb-4 d-flex justify-content-between">
-        <h3 class="section-title">Популярные</h3>
+            
+        <h3 class="section-title">{% blocktrans %}{{ popular }}{% endblocktrans %}</h3>
         <a href="/shop" class="proxima-sb color-red">
-            Весь каталог >
+            {% blocktrans %}Весь каталог{% endblocktrans %} >
         </a>   
     </div>
     <div class="popular-list row">
@@ -98,13 +100,12 @@
         slidesToScroll: 1,
         dots: true,
         infinite: true,
-        autoplay: false,
-        autoplaySpeed: 5000,
+        autoplay: true,
+        autoplaySpeed: 3000,
         lazyLoad: 'ondemand',
         arrows: true,
         // variableWidth: true,
         // adaptiveHeight: true,
-
     });
     
     getItems();

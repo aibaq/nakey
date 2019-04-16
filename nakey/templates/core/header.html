@@ -26,7 +26,7 @@
     position: relative;
 }
 .header-search input#header-search-text{
-    height: 32px;
+    height: 100%;
     min-width: 240px;
     border-color: #E4E5EC;
     border-radius: 32px;
@@ -66,6 +66,12 @@
     height: 24px;
     width: 24px;
 }
+.lang-block .btn{
+    color: #3A3232;
+}
+.lang-block .btn:hover{
+    color: #D62C2C;
+}
 @media screen and (max-width: 1200px){
     .nav-item {
         margin: 0 16px;
@@ -92,6 +98,9 @@
     }  
 }
 @media screen and (max-width: 576px){
+    .navbar{
+       flex-wrap: nowrap;
+    }
     .navbar ul{
         padding-left: 0;
     }
@@ -100,6 +109,12 @@
     }
     .nav-item {
         margin: 0 0px;
+    }
+    .nav-item a{
+        font-size: 13px;
+    }
+    .lang-block .btn{
+        font-size: 13px;
     }
     .header-search{
         margin-left: 16px;
@@ -163,7 +178,7 @@
             <li class="nav-item dropdown dropdown-nk d-none d-sm-flex">
                 <a class="proxima-sb px-3" href="/shop" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt="">
-                    Каталог 
+                    {% blocktrans %}Каталог{% endblocktrans%}
                 </a>
                 <ul class="dropdown-menu" id="dropdown-category" aria-labelledby="navbarDropdown">
                     {% include './categories.html' with handler='header' %}
@@ -173,14 +188,14 @@
                 <a class="nav-link proxima-sb pl-0 pl-md-3" href="/about">{% blocktrans %}О нас{% endblocktrans %}</a>
             </li>
             <li class="nav-item d-flex">
-                <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">Контакты</a>
+                <a class="nav-link proxima-sb px-0 px-md-3" href="/contacts">{% blocktrans %}Контакты{% endblocktrans %}</a>
             </li>
         </ul>
         <div class="d-none d-sm-flex">
             <div class="input-group my-2 my-lg-0 header-search mr-3">
-                <input  id="header-search-text" type="search" class="form-control" placeholder="Кожаный рюкзак" aria-label="Search" aria-describedby="basic-addon2">
+                <input  id="header-search-text" type="search" class="form-control" placeholder="{% blocktrans %}Кожаный рюкзак{% endblocktrans %}" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-nk" type="button" onclick="onSearch()">Найти</button>
+                    <button class="btn btn-nk" type="button" onclick="onSearch()">{% blocktrans %}Найти{% endblocktrans %}</button>
                 </div>
             </div>  
             <div class="d-flex align-items-center cart-link">
@@ -190,11 +205,30 @@
                 </a>
             </div>
         </div>
+        <div class="lang-block mr-0 mr-sm-4">
+            <div class="dropdown">
+                <form action="{% url 'set_language' %}" method="post" id="changeLangForm">
+                {% csrf_token %}
+                <input name="language" type="hidden" class="lang-input" />
+                <a class="btn btn-link dropdown-toggle" href="#" role="button" id="langMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {{ LANGUAGE_CODE }}
+                </a>
+                {% get_available_languages as LANGUAGES %}
+                <div class="dropdown-menu lang-dropdown" aria-labelledby="langMenuLink">
+                    {% for lang in LANGUAGES %}
+                    <a class="cursor-pointer dropdown-item lang-link {% if lang.0 == LANGUAGE_CODE %} active{% endif %}"
+                        data-lang="{{ lang.0 }}">{{ lang.0 }}</a>
+                    {% endfor %}
+                </div>
+                </form>
+            </div>
+        </div>
     </nav>
     <div class="d-flex justify-content-between d-sm-none mobile-nav px-3 pb-3">
         <button class="proxima-sb px-0 btn-hamburger" id="sidebarCollapse">
             <img class="mr-3" src="{% static 'img/hamburger.svg'%}" alt=""/>
-            Каталог
+            {% blocktrans %}Каталог{% endblocktrans %}
         </button>
         <div class="d-flex">
             <a href="/cart" class="cart-icon position-relative mr-4">
@@ -247,6 +281,12 @@ $('.dropdown > a').hover(
         $('.dropdown > a img ').attr('src', "{% static 'img/hamburger.svg'%}");
     }
 )
+//change lang:
+$('.lang-link').on('click', function() {
+    let selectedLang = $(this).data('lang');
+    $('.lang-input').val(selectedLang);
+    $('#changeLangForm').submit();
+});
 // Sidebar:
 $(document).ready(function () {
 

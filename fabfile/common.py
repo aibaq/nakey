@@ -44,6 +44,11 @@ def gunicorn_logs():
 def celery_logs():
     run("tail -f /var/log/celery/nakey.log")
 
+@task
+@set_env()
+def compile_messages():
+    run("cd ~; source ./envs/nakey/bin/activate; "
+        "cd ~/{}/; django-admin compilemessages".format(env.repo_name))
 
 @task
 @set_env()

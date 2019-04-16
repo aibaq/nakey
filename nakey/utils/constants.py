@@ -1,5 +1,5 @@
 
 
-POPULAR_COUNT = 10
+POPULAR_COUNT = 8
 
 RECEIVER_EMAIL = 'nakeykz@gmail.com'
