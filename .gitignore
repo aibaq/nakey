@@ -62,3 +62,5 @@ db.sqlite3
 celerybeat-schedule.db
 celerybeat-schedule
 celerybeat.pid
+
+media/
