@@ -15,7 +15,7 @@ class Banner(TimestampMixin, models.Model):
     title = models.CharField(max_length=500, verbose_name='Наименование')
     subtitle = models.CharField(max_length=500, verbose_name='Наименование 2')
     image = models.ImageField(upload_to=banner_upload)
-    image_title = models.CharField(max_length=500, verbose_name='Наименование ссылки')
+    image_title = models.CharField(max_length=500, verbose_name='Относительная ссылка на категорию или товар')
 
     def __str__(self):
         return self.title
@@ -58,8 +58,8 @@ class Size(models.Model):
 
 class Manufacture(models.Model):
     class Meta:
-        verbose_name = 'Про'
-        verbose_name_plural = 'Размеры'
+        verbose_name = 'Производство'
+        verbose_name_plural = 'Производство'
     name = models.CharField(max_length=500, verbose_name='Наименование')
 
     def __str__(self):

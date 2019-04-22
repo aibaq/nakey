@@ -4,7 +4,7 @@ from .models import Banner, Category, Color, Size, Manufacture, Item
 
 @register(Banner)
 class BannerTranslationOptions(TranslationOptions):
-    fields = ('title', 'subtitle', 'image_title')
+    fields = ('title', 'subtitle')
 
 
 @register(Category)
