@@ -94,3 +94,10 @@ def restart():
     update_supervisor()
     update_nginx()
 
+
+@task
+@set_env()
+def compilemessages():
+    run("cd ~; source ./envs/nakey/bin/activate; "
+        "cd ~/{} && django-admin compilemessages".format(env.repo_name))
+
