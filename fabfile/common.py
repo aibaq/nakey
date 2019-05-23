@@ -94,28 +94,3 @@ def restart():
     update_supervisor()
     update_nginx()
 
-
-@task
-@set_env()
-def letsencrypt(config_name, *domains):
-    '''
-    usage: fab env common.first_run:config_name,domain1.com,domain2.com
-    '''
-    domains = list(domains)
-    domains_command = " ".join(["-d " + domain for domain in domains])
-    sudo("service nginx stop")
-    run("mkdir -p ~/letsencrypt;mkdir -p ~/letsencrypt/work;mkdir -p ~/letsencrypt/logs;mkdir -p ~/letsencrypt/cron;")
-    sudo(("certbot certonly -n --expand --work-dir ~/letsencrypt/work/ --logs-dir ~/letsencrypt/logs/ " + domains_command).format(env.repo_name, config_name))
-    run("openssl dhparam -out ~/{0}/configs/letsencrypt/{1}/ssl-dhparams.pem 2048".format(env.repo_name, config_name)).format(env.repo_name, env.repository_ssh)
-    run("echo \" 0 9 1,15 * * ~/letsencrypt/cron/cronscript.sh\" > ~/letsencrypt/cron/crontab")
-    run("""
-        echo \"
-        sudo service nginx stop;
-        certbot renew -n --config-dir ~/{0}/configs/letsencrypt/ --work-dir ~/letsencrypt/work/ --logs-dir ~/letsencrypt/logs/;
-        chmod -R 775 ~/{0}/configs/letsencrypt/;
-        sudo service nginx start;
-        \" > ~/letsencrypt/cron/cronscript.sh
-        """.format(env.repo_name, env.repository_ssh))
-    run("chmod +x ~/letsencrypt/cron/cronscript.sh")
-    run("crontab ~/letsencrypt/cron/crontab")
-    update_nginx()
