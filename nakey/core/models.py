@@ -12,9 +12,9 @@ class Banner(TimestampMixin, models.Model):
     class Meta:
         verbose_name = 'Баннер'
         verbose_name_plural = 'Баннера'
-    title = models.CharField(max_length=500, verbose_name='Наименование')
-    subtitle = models.CharField(max_length=500, verbose_name='Наименование 2')
-    image = models.ImageField(upload_to=banner_upload)
+    title = models.CharField(max_length=500, verbose_name='Заголовок', blank=True)
+    subtitle = models.CharField(max_length=500, verbose_name='Подзаголовок', blank=True)
+    image = models.ImageField(upload_to=banner_upload, verbose_name='Картинка на фоне')
     image_title = models.CharField(max_length=500, verbose_name='Относительная ссылка на категорию или товар')
 
     def __str__(self):
@@ -71,11 +71,11 @@ class Item(TimestampMixin, models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
     name = models.CharField(max_length=500, verbose_name='Наименование')
-    price = models.PositiveIntegerField(verbose_name='Цена')
+    price = models.PositiveIntegerField(verbose_name='Цена', blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='items')
     colors = models.ManyToManyField(Color)
-    sizes = models.ManyToManyField(Size)
-    manufacture = models.ForeignKey(Manufacture, on_delete=models.DO_NOTHING)
+    sizes = models.ManyToManyField(Size, verbose_name='Относительная', blank=True)
+    manufacture = models.ForeignKey(Manufacture, on_delete=models.DO_NOTHING, verbose_name='Пройзводство', blank=True)
     description = models.TextField(verbose_name='Описание')
     view_count = models.PositiveIntegerField(default=10, verbose_name='Просмотры')
     # TODO: состав

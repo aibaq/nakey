@@ -70,67 +70,76 @@
 <script>
 getCategories();
 function toggleCategory(id){
-    if($(`#${id} ul`).hasClass('show')){
-        $(`#${id} ul`).removeClass('show')
-        $(`#${id} .parent`).removeClass('active')
-        $(`#${id} .parent img`).attr('src', "{% static 'img/plus.svg'%}")
-    }else{
-        $(`#${id} ul`).addClass('show')
-        $(`#${id} .parent`).addClass('active')
-        $(`#${id} .parent img`).attr('src', "{% static 'img/minus-red.svg'%}")
+    const querySelect = $(`#${id} > ul`);
+    if (querySelect.hasClass('show')) {
+        querySelect.removeClass('show');
+        $(`#${id} > .parent`).removeClass('active');
+        $(`#${id} > .parent img`).attr('src', "{% static 'img/plus.svg'%}");
+    } else {
+        querySelect.addClass('show');
+        $(`#${id} > .parent`).addClass('active');
+        $(`#${id} > .parent img`).attr('src', "{% static 'img/minus-red.svg'%}");
     }
 }
 
 function getCategories(){
     $.ajax({
         url: categoryUrl,
-        success: function(res){
-            if(res){
-                if(res.code == 0){
-                    categories = res.data.results;
-                    let level1 = [], level2 = [];
-                    let activeId;
-                    categories.map(c=>{
-                        if(c.level == 0){
-                            level1.push(c);
-                            c.children = [];
-                        }else if(c.level == 1){
-                            level2.push(c);
-                        }
-                    });
-                    let query = getUrlVars();
-                    for(let i in level1){
-                        let htmlId = `{{handler}}_catid_${level1[i].id}`;
-                        if(query['category'] == level1[i].id){
-                            activeId = htmlId;
-                        }
-                        level1[i].htmlId = htmlId;
-                        let cat = level1[i];
-                        $('#categoryTmpl').tmpl(cat).appendTo('#category-list-{{handler}}');
-                        for(let child in level2){
-                            if(level2[child].parent == level1[i].id){
-                                level2[child].class = '';
-                                if(query['category'] == level2[child].id){
-                                    level2[child].class = 'active';
-                                    activeId = htmlId;
-                                }
-                                level1[i].children.push(level2[child]);
-                                $(`#${htmlId} ul`).append(`<li class="${level2[child].class}"><a href="/shop/?category=${level2[child].id}">${level2[child].name}</a></li>`)
+        success: function(res) {
+            if (res && res.code === 0) {
+                let level1 = [], level2 = [], level3 = [], activeHtmlId;
+                const activeId = getUrlVars().category;
+                res.data.results.forEach(c => {
+                    if (c.level === 0) {
+                        level1.push(c);
+                    } else if (c.level === 1) {
+                        level2.push(c);
+                    } else {
+                        level3.push(c);
+                    }
+                });
+
+                level1.forEach( parent => {
+                    parent.htmlId = `{{handler}}_cat_${parent.id}`;
+                    $('#categoryTmpl').tmpl(parent).appendTo('#category-list-{{handler}}');
+
+                    level2.forEach( (child) => {
+                        child.htmlId = `{{handler}}_cat_${child.id}`;
+                        if (child.parent === parent.id) {
+                            parent.hasChildren = 1;
+                            // const childClassName = child.id == activeId ? 'active' : '';
+                            if (activeId == child.id) {
+                                toggleCategory(parent.htmlId);
                             }
+                            $(`#${parent.htmlId} > ul`).append(`<li id="${child.htmlId}"><div class="parent d-flex justify-content-between"><a href="/shop/?category=${child.id}">${child.name}</a></div><ul class="pl-4 m-0"></ul></li>`)
+
+                            level3.forEach(grandChild => {
+                                if (grandChild.parent === child.id) {
+                                    child.hasChildren = 1;
+                                    const className = grandChild.id == activeId ? 'active' : '';
+                                    $(`#${child.htmlId} > ul`).append(`<li class="${className}"><a href="/shop/?category=${grandChild.id}">${grandChild.name}</a></li>`);
+                                    if (activeId == grandChild.id) {
+                                        toggleCategory(parent.htmlId);
+                                        toggleCategory(child.htmlId);
+                                    }
+                                }
+                            });
                         }
-                        if(level1[i].children.length > 0){
-                            $(`#${htmlId} .parent`).append(`<div class="img d-flex justify-content-center align-items-center" onclick="toggleCategory('${htmlId}')">
+                        if (child.hasChildren === 1) {
+                            $(`#${child.htmlId} > .parent`).append(`<div class="img d-flex justify-content-center align-items-center" onclick="toggleCategory('${child.htmlId}')">
                                 <img src="{% static 'img/plus.svg'%}"/>
                             </div>`)
+                            child.hasChildren = 2;
                         }
+                    });
+                    if (parent.hasChildren === 1) {
+                        $(`#${parent.htmlId} > .parent`).append(`<div class="img d-flex justify-content-center align-items-center" onclick="toggleCategory('${parent.htmlId}')">
+                            <img src="{% static 'img/plus.svg'%}"/>
+                        </div>`)
+                        parent.hasChildren = 2;
                     }
-                    toggleCategory(activeId||level1[0].id);
-                    
-                }else{
-
-                }
-            }else{
-
+                });
+                toggleCategory(activeId ? `{{handler}}_cat_${activeId}` : level1[0].id);
             }
         },
     });
