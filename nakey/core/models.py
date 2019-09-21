@@ -74,7 +74,7 @@ class Item(TimestampMixin, models.Model):
     price = models.PositiveIntegerField(verbose_name='Цена', blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='items')
     colors = models.ManyToManyField(Color)
-    sizes = models.ManyToManyField(Size, verbose_name='Относительная', blank=True)
+    sizes = models.ManyToManyField(Size, verbose_name='Размер', blank=True)
     manufacture = models.ForeignKey(Manufacture, on_delete=models.DO_NOTHING, verbose_name='Пройзводство', blank=True)
     description = models.TextField(verbose_name='Описание')
     view_count = models.PositiveIntegerField(default=10, verbose_name='Просмотры')

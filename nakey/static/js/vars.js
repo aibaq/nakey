@@ -1,5 +1,5 @@
 const categoryUrl = '/category';
-const popularUrl = "/item/?limit=8";
+const popularUrl = "/item/?limit=8&ordering=-view_count";
 const HANDLER_ARRAY = {
     'shop':'shop',
     'header': 'header',

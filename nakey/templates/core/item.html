@@ -43,7 +43,7 @@ fjs.parentNode.insertBefore(js, fjs);
         </div>
         <div class="col-12 col-md-6 description">
             <h1 class="color-black">{{ item.name }}</h1>
-            <p class="color-black">{{ item.description }}</p>
+            <p class="color-black">{{ item.description | safe }}</p>
             <table class="detail w-100 mb-5">
                 <tr>
                     <td>{% blocktrans %}Категория{% endblocktrans %}:</td>
@@ -56,6 +56,10 @@ fjs.parentNode.insertBefore(js, fjs);
                 <tr>
                     <td>{% blocktrans %}Пройзводство{% endblocktrans %}:</td>
                     <td>{{item.manufacture.name}}</td>
+                </tr>
+                <tr>
+                    <td>{% blocktrans %}Просмотры{% endblocktrans %}:</td>
+                    <td>{{item.view_count}}</td>
                 </tr>
             </table>
             <div class="mb-5 color-red price">{{ item.price }}&nbsp;&#8376;</div>
