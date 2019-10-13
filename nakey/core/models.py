@@ -78,6 +78,8 @@ class Item(TimestampMixin, models.Model):
     manufacture = models.ForeignKey(Manufacture, on_delete=models.DO_NOTHING, verbose_name='Пройзводство', blank=True)
     description = models.TextField(verbose_name='Описание')
     view_count = models.PositiveIntegerField(default=10, verbose_name='Просмотры')
+    show_price = models.BooleanField(default=True, verbose_name='Показать цену')
+    show_manufacture = models.BooleanField(default=True, verbose_name='Показать пройзводство')
     # TODO: состав
 
 

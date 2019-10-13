@@ -10,7 +10,7 @@
                     </div>
                     <div class="description p-2 text-center">
                         <h5 class="main-black color-black">${item.name}</h5>
-                        <h6 class="main-black color-red">${item.price}&nbsp;&#8376;</h6>                       
+                        <h6 class="main-black color-red">${item.show_price ? item.price : ''}${item.show_price ? '&nbsp;&#8376;' : '' }</h6>
                     </div>
                 </a>
                 <div class="container item-btns d-flex justify-content-between">
