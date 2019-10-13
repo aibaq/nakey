@@ -118,8 +118,10 @@
         if(filter.category){
             newUrl+="&category="+filter.category;
         }
-        if(filter.ordering){
+        if (filter.ordering){
             newUrl+="&ordering="+filter.ordering;
+        } else {
+            newUrl+="&ordering=price";
         }
         if(filter.search){
             newUrl+="&search="+filter.search;
