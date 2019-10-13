@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 16:39+0600\n"
+"POT-Creation-Date: 2019-10-13 21:45+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Kazakh"
 msgstr ""
 
-#: nakey/templates/core/about.html:21 nakey/templates/core/header.html:188
+#: nakey/templates/core/about.html:21 nakey/templates/core/header.html:189
 msgid "О нас"
 msgstr "Біз туралы"
 
@@ -72,7 +72,7 @@ msgstr "Тапсырысты рәсімдеу"
 msgid "Ваша корзина пуста"
 msgstr "Сіздің себетіңіз бос"
 
-#: nakey/templates/core/contacts.html:32 nakey/templates/core/header.html:191
+#: nakey/templates/core/contacts.html:32 nakey/templates/core/header.html:192
 msgid "Контакты"
 msgstr "Байланыс"
 
@@ -104,15 +104,11 @@ msgstr "Бізбен байланыс"
 msgid "Социальные сети"
 msgstr "Әлеуметтік желілер"
 
-#: nakey/templates/core/header.html:181 nakey/templates/core/header.html:231
+#: nakey/templates/core/header.html:182 nakey/templates/core/header.html:232
 msgid "Каталог"
 msgstr ""
 
-#: nakey/templates/core/header.html:196
-msgid "Кожаный рюкзак"
-msgstr "Былғары сөмке"
-
-#: nakey/templates/core/header.html:198 nakey/templates/core/shop.html:47
+#: nakey/templates/core/header.html:199 nakey/templates/core/shop.html:47
 msgid "Найти"
 msgstr "Іздеу"
 
@@ -120,13 +116,13 @@ msgstr "Іздеу"
 msgid "Главная страница"
 msgstr "Басты бет"
 
-#: nakey/templates/core/index.html:46
+#: nakey/templates/core/index.html:48
 #, fuzzy, python-format
 #| msgid "%(popular)s"
 msgid "%(popular)s"
 msgstr "Танымал"
 
-#: nakey/templates/core/index.html:48
+#: nakey/templates/core/index.html:50
 msgid "Весь каталог"
 msgstr "Барлық каталог"
 
@@ -139,30 +135,38 @@ msgid "Цвет"
 msgstr "Түсі"
 
 #: nakey/templates/core/item.html:57
+msgid "Размер"
+msgstr "Өлшемі"
+
+#: nakey/templates/core/item.html:61
 msgid "Пройзводство"
 msgstr "Өндірген ел"
 
-#: nakey/templates/core/item.html:64 nakey/templates/core/template.html:18
+#: nakey/templates/core/item.html:65
+msgid "Просмотры"
+msgstr "Қаралым"
+
+#: nakey/templates/core/item.html:72 nakey/templates/core/template.html:17
 msgid "Купить"
 msgstr "Сатып алу"
 
-#: nakey/templates/core/item.html:69
+#: nakey/templates/core/item.html:77
 msgid "Добавить в корзину"
 msgstr "Себетке салу"
 
-#: nakey/templates/core/item.html:73
+#: nakey/templates/core/item.html:81
 msgid "Поделитесь c друзьями"
 msgstr "Достарыңызбен бөлісіңіз"
 
-#: nakey/templates/core/item.html:99
+#: nakey/templates/core/item.html:107
 msgid "Поделиться"
 msgstr "Бөлісу"
 
-#: nakey/templates/core/item.html:158 nakey/templates/core/item.html:168
+#: nakey/templates/core/item.html:166 nakey/templates/core/item.html:176
 msgid "Перейти в корзину"
 msgstr "Себетке өту"
 
-#: nakey/templates/core/item.html:192
+#: nakey/templates/core/item.html:200
 msgid "Вы скопировали ссылку"
 msgstr "Сіз сілтемені көшірдіңіз"
 
@@ -188,35 +192,35 @@ msgstr "Танымалдылық бойынша"
 msgid "КАТАЛОГ"
 msgstr ""
 
-#: nakey/templates/core/shop.html:139
+#: nakey/templates/core/shop.html:141
 msgid "К сожелению, товары не нашлись"
 msgstr "Өкінішке орай, тауарлар табылмады"
 
-#: nakey/templates/core/template.html:21
+#: nakey/templates/core/template.html:20
 msgid "В корзину"
 msgstr "Себетке"
 
-#: nakey/templates/core/template.html:65
+#: nakey/templates/core/template.html:64
 msgid "Заявка"
 msgstr "Тапсырыс"
 
-#: nakey/templates/core/template.html:67
+#: nakey/templates/core/template.html:66
 msgid "Ваше имя"
 msgstr "Есіміңіз"
 
-#: nakey/templates/core/template.html:71
+#: nakey/templates/core/template.html:70
 msgid "Ваш телефон"
 msgstr "Телефоныңыз"
 
-#: nakey/templates/core/template.html:75
+#: nakey/templates/core/template.html:74
 msgid "Ваш город"
 msgstr "Қалаңыз"
 
-#: nakey/templates/core/template.html:78
+#: nakey/templates/core/template.html:77
 msgid "Отправить"
 msgstr "Жіберу"
 
-#: nakey/templates/core/template.html:110
+#: nakey/templates/core/template.html:109
 msgid ""
 "Ваш запрос успешно отправлен. Наши менеджеры в скором времени свяжутся с "
 "вами!"
@@ -224,29 +228,32 @@ msgstr ""
 "Сіздің тапсырысыңыз сәтті жіберілді. Біздің менеджерлер сізге жақын арада "
 "хабарласады!"
 
-#: nakey/templates/core/template.html:113
+#: nakey/templates/core/template.html:112
 msgid "Ошибка"
 msgstr "Қате"
 
-#: nakey/templates/core/template.html:113
+#: nakey/templates/core/template.html:112
 msgid "Попробуйте еще раз"
 msgstr "Тағы да бір көріңіз"
 
-#: nakey/templates/core/template.html:120
+#: nakey/templates/core/template.html:119
 msgid "Ошибка сервера"
 msgstr "Сервер қатесі"
 
-#: nakey/templates/core/template.html:129
+#: nakey/templates/core/template.html:128
 msgid "Заполните имя"
 msgstr "Есіміңізді жазыңыз"
 
-#: nakey/templates/core/template.html:134
+#: nakey/templates/core/template.html:133
 msgid "Заполните телефон"
 msgstr "Телефоныңызды жазыңыз"
 
-#: nakey/templates/core/template.html:139
+#: nakey/templates/core/template.html:138
 msgid "Заполните ваш город"
 msgstr "Қалаңызды жазыңыз"
+
+#~ msgid "Кожаный рюкзак"
+#~ msgstr "Былғары сөмке"
 
 #, fuzzy
 #~| msgid "Оформить заявку"
